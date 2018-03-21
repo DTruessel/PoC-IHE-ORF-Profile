@@ -1,0 +1,48 @@
+
+<h1 *ngIf="!givenName">Willkommen!</h1>
+<h1 *ngIf="givenName">Willkommen, {{givenName}}!</h1>
+
+<p *ngIf="needLogin" class="alert alert-warning">
+  Please login to use the requested part of this application.
+</p>
+
+<p>Login with Authorization Server</p>
+<button class="btn btn-default" (click)="login()">Login</button>
+<button class="btn btn-default" (click)="logout()">Logout</button>
+
+
+<mat-toolbar color="primary">
+    <mat-toolbar-row>
+
+      <span class="example-fill-remaining-space"></span>
+      <span class="example-spacer"></span>
+  
+      <button mat-button>Login</button>
+    </mat-toolbar-row>
+  </mat-toolbar>
+  
+  <mat-card class="example-card">
+    <mat-card-header>
+      <mat-card-title>Login</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <form class="example-form">
+        <table class="example-full-width" cellspacing="0">
+          <tr>
+            <td>
+              <mat-form-field class="example-full-width">
+                <input matInput placeholder="Username" [(ngModel)]="username" name="username" required>
+              </mat-form-field>
+            </td>
+          </tr>
+          <tr>
+            <td><mat-form-field class="example-full-width">
+              <input matInput placeholder="Password" [(ngModel)]="password" type="password" name="password" required>
+            </mat-form-field></td>
+          </tr></table>
+      </form>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-raised-button (click)="login()" color="primary">Login</button>
+    </mat-card-actions>
+  </mat-card>

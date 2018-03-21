@@ -1,0 +1,71 @@
+<!doctype html>
+
+<div>
+    <meta charset="utf-8">
+    <title>PoCORF</title>
+    <mat-toolbar color="primary">
+            <span><mat-icon>mood</mat-icon></span>
+
+            <button mat-icon-button [mat-menu-trigger-for]="menu">
+                    <mat-icon>more_vert</mat-icon>
+            </button>
+    </mat-toolbar>
+
+    <mat-menu x-position="before" #menu="matMenu">
+        <mat-toolbar-row>
+            <button routerLink="login">Login</button>
+            <button routerLink="patients">Patients</button>
+            <button routerLink="form">Forms</button>
+            <button routerLink="CapabilityStatement">CapabilityStatement</button>
+            <button routerLink="settings">Settings</button>
+            <button routerLink="">Search Service</button>
+            <button routerLink="">Logout</button>                       
+
+        </mat-toolbar-row>               
+    </mat-menu>
+
+    <mat-card>
+            <span class="example-spacer"></span>
+
+            <a mat-button routerLink="login">Login</a>
+            <a mat-button routerLink="patients">Patients</a>
+            <a routerLink="form">Forms</a>
+            <a mat-button routerLink="CapabilityStatement">CapabilityStatement</a>            
+            <a mat-button routerLink="settings">Settings</a>            
+            <a mat-button routerLink="">Search Patient</a>
+
+    </mat-card>
+ 
+            
+
+ 
+
+
+
+</div>
+
+<br>
+<br>
+
+<div>
+
+    <mat-card>
+        <mat-card-title>Impressum</mat-card-title>
+        <mat-card-footer>
+            <ul>
+                <li>built with <a href="https://angular.io/">angular</a></li>  
+                <li>using <a href="https://github.com/ahdis/ng-fhirjs">ng-fhirjs</a> as an adapter for accessing a fhir server with <a href="https://github.com/FHIR/fhir.js">fhir.js</a></li>
+                <li>integrating fhir type definitions from <a href="https://github.com/DefinitelyTyped/DefinitelyTyped/tree/master/types/fhir">DefinitelyTyped</a>) (ST3)</li>
+                <li>using <a href="https://material.angular.io/">angular material</a> for UI components</li>
+            </ul>
+            <p>use the menu top right for different functionalities</p>
+            <p>brought to you by <a href="http://www.ahdis.ch">ahdis</a>, contact <a href="mail-to:oliver.egger@ahdis.ch">oliver</a> for further info.</p>
+            <p>HL7®, HEALTH LEVEL SEVEN®, FHIR® and the FHIR ® are trademarks owned by Health Level Seven International, registered with the United States Patent and Trademark Office. </p>
+        </mat-card-footer>
+    </mat-card>
+
+</div>
+
+
+
+

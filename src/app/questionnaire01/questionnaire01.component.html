@@ -1,0 +1,149 @@
+<form>
+
+<mat-card>
+    <mat-card-header>
+          <mat-card-title-group>
+            <mat-card-title>Questionnaire 01 </mat-card-title>
+            <mat-card-subtitle>Angaben zum Patienten</mat-card-subtitle>
+          </mat-card-title-group>
+
+        <mat-form-field>
+          <input matInput placeholder="_id Search Parameter">
+        </mat-form-field>
+
+        <mat-form-field>
+          <input matInput placeholder="code Search Parameter">
+        </mat-form-field>
+
+        <mat-form-field>
+          <input matInput placeholder="identifierSearchParameters">
+        </mat-form-field>
+
+        <mat-form-field>
+          <input matInput placeholder="publisherSearchParameter">
+        </mat-form-field>
+
+        <mat-form-field>
+          <input matInput placeholder="statusSearchParameter">
+        </mat-form-field>
+
+        <mat-form-field>
+          <input matInput placeholder="titleSearchParameter">
+        </mat-form-field>
+
+        <mat-form-field>
+          <input matInput placeholder="versionSearchParameter">
+        </mat-form-field>
+
+      </mat-card-header>  
+</mat-card>
+
+  <mat-card>
+
+    <table class="example-container" cellspacing="10">
+      <tr>        
+        <td>
+          <mat-form-field class="example-full-width">
+            <mat-checkbox>Weiblich</mat-checkbox>
+            <mat-checkbox>Männlich</mat-checkbox>
+          </mat-form-field>
+        </td>
+      </tr>
+    </table>
+
+    <table class="example-container" cellspacing="10">
+        <tr>        
+          <td>
+            <mat-form-field class="example-full-width">
+            <input type="text" matInput placeholder="Name">
+            </mat-form-field>
+          </td>
+
+          <td>
+            <mat-form-field class="example-full-width">
+              <input type="text" matInput placeholder="Vorname">
+            </mat-form-field>
+          </td>
+      </tr>
+    </table>
+
+      <p class="example-container">
+          <mat-form-field >
+            <textarea matInput placeholder="Adresse"></textarea>
+          </mat-form-field>
+      </p>
+
+      <table class="example-container" cellspacing="10">
+        <tr>
+          <td>
+            <mat-form-field class="example-full-width">
+              <input matInput #postalCode maxlength="5" placeholder="PLZ" value="">
+              <mat-hint align="end">{{postalCode.value.length}} / 4</mat-hint>
+            </mat-form-field>
+          </td>
+          <td>
+            <mat-form-field class="example-full-width">
+              <input matInput placeholder="Ort">
+            </mat-form-field>
+          </td>
+        </tr>
+      </table>
+
+      <table class="example-container" cellspacing="10">
+        <tr>
+          <td>
+            <mat-form-field class="example-full-width">
+              <input type="date" matInput placeholder="Geburtsdatum">
+            </mat-form-field>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <mat-form-field class="example-full-width">
+                <input type="tel" matInput placeholder="Phone">
+            </mat-form-field>
+          </td>
+          <td>
+            <mat-form-field class="example-full-width">
+              <input type="email" matInput placeholder="Email">
+            </mat-form-field>
+          </td>
+        </tr>
+      </table>
+      <p class="example-container">
+        <mat-form-field>
+          <textarea matInput placeholder="Freitext"></textarea>
+        </mat-form-field>        
+      </p>
+      <p class="example-container">
+        <mat-form-field>
+          <mat-select placeholder="Select">
+            <mat-option value="option">Option</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </p>
+
+      <p class="example-container">
+        <mat-form-field>
+          <input matInput #message maxlength="256" placeholder="Message">
+          <mat-hint align="start"><strong>Don't disclose personal info</strong></mat-hint>
+          <mat-hint align="end">{{message.value.length}} / 256</mat-hint>
+      </mat-form-field>
+      </p>
+
+      <mat-card-actions>
+          <button mat-raised-button (click)="submit()" color="primary">Submit</button>
+          <button mat-raised-button (click)="save()" color="primary">Save</button>
+          <button mat-raised-button (click)="download()" color="primary">Download</button>                    
+      </mat-card-actions>
+
+  </mat-card>
+
+</form>
+
+
+
+
+
+
+

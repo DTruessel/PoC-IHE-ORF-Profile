@@ -16,8 +16,10 @@ import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { UserComponent } from './user/user.component';
 import { FormComponent } from './form/form.component';
+import { ReactiveFormsModule } from '@angular/forms';
 import { AuthService } from './auth.service';
 import { TokenStorage } from './token.storage';
+import { Questionnaire01Component } from './questionnaire01/questionnaire01.component';
 
 
 const routes: Routes = [
@@ -30,6 +32,9 @@ const routes: Routes = [
     },
     {
       path: 'form', component: FormComponent
+    },
+    {
+      path: 'questionnaire01', component: Questionnaire01Component
     },
     {
       path: 'CapabilityStatement', component: CapabilityStatementComponent
@@ -50,7 +55,8 @@ const routes: Routes = [
     HomeComponent,
     LoginComponent,
     UserComponent,
-    FormComponent
+    FormComponent,
+    Questionnaire01Component
   ],
   imports: [
     BrowserModule,

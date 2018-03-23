@@ -26,6 +26,8 @@ export class AppComponent {
         return this.title + ' - ' + 'CapabilityStatement';
       case '/settings':
         return this.title + ' - ' + 'Settings';
+      case '/questionnaire01':
+        return this.title + ' - ' + 'Questionnaire01';
     }
     return this.title;
   }

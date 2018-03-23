@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { MatButtonModule, MatToolbarModule, MatInputModule } from '@angular/material';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatCardModule } from '@angular/material/card';
-
 import { MatFormFieldModule} from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
@@ -17,8 +16,7 @@ import { MatTooltipModule } from '@angular/material';
 import { MatSnackBarModule } from '@angular/material';
 import { MatSidenavModule } from '@angular/material';
 import { MatSortModule } from '@angular/material';
-
-
+import {MatCheckboxModule} from '@angular/material/checkbox';
 
 @NgModule({
   imports: [
@@ -39,7 +37,8 @@ import { MatSortModule } from '@angular/material';
     MatTooltipModule,
     MatSnackBarModule,
     MatSidenavModule,
-    MatSortModule
+    MatSortModule,
+    MatCheckboxModule
   ],
   exports: [
     MatButtonModule,
@@ -59,7 +58,8 @@ import { MatSortModule } from '@angular/material';
     MatTooltipModule,
     MatSnackBarModule,
     MatSidenavModule,
-    MatSortModule
+    MatSortModule,
+    MatCheckboxModule
   ],
 })
 export class MaterialModule { }

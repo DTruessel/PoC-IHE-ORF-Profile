@@ -3,50 +3,30 @@
 <mat-card>
     <mat-card-header>
           <mat-card-title-group>
-            <mat-card-title>Questionnaire 01 </mat-card-title>
-            <mat-card-subtitle>Angaben zum Patienten</mat-card-subtitle>
+            <mat-card-title> Questionnaire 01: Angaben zum Patienten </mat-card-title>
           </mat-card-title-group>
 
-        <mat-form-field>
-          <input matInput placeholder="_id Search Parameter">
-        </mat-form-field>
-
-        <mat-form-field>
-          <input matInput placeholder="code Search Parameter">
-        </mat-form-field>
-
-        <mat-form-field>
-          <input matInput placeholder="identifierSearchParameters">
-        </mat-form-field>
-
-        <mat-form-field>
-          <input matInput placeholder="publisherSearchParameter">
-        </mat-form-field>
-
-        <mat-form-field>
-          <input matInput placeholder="statusSearchParameter">
-        </mat-form-field>
-
-        <mat-form-field>
-          <input matInput placeholder="titleSearchParameter">
-        </mat-form-field>
-
-        <mat-form-field>
-          <input matInput placeholder="versionSearchParameter">
-        </mat-form-field>
-
+          <mat-list role="list">
+              <mat-list-item role="_id Search Parameter">_id Search Parameter</mat-list-item>
+              <mat-list-item role="code Search Parameter">code Search Parameter</mat-list-item>
+              <mat-list-item role="identifierSearchParameters">identifierSearchParameters</mat-list-item>
+              <mat-list-item role="publisherSearchParameter">publisherSearchParameter</mat-list-item>
+              <mat-list-item role="statusSearchParameter">statusSearchParameter</mat-list-item>              
+              <mat-list-item role="titleSearchParameter">titleSearchParameter</mat-list-item>
+              <mat-list-item role="versionSearchParameter">versionSearchParameter</mat-list-item>
+          </mat-list>
       </mat-card-header>  
-</mat-card>
+  </mat-card>
 
   <mat-card>
 
     <table class="example-container" cellspacing="10">
       <tr>        
         <td>
-          <mat-form-field class="example-full-width">
-            <mat-checkbox>Weiblich</mat-checkbox>
-            <mat-checkbox>Männlich</mat-checkbox>
-          </mat-form-field>
+          <mat-radio-group>
+              <mat-radio-button value="Weiblich">Weiblich</mat-radio-button>
+              <mat-radio-button value="Männlich">Männlich</mat-radio-button>
+          </mat-radio-group>
         </td>
       </tr>
     </table>

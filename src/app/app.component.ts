@@ -1,5 +1,6 @@
+
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, RouterModule, Routes } from '@angular/router';
 import { FhirJsHttpService, FHIR_HTTP_CONFIG } from 'ng-fhirjs';
 
 @Component({

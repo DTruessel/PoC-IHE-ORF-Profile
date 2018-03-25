@@ -12,6 +12,7 @@ export const FHIR_JS_CONFIG: FhirConfig = {
   styleUrls: ['./settings.component.css']
 })
 export class SettingsComponent implements OnInit {
+
   fhirServers = ['http://test.fhir.org/r3',
     'http://localhost:8080/baseDstu3',
     'http://vonk.furore.com',

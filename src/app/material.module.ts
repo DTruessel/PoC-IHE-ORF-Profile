@@ -22,6 +22,7 @@ import { MatListModule } from '@angular/material/list';
 
 @NgModule({
   imports: [
+    CommonModule,
     MatButtonModule,
     MatToolbarModule,
     MatInputModule,
@@ -45,6 +46,7 @@ import { MatListModule } from '@angular/material/list';
     MatListModule
   ],
   exports: [
+    CommonModule,
     MatButtonModule,
     MatToolbarModule,
     MatInputModule,

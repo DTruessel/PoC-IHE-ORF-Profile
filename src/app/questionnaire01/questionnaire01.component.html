@@ -6,28 +6,20 @@
             <mat-card-title> Questionnaire 01: Angaben zum Patienten </mat-card-title>
           </mat-card-title-group>
 
-          <mat-list role="list">
-              <mat-list-item role="_id Search Parameter">_id Search Parameter</mat-list-item>
-              <mat-list-item role="code Search Parameter">code Search Parameter</mat-list-item>
-              <mat-list-item role="identifierSearchParameters">identifierSearchParameters</mat-list-item>
-              <mat-list-item role="publisherSearchParameter">publisherSearchParameter</mat-list-item>
-              <mat-list-item role="statusSearchParameter">statusSearchParameter</mat-list-item>              
-              <mat-list-item role="titleSearchParameter">titleSearchParameter</mat-list-item>
-              <mat-list-item role="versionSearchParameter">versionSearchParameter</mat-list-item>
-          </mat-list>
+
       </mat-card-header>  
   </mat-card>
 
   <mat-card>
 
     <table class="example-container" cellspacing="10">
-      <tr>        
+      <tr>
         <td>
-          <mat-radio-group>
-              <mat-radio-button value="Weiblich">Weiblich</mat-radio-button>
-              <mat-radio-button value="Männlich">Männlich</mat-radio-button>
-          </mat-radio-group>
+            <mat-radio-button value="Weiblich">Weiblich</mat-radio-button>      
         </td>
+        <td>
+            <mat-radio-button value="Männlich">Männlich</mat-radio-button>  
+        </td>        
       </tr>
     </table>
 
@@ -38,7 +30,6 @@
             <input type="text" matInput placeholder="Name">
             </mat-form-field>
           </td>
-
           <td>
             <mat-form-field class="example-full-width">
               <input type="text" matInput placeholder="Vorname">
@@ -48,7 +39,7 @@
     </table>
 
       <p class="example-container">
-          <mat-form-field >
+          <mat-form-field>
             <textarea matInput placeholder="Adresse"></textarea>
           </mat-form-field>
       </p>
@@ -57,8 +48,8 @@
         <tr>
           <td>
             <mat-form-field class="example-full-width">
-              <input matInput #postalCode maxlength="5" placeholder="PLZ" value="">
-              <mat-hint align="end">{{postalCode.value.length}} / 4</mat-hint>
+              <input matInput #PLZ maxlength="4" placeholder="PLZ" value="">
+              <mat-hint align="end">{{ PLZ.value.length }} / 4</mat-hint>
             </mat-form-field>
           </td>
           <td>
@@ -80,36 +71,51 @@
         <tr>
           <td>
             <mat-form-field class="example-full-width">
-                <input type="tel" matInput placeholder="Phone">
+                <input type="tel" matInput placeholder="Telefonnummer">
             </mat-form-field>
           </td>
           <td>
             <mat-form-field class="example-full-width">
-              <input type="email" matInput placeholder="Email">
+              <input type="email" matInput placeholder="Email-Adresse">
             </mat-form-field>
           </td>
         </tr>
       </table>
-      <p class="example-container">
-        <mat-form-field>
-          <textarea matInput placeholder="Freitext"></textarea>
-        </mat-form-field>        
-      </p>
-      <p class="example-container">
-        <mat-form-field>
-          <mat-select placeholder="Select">
-            <mat-option value="option">Option</mat-option>
-          </mat-select>
-        </mat-form-field>
-      </p>
+  </mat-card>
+<br>
+<br>
+  <mat-card>
+    <p class="example-container">
+      <mat-form-field>
+        <textarea matInput placeholder="Diagnose(n)"></textarea>
+      </mat-form-field>        
+    </p>
+  </mat-card>
+  
+  <mat-card>
+    <p class="example-container">
+       <mat-radio-group>
+          <label>Dringlichkeit des Auftrages</label>
+          <br>
+          <mat-radio-button value="sehr dringlich">Sehr dringlich; bitte um sofortige Meldung an die Leistungsstelle</mat-radio-button>
+          <br>
+          <mat-radio-button value="dringlich">Dringlich</mat-radio-button>
+          <br> 
+          <mat-radio-button value="normal">Normal</mat-radio-button>            
+        </mat-radio-group>
+    </p>
 
-      <p class="example-container">
+    <p class="example-container">
+        <mat-checkbox>Bitte Resultate umgehend an den Absender zurückschicken und Arzt informieren</mat-checkbox>
+    </p>
+
+    <p class="example-container">
         <mat-form-field>
-          <input matInput #message maxlength="256" placeholder="Message">
-          <mat-hint align="start"><strong>Don't disclose personal info</strong></mat-hint>
+          <input matInput #message maxlength="256" placeholder="Bemerkungen">
+          <mat-hint align="start"><strong>' '</strong></mat-hint>
           <mat-hint align="end">{{message.value.length}} / 256</mat-hint>
       </mat-form-field>
-      </p>
+    </p>
 
       <mat-card-actions>
           <button mat-raised-button (click)="submit()" color="primary">Submit</button>

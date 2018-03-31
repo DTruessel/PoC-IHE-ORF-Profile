@@ -5,17 +5,23 @@ import { CapabilityStatementComponent } from '../capability-statement/capability
 import { PatientsComponent } from '../patients/patients.component';
 import { HomeComponent } from '../home/home.component';
 import { LoginComponent } from '../login/login.component';
-import { UserComponent } from '../user/user.component';
+
 import { SettingsComponent } from '../settings/settings.component';
 import { FormComponent } from '../form/form.component';
+import { UserComponent } from '../user/user.component';
 
 const routes: Routes = [
     {
       path: '', component: HomeComponent
     },
-    { path: 'login', component: LoginComponent
+    {
+      path: 'login', component: LoginComponent
     },
-    { path: 'patients', component: PatientsComponent
+    {
+      path: 'patients', component: PatientsComponent
+    },
+    {
+      path: 'user', component: UserComponent
     },
     {
       path: 'form', component: FormComponent
@@ -28,8 +34,10 @@ const routes: Routes = [
     },
     {
       path: 'settings', component: SettingsComponent
+    },
+    {
+      path: '', component: LoginComponent
     }
-
   ];
 
   @NgModule({
@@ -39,3 +47,5 @@ const routes: Routes = [
 })
 
 export class AppRoutingModule {}
+
+/*http://www.devglan.com/angular/angular-material-app*/

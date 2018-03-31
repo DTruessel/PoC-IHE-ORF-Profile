@@ -1,7 +1,7 @@
-import { Injectable } from '@angular/core';
+/* import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
-import { User } from './user/user.model';
+import { User } from './models/user.model';
 
 
 const httpOptions = {
@@ -19,4 +19,4 @@ export class UserService {
     return this.http.get<User[]>(this.userUrl + '/users');
   }
 
-}
+}*/

@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import {Router} from '@angular/router';
-import {MatDialog} from '@angular/material';
-import {AuthService} from '../auth.service';
-import {TokenStorage} from '../token.storage';
+import { Router } from '@angular/router';
+import { MatDialog } from '@angular/material';
+import { AuthService } from '../shared/auth.service';
+
 
 @Component({
   selector: 'app-login',
@@ -11,19 +11,18 @@ import {TokenStorage} from '../token.storage';
 })
 export class LoginComponent {
 
-  constructor(private router: Router, public dialog: MatDialog, private authService: AuthService, private token: TokenStorage) {
+  constructor(private router: Router, public dialog: MatDialog, private authService: AuthService) {
   }
 
   username: string;
   password: string;
 
   login(): void {
-    this.authService.attemptAuth(this.username, this.password).subscribe(
-      data => {
-        this.token.saveToken(data.token);
-        this.router.navigate(['user']);
-      }
-    );
+    if (this.username === 'admin' && this.password === 'admin') {
+     this.router.navigate(['user']);
+    } else {
+      alert('Invalid credentials');
+    }
   }
 
 }

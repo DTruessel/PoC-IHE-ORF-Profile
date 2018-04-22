@@ -26,4 +26,7 @@
     </mat-table>
     <mat-paginator [length]="length" [pageSize]="size" [pageSizeOptions]="pageSizeOptions" (page)="goToPage($event)"></mat-paginator>
   </mat-card-content>
+  <button mat-menu-item routerLink="/">
+    <span>Home</span>
+  </button>
 </mat-card>

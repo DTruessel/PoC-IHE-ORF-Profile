@@ -9,9 +9,6 @@ import { catchError } from 'rxjs/operators';
 import { User } from '../models/user.model';
 import { HttpErrorHandler, HandleError } from '../shared/http-error-handler.service';
 
-
-
-
 const httpOptions = {
   headers: new HttpHeaders({
     'Content-Type':  'application/json',
@@ -25,7 +22,7 @@ httpOptions.headers =
 @Injectable()
 
 export class UserService {
-  userUrl = 'api/heroes';  // URL to web api
+  userUrl = 'https://jsonplaceholder.typicode.com/users';  // URL to web api
   private handleError: HandleError;
 
   constructor(
@@ -34,7 +31,7 @@ export class UserService {
     this.handleError = httpErrorHandler.createHandleError('UserService');
   }
 
-  /** GET heroes from the server */
+  /** GET users from the server */
   getUser (): Observable<User[]> {
     return this.http.get<User[]>(this.userUrl)
       .pipe(
@@ -42,7 +39,7 @@ export class UserService {
       );
   }
 
-  /* GET heroes whose name contains search term */
+  /* GET users whose name contains search term */
   searchUser(term: string): Observable<User[]> {
     term = term.trim();
 
@@ -58,7 +55,7 @@ export class UserService {
 
   //////// Save methods //////////
 
-  /** POST: add a new hero to the database */
+  /** POST: add a new user to the database */
   addUser (user: User): Observable<User> {
     return this.http.post<User>(this.userUrl, user, httpOptions)
       .pipe(
@@ -66,16 +63,16 @@ export class UserService {
       );
   }
 
-  /** DELETE: delete the hero from the server */
+  /** DELETE: delete the user from the server */
   deleteUser (id: number): Observable<{}> {
-    const url = `${this.userUrl}/${id}`; // DELETE api/heroes/42
+    const url = `${this.userUrl}/${id}`; // DELETE api/users/42
     return this.http.delete(url, httpOptions)
       .pipe(
         catchError(this.handleError('deleteUser'))
       );
   }
 
-  /** PUT: update the hero on the server. Returns the updated hero upon success. */
+  /** PUT: update the user on the server. Returns the updated user upon success. */
   updateUser (user: User): Observable<User> {
     httpOptions.headers =
       httpOptions.headers.set('Authorization', 'my-new-auth-token');

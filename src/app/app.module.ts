@@ -25,6 +25,8 @@ import { DownloaderComponent } from './downloader/downloader.component';
 import { AuthService } from './shared/auth.service';
 import { UserComponent } from './user/user.component';
 
+import { UserGetService } from './shared/user-get.service';
+
 
 @NgModule({
   declarations: [
@@ -39,7 +41,7 @@ import { UserComponent } from './user/user.component';
     HttpConfigComponent,
     MessagesComponent,
     DownloaderComponent,
-    UserComponent
+    UserComponent,
   ],
 
   imports: [
@@ -49,7 +51,7 @@ import { UserComponent } from './user/user.component';
     NgFhirjsModule,
     AppRoutingModule,
     FormsModule,
-    MaterialModule
+    MaterialModule,
   ],
 
   providers: [
@@ -57,7 +59,9 @@ import { UserComponent } from './user/user.component';
     UserService,
     AppRoutingModule,
     HttpService,
-    AuthService
+    AuthService,
+
+    UserGetService
   ],
 
   bootstrap: [ AppComponent ]

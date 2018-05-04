@@ -9,43 +9,47 @@ import { LoginComponent } from '../login/login.component';
 import { SettingsComponent } from '../settings/settings.component';
 import { FormComponent } from '../form/form.component';
 import { UserComponent } from '../user/user.component';
+import { Questionnaire02Component } from '../questionnaire02/questionnaire02.component';
 
 const routes: Routes = [
-    {
-      path: '', component: HomeComponent
-    },
-    {
-      path: 'login', component: LoginComponent
-    },
-    {
-      path: 'patients', component: PatientsComponent
-    },
-    {
-      path: 'user', component: UserComponent
-    },
-    {
-      path: 'form', component: FormComponent
-    },
-    {
-      path: 'questionnaire01', component: Questionnaire01Component
-    },
-    {
-      path: 'CapabilityStatement', component: CapabilityStatementComponent
-    },
-    {
-      path: 'settings', component: SettingsComponent
-    },
-    {
-      path: '', component: LoginComponent
-    }
-  ];
+  {
+    path: '', component: HomeComponent
+  },
+  {
+    path: 'login', component: LoginComponent
+  },
+  {
+    path: 'patients', component: PatientsComponent
+  },
+  {
+    path: 'user', component: UserComponent
+  },
+  {
+    path: 'form', component: FormComponent
+  },
+  {
+    path: 'questionnaire01', component: Questionnaire01Component
+  },
+  {
+    path: 'questionnaire02', component: Questionnaire02Component
+  },
+  {
+    path: 'CapabilityStatement', component: CapabilityStatementComponent
+  },
+  {
+    path: 'settings', component: SettingsComponent
+  },
+  {
+    path: '', component: LoginComponent
+  }
+];
 
-  @NgModule({
-    imports: [ RouterModule.forRoot(routes, { useHash: true })
-    ],
-    exports: [ RouterModule ]
+@NgModule({
+  imports: [RouterModule.forRoot(routes, { useHash: true })
+  ],
+  exports: [RouterModule]
 })
 
-export class AppRoutingModule {}
+export class AppRoutingModule { }
 
 /*http://www.devglan.com/angular/angular-material-app*/

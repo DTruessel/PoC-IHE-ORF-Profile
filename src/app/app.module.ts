@@ -22,10 +22,10 @@ import { HttpService } from './shared/http.service';
 import { HttpConfigComponent } from './http-config/http-config.component';
 import { MessagesComponent } from './messages/messages.component';
 import { DownloaderComponent } from './downloader/downloader.component';
-import { AuthService } from './shared/auth.service';
+
 import { UserComponent } from './user/user.component';
 
-import { UserGetService } from './shared/user-get.service';
+import { Questionnaire02Component } from './questionnaire02/questionnaire02.component';
 
 
 @NgModule({
@@ -42,6 +42,7 @@ import { UserGetService } from './shared/user-get.service';
     MessagesComponent,
     DownloaderComponent,
     UserComponent,
+    Questionnaire02Component,
   ],
 
   imports: [
@@ -59,12 +60,9 @@ import { UserGetService } from './shared/user-get.service';
     UserService,
     AppRoutingModule,
     HttpService,
-    AuthService,
-
-    UserGetService
   ],
 
-  bootstrap: [ AppComponent ]
+  bootstrap: [AppComponent]
 
 })
 

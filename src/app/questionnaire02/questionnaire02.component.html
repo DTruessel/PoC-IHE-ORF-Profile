@@ -1,0 +1,35 @@
+<mat-card class="Questionnaires">
+  <mat-card-content>
+
+    <div class="searchPanel">
+      <mat-input-container floatPlaceholder="never">
+        <input matInput #filter placeholder="Suchen...">
+      </mat-input-container>
+    </div>
+
+    <mat-table #table [dataSource]="dataSource">
+      <mat-header-row *matHeaderRowDef="['questionnaireCol']">
+      </mat-header-row>
+      <mat-row *matRowDef="let row; columns: ['questionnaireCol']" (click)="selectRow(row)">
+      </mat-row>
+
+      <ng-container matColumnDef="questionnaireCol">
+        <mat-header-cell *matHeaderCellDef>Questionnaire</mat-header-cell>
+        <mat-cell *matCellDef="let entry">{{ getQName(entry) }}</mat-cell>
+      </ng-container>
+
+    </mat-table>
+
+
+    <!--<mat-table #table [dataSource]="dataSource">
+  
+        <mat-header-row *matHeaderRowDef="['familyNameCol', 'givenNamesCol', 'birthDateCol','addressLinesCol','addressCityCol']"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: ['familyNameCol', 'givenNamesCol', 'birthDateCol','addressLinesCol','addressCityCol']"></mat-row>
+      </mat-table>-->
+    <mat-paginator [length]="length" [pageSize]="size" [pageSizeOptions]="pageSizeOptions" (page)="goToPage($event)">
+    </mat-paginator>
+  </mat-card-content>
+  <button mat-menu-item routerLink="/">
+    <span>Home</span>
+  </button>
+</mat-card>

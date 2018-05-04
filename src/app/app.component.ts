@@ -12,7 +12,7 @@ export class AppComponent {
 
   title = 'Proof Of Concept IHE ORF';
 
-  constructor(private fhirHttpService: FhirJsHttpService, private router: Router) {  }
+  constructor(private fhirHttpService: FhirJsHttpService, private router: Router) { }
 
   getTitle(): string {
     switch (this.router.url) {
@@ -28,6 +28,8 @@ export class AppComponent {
         return this.title + ' - ' + 'Settings';
       case '/questionnaire01':
         return this.title + ' - ' + 'Questionnaire01';
+      case '/questionnaire02':
+        return this.title + ' - ' + 'Questionnaire02';
     }
     return this.title;
   }

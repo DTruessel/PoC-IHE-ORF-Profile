@@ -1,55 +1,71 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { Questionnaire01Component } from '../questionnaire01/questionnaire01.component';
 import { CapabilityStatementComponent } from '../capability-statement/capability-statement.component';
-import { PatientsComponent } from '../patients/patients.component';
 import { HomeComponent } from '../home/home.component';
-import { LoginComponent } from '../login/login.component';
-
 import { SettingsComponent } from '../settings/settings.component';
-import { FormComponent } from '../form/form.component';
-import { UserComponent } from '../user/user.component';
-import { Questionnaire02Component } from '../questionnaire02/questionnaire02.component';
+import { QuestionnairesComponent } from '../questionnaires/questionnaires.component';
+import { QuestionnaireDetailsComponent } from '../questionnaire-details/questionnaire-details.component';
+import { PageNotFoundComponent } from '../page-not-found.component';
+import { PatientsListComponent } from '../patients/patients-list/patients-list.component';
+import { PatientDetailComponent } from '../patients/patient-detail/patient-detail.component';
+import { PatientsComponent } from '../patients/patients/patients.component';
+
 
 const routes: Routes = [
+
   {
-    path: '', component: HomeComponent
+    path: 'home',
+    component: HomeComponent,
   },
   {
-    path: 'login', component: LoginComponent
+    path: 'patients-list',
+    component: PatientsListComponent,
   },
   {
-    path: 'patients', component: PatientsComponent
+    path: 'patients',
+    component: PatientsComponent,
   },
   {
-    path: 'user', component: UserComponent
+    path: 'patient-detail/:id',
+    component: PatientDetailComponent,
+  },
+
+  {
+    path: 'questionnaires',
+    component: QuestionnairesComponent,
+    data: {},
   },
   {
-    path: 'form', component: FormComponent
+    path: 'Questionnaire/:id', component: QuestionnaireDetailsComponent,
   },
   {
-    path: 'questionnaire01', component: Questionnaire01Component
+    path: 'capabilityStatement',
+    component: CapabilityStatementComponent
   },
   {
-    path: 'questionnaire02', component: Questionnaire02Component
+    path: 'settings',
+    component: SettingsComponent
   },
   {
-    path: 'CapabilityStatement', component: CapabilityStatementComponent
+    path: '',
+    redirectTo: '/home',
+    pathMatch: 'full'
   },
   {
-    path: 'settings', component: SettingsComponent
+    path: '**',
+    component: PageNotFoundComponent
   },
-  {
-    path: '', component: LoginComponent
-  }
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes, { useHash: true })
+  imports: [
+    RouterModule.forRoot(
+      routes,
+      { useHash: true })
   ],
-  exports: [RouterModule]
+  exports: [
+    RouterModule
+  ]
 })
 
 export class AppRoutingModule { }
-
-/*http://www.devglan.com/angular/angular-material-app*/

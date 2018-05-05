@@ -15,37 +15,27 @@
         <span>Home</span>
       </button>
 
-      <button mat-menu-item routerLink="/login">
-        <mat-icon>people</mat-icon>
-        <span>Login</span>
-      </button>
-
-      <button mat-menu-item routerLink="/patients">
+      <button mat-menu-item routerLink="/patients-list">
         <mat-icon>people</mat-icon>
         <span>Patients list</span>
       </button>
 
-      <button mat-menu-item routerLink="/form">
-        <mat-icon>info</mat-icon>
-        <span>Forms</span>
-      </button>
-
-      <button mat-menu-item routerLink="/questionnaire01">
-        <mat-icon>info</mat-icon>
-        <span>Questionnaire01</span>
-      </button>
-
-      <button mat-menu-item routerLink="/questionnaire02">
-        <mat-icon>info</mat-icon>
-        <span>Questionnaire02</span>
-      </button>
-
-      <button mat-menu-item routerLink="/user">
+      <button mat-menu-item routerLink="/patients">
         <mat-icon>people</mat-icon>
-        <span>User</span>
+        <span>Patients Test</span>
       </button>
 
-      <button mat-menu-item routerLink="/CapabilityStatement">
+      <button mat-menu-item routerLink="/patient-detail">
+        <mat-icon>people</mat-icon>
+        <span>Patient</span>
+      </button>
+
+      <button mat-menu-item routerLink="/questionnaires">
+        <mat-icon>info</mat-icon>
+        <span>Questionnaires</span>
+      </button>
+
+      <button mat-menu-item routerLink="/capabilityStatement">
         <mat-icon>info</mat-icon>
         <span>CapabilityStatement</span>
       </button>
@@ -59,5 +49,16 @@
   </span>
 </mat-toolbar>
 <div class="mat-typography">
-  <router-outlet> </router-outlet>
 </div>
+
+<h3 class="mat-subheading-2">Navigation</h3>
+<nav class="mat-button">
+  <a routerLink="/patients-list" routerLinkActive="active">Patients</a>
+  <a routerLink="/patients" routerLinkActive="active">Patients Test</a>
+  <a routerLink="/patient-detail" routerLinkActive="active">Patient</a>
+  <a routerLink="/questionnaires" routerLinkActive="active">Questionnaires</a>
+  <a routerLink="/capabilityStatement" routerLinkActive="active">CapabilityStatement</a>
+  <a routerLink="/settings" routerLinkActive="active">Settings</a>
+</nav>
+
+<router-outlet></router-outlet>

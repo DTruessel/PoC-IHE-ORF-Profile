@@ -3,47 +3,6 @@
 <div>
     <meta charset="utf-8">
     <title>PoCORF</title>
-    <mat-toolbar color="primary">
-        <span>
-            <mat-icon>mood</mat-icon>
-        </span>
-
-        <button mat-icon-button [mat-menu-trigger-for]="menu">
-            <mat-icon>more_vert</mat-icon>
-        </button>
-    </mat-toolbar>
-
-    <mat-menu x-position="before" #menu="matMenu">
-        <mat-toolbar-row>
-            <button routerLink="login"> Login </button>
-            <button routerLink="patients"> Patients </button>
-            <button routerLink="user"> User </button>
-            <button routerLink="form"> Forms </button>
-            <button routerLink="questionnaire01"> Questionnaire01 </button>
-            <button routerLink="questionnaire02"> Questionnaire02 </button>
-            <button routerLink="CapabilityStatement"> CapabilityStatement </button>
-            <button routerLink="settings"> Settings </button>
-            <button routerLink=""> Search Service </button>
-            <button routerLink=""> Logout </button>
-
-        </mat-toolbar-row>
-    </mat-menu>
-
-    <mat-card>
-        <span class="example-spacer"></span>
-
-        <a mat-button routerLink="login">Login</a>
-        <a mat-button routerLink="patients">Patients</a>
-        <a mat-button routerLink="user"> User </a>
-        <a routerLink="form">Forms</a>
-        <a routerLink="questionnaire01">Questionnaire01</a>
-        <a routerLink="questionnaire02">Questionnaire02</a>
-        <a mat-button routerLink="CapabilityStatement">CapabilityStatement</a>
-        <a mat-button routerLink="settings">Settings</a>
-        <a mat-button routerLink="">Search Patient</a>
-
-    </mat-card>
-
 </div>
 
 <br>
@@ -51,7 +10,7 @@
 
 <div>
 
-    <mat-card>
+    <mat-card class="mat-caption">
         <mat-card-title>Impressum</mat-card-title>
         <mat-card-footer>
             <ul>

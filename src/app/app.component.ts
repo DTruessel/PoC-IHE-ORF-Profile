@@ -16,20 +16,14 @@ export class AppComponent {
 
   getTitle(): string {
     switch (this.router.url) {
-      case '/login':
-        return this.title + ' - ' + 'Login';
-      case '/form':
-        return this.title + ' - ' + 'Forms';
-      case '/patients':
+      case '/patients-list':
         return this.title + ' - ' + 'Patients';
       case '/CapabilityStatement':
         return this.title + ' - ' + 'CapabilityStatement';
       case '/settings':
         return this.title + ' - ' + 'Settings';
-      case '/questionnaire01':
-        return this.title + ' - ' + 'Questionnaire01';
-      case '/questionnaire02':
-        return this.title + ' - ' + 'Questionnaire02';
+      case '/questionnaires':
+        return this.title + ' - ' + 'Questionnaires';
     }
     return this.title;
   }

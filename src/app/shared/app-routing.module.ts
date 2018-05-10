@@ -4,11 +4,12 @@ import { CapabilityStatementComponent } from '../capability-statement/capability
 import { HomeComponent } from '../home/home.component';
 import { SettingsComponent } from '../settings/settings.component';
 import { QuestionnairesComponent } from '../questionnaires/questionnaires.component';
-import { QuestionnaireDetailsComponent } from '../questionnaire-details/questionnaire-details.component';
 import { PageNotFoundComponent } from '../page-not-found.component';
 import { PatientsListComponent } from '../patients/patients-list/patients-list.component';
 import { PatientDetailComponent } from '../patients/patient-detail/patient-detail.component';
 import { PatientsComponent } from '../patients/patients/patients.component';
+import { DynamicFormQuestionComponent } from '../dynamic-form-question/dynamic-form-question.component';
+import { DynamicFormComponent } from '../dynamic-form/dynamic-form.component';
 
 
 const routes: Routes = [
@@ -29,20 +30,20 @@ const routes: Routes = [
     path: 'patient-detail/:id',
     component: PatientDetailComponent,
   },
-
-  {
+  { // Liste der Questionnaires und Suchfelder
     path: 'questionnaires',
     component: QuestionnairesComponent,
     data: {},
   },
-  {
-    path: 'Questionnaire/:id', component: QuestionnaireDetailsComponent,
-  },
+  /*{
+    path: 'dynamic-form',
+    component: DynamicFormComponent,
+  },*/
   {
     path: 'capabilityStatement',
     component: CapabilityStatementComponent
   },
-  {
+  { // FHIR Testserver
     path: 'settings',
     component: SettingsComponent
   },

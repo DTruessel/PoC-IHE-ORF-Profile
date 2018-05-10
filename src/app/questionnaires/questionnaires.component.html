@@ -3,12 +3,43 @@
 
     <div class="searchPanel">
       <mat-input-container floatPlaceholder="never">
-        <input matInput #filter placeholder="Suchen...">
+        <input matInput #filter placeholder="_id Search Parameter">
+      </mat-input-container>
+    </div>
+    <div class="searchPanel">
+      <mat-input-container floatPlaceholder="never">
+        <input matInput #filter placeholder="code Search Parameter">
+      </mat-input-container>
+    </div>
+    <div class="searchPanel">
+      <mat-input-container floatPlaceholder="never">
+        <input matInput #filter placeholder="identifier Search Parameter">
+      </mat-input-container>
+    </div>
+    <div class="searchPanel">
+      <mat-input-container floatPlaceholder="never">
+        <input matInput #filter placeholder="publisher Search Parameter">
+      </mat-input-container>
+    </div>
+    <div class="searchPanel">
+      <mat-input-container floatPlaceholder="never">
+        <input matInput #filter placeholder="status Search Parameter">
+      </mat-input-container>
+    </div>
+    <div class="searchPanel">
+      <mat-input-container floatPlaceholder="never">
+        <input matInput #filter placeholder="title Search Parameter">
+      </mat-input-container>
+    </div>
+    <div class="searchPanel">
+      <mat-input-container floatPlaceholder="never">
+        <input matInput #filter placeholder="version Search Parameter">
       </mat-input-container>
     </div>
 
     <mat-table #table [dataSource]="dataSource">
       <mat-header-row *matHeaderRowDef="['questionnaireCol']">
+        <!--Array mit nur einem Eintrag-->
       </mat-header-row>
       <mat-row *matRowDef="let row; columns: ['questionnaireCol']" (click)="selectRow(row)">
       </mat-row>
@@ -20,12 +51,6 @@
 
     </mat-table>
 
-
-    <!--<mat-table #table [dataSource]="dataSource">
-  
-        <mat-header-row *matHeaderRowDef="['familyNameCol', 'givenNamesCol', 'birthDateCol','addressLinesCol','addressCityCol']"></mat-header-row>
-        <mat-row *matRowDef="let row; columns: ['familyNameCol', 'givenNamesCol', 'birthDateCol','addressLinesCol','addressCityCol']"></mat-row>
-      </mat-table>-->
     <mat-paginator [length]="length" [pageSize]="size" [pageSizeOptions]="pageSizeOptions" (page)="goToPage($event)">
     </mat-paginator>
   </mat-card-content>

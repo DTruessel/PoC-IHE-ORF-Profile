@@ -1,5 +1,6 @@
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet">
+
 <mat-toolbar color="primary" role="header">
   <span>{{ getTitle() }}</span>
   <!-- This fills the remaining space of the current row -->
@@ -51,14 +52,15 @@
 <div class="mat-typography">
 </div>
 
-<h3 class="mat-subheading-2">Navigation</h3>
-<nav class="mat-button">
-  <a routerLink="/patients-list" routerLinkActive="active">Patients</a>
-  <a routerLink="/patients" routerLinkActive="active">Patients Test</a>
-  <a routerLink="/patient-detail" routerLinkActive="active">Patient</a>
-  <a routerLink="/questionnaires" routerLinkActive="active">Questionnaires</a>
-  <a routerLink="/capabilityStatement" routerLinkActive="active">CapabilityStatement</a>
-  <a routerLink="/settings" routerLinkActive="active">Settings</a>
+
+<nav>
+  <a class="mat-raised-button" routerLink="/patients-list" routerLinkActive="active">Patients</a>
+  <a class="mat-raised-button" routerLink="/patients" routerLinkActive="active">My Patients</a>
+  <!--<a class="mat-raised-button" mat-fabrouterLink="/patient-detail" routerLinkActive="active">Patient</a>-->
+  <a class="mat-raised-button" routerLink="/questionnaires" routerLinkActive="active">Questionnaires</a>
+  <a class="mat-raised-button" routerLink="/dynamic-form-question" routerLinkActive="active">Dynamic Form</a>
+  <a class="mat-raised-button" routerLink="/capabilityStatement" routerLinkActive="active">CapabilityStatement</a>
+  <a class="mat-raised-button" routerLink="/settings" routerLinkActive="active">Settings</a>
 </nav>
 
 <router-outlet></router-outlet>

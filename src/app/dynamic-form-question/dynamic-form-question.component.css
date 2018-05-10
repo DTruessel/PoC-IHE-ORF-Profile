@@ -1,0 +1,95 @@
+.descriptionQ {
+    width: 180%;
+    margin: 5px;
+    display: flex;
+  }
+  
+  /* .descriptionLabel, .descriptionText {
+  } */
+  
+  .descriptionLabel {
+    font-weight: bold;
+    width: 100px;
+  }
+  
+  .singleQuestionDiv, .spanQuestionDiv_1, .spanQuestionDiv_2, .spanQuestionDiv_3, .spanQuestionDiv_4 {
+    width: 180px;
+    margin: 5px;
+    display: grid;
+  }
+  
+  .spanQuestionDiv_2 {
+    width: 370px;
+  }
+  
+  .spanQuestionDiv_3 {
+    width: 560px;
+  }
+  
+  .spanQuestionDiv_4 {
+    width: 720px;
+  }
+  
+  .radioGroup {
+    display: flex;
+    flex-wrap: wrap;
+    border: 0.5px solid silver;
+    background-color: white;
+  }
+  
+  .radioOption {
+    margin: 1px 6px -3px 3px;
+    height: 24px;
+  }
+  
+  .textInputQ, .selectQ, .dateInputQ {
+    width: 180px;
+    height: 1.5em;
+  }
+  
+  .textAreaQ {
+    min-height: 33px;
+  }
+  
+  input, select, textarea {
+    margin: 0;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    vertical-align: middle;
+  }
+  
+  .groupHeader {
+    font-weight: bolder;
+    width: 100%;
+  }
+  
+  .qLabel {
+    display: block;
+    margin: 6px 1px -2px 1px;
+  }
+  
+  .questionGroup_1, .questionGroup_2, .questionGroup_3 {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 9px 0px 3px 0px;
+    padding: 12px;
+  }
+  
+  .questionGroup_0 {
+    background-color: rgb(238, 237, 183);
+    padding: 12px;
+    margin: 8px 0 2px 0;
+  }
+  
+  .questionGroup_1 {
+    background-color: rgb(191, 236, 206);
+  }
+  
+  .questionGroup_2 {
+    background-color: rgb(184, 231, 250);
+  }
+  
+  .questionGroup_3 {
+    background-color: burlywood;
+  }

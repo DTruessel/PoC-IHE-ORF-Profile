@@ -1,0 +1,26 @@
+<div>
+  <form (ngSubmit)="onSubmit()" [formGroup]="form">
+    <div *ngFor="let question of questions">
+      <app-question [question]="question" [form]="form"></app-question>
+    </div>
+    <!-- <div>
+      <button type="submit" [disabled]="!form.valid">Save</button>
+    </div> -->
+  </form>
+
+  <!-- TODO TMP -->
+  <hr />
+  <strong>Form Value</strong>
+  <pre>{{ form.value | json }}</pre>
+  <strong>Form is valid:</strong> {{form.valid}}
+
+
+  <div *ngIf="payLoad" class="form-row">
+    <strong>Saved the following values</strong>
+    <br>{{payLoad}}
+  </div>
+
+
+
+
+</div>

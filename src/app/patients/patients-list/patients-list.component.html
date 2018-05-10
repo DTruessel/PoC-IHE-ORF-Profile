@@ -15,11 +15,11 @@
         (click)="selectRow(row)"></mat-row>
 
       <ng-container matColumnDef="familyNameCol">
-        <mat-header-cell *matHeaderCellDef>Family</mat-header-cell>
+        <mat-header-cell *matHeaderCellDef>Family Name</mat-header-cell>
         <mat-cell *matCellDef="let entry">{{ getPatientFamilyName(entry) }}</mat-cell>
       </ng-container>
       <ng-container matColumnDef="givenNamesCol">
-        <mat-header-cell *matHeaderCellDef>Given</mat-header-cell>
+        <mat-header-cell *matHeaderCellDef>Given Names</mat-header-cell>
         <mat-cell *matCellDef="let entry">{{ getPatientGivenNames(entry) }}</mat-cell>
       </ng-container>
       <ng-container matColumnDef="birthDateCol">

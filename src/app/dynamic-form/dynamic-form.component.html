@@ -13,14 +13,12 @@
   <strong>Form Value</strong>
   <pre>{{ form.value | json }}</pre>
   <strong>Form is valid:</strong> {{form.valid}}
-
-
-  <div *ngIf="payLoad" class="form-row">
-    <strong>Saved the following values</strong>
-    <br>{{payLoad}}
-  </div>
+</div>
 
 
 
 
+<div *ngIf="payLoad" class="form-row">
+  <strong>Saved the following values</strong>
+  <br>{{payLoad}}
 </div>

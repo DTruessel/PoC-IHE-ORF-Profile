@@ -11,7 +11,6 @@ import { PatientsListComponent } from './patients/patients-list/patients-list.co
 import { PatientsComponent } from './patients/patients/patients.component';
 import { PatientDetailComponent } from './patients/patient-detail/patient-detail.component';
 
-import { QuestionnairesComponent } from './questionnaires/questionnaires.component';
 import { SettingsComponent } from './settings/settings.component';
 import { CapabilityStatementComponent } from './capability-statement/capability-statement.component';
 import { PageNotFoundComponent } from './page-not-found.component';
@@ -27,6 +26,13 @@ import { PatientService } from './patients/patient.service';
 import { SelectivePreloadingStrategy } from './selective-preloading-strategy';
 import { SessionService } from './services/session.service';
 
+import { DynamicFormComponent } from './dynamic-form/dynamic-form.component';
+import { DynamicFormQuestionComponent } from './dynamic-form-question/dynamic-form-question.component';
+import { QuestionnairesListComponent } from './questionnaires/questionnaires-list/questionnaires-list.component';
+import { QuestionnaireLoadComponent } from './questionnaires/questionnaire-load/questionnaire-load.component';
+import { QuestionService } from './services/question.service';
+import { ParserService } from './services/parser.service';
+
 
 
 
@@ -37,10 +43,13 @@ import { SessionService } from './services/session.service';
     PatientsListComponent,
     PatientsComponent,
     PatientDetailComponent,
-    QuestionnairesComponent,
     SettingsComponent,
     CapabilityStatementComponent,
     PageNotFoundComponent,
+    QuestionnaireLoadComponent,
+    DynamicFormComponent,
+    DynamicFormQuestionComponent,
+    QuestionnairesListComponent,
 
   ],
 
@@ -52,6 +61,7 @@ import { SessionService } from './services/session.service';
     NgFhirjsModule,
     FormsModule,
     MaterialModule,
+    ReactiveFormsModule
   ],
 
   providers: [
@@ -59,6 +69,8 @@ import { SessionService } from './services/session.service';
     AppRoutingModule, MessageService, PatientService,
     SelectivePreloadingStrategy,
     SessionService,
+    QuestionService,
+    ParserService
   ],
 
   bootstrap: [AppComponent]

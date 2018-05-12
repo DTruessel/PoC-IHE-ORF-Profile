@@ -24,8 +24,8 @@ export class AppComponent {
         return this.title + ' - ' + 'Settings';
       case '/questionnaires':
         return this.title + ' - ' + 'Questionnaires';
-      case '/dynamic-form-question':
-        return this.title + ' - ' + 'Dynamic Form';
+      case '/questionnaire-load':
+        return this.title + ' - ' + 'Selected Questionnaire';
     }
     return this.title;
   }

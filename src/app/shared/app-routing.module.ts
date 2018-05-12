@@ -3,13 +3,15 @@ import { Routes, RouterModule } from '@angular/router';
 import { CapabilityStatementComponent } from '../capability-statement/capability-statement.component';
 import { HomeComponent } from '../home/home.component';
 import { SettingsComponent } from '../settings/settings.component';
-import { QuestionnairesComponent } from '../questionnaires/questionnaires.component';
+import { QuestionnairesListComponent } from '../questionnaires/questionnaires-list/questionnaires-list.component';
 import { PageNotFoundComponent } from '../page-not-found.component';
 import { PatientsListComponent } from '../patients/patients-list/patients-list.component';
 import { PatientDetailComponent } from '../patients/patient-detail/patient-detail.component';
 import { PatientsComponent } from '../patients/patients/patients.component';
 import { DynamicFormQuestionComponent } from '../dynamic-form-question/dynamic-form-question.component';
 import { DynamicFormComponent } from '../dynamic-form/dynamic-form.component';
+import { QuestionnaireLoadComponent } from '../questionnaires/questionnaire-load/questionnaire-load.component';
+
 
 
 const routes: Routes = [
@@ -31,14 +33,14 @@ const routes: Routes = [
     component: PatientDetailComponent,
   },
   { // Liste der Questionnaires und Suchfelder
-    path: 'questionnaires',
-    component: QuestionnairesComponent,
+    path: 'questionnaires-list',
+    component: QuestionnairesListComponent,
     data: {},
   },
-  /*{
-    path: 'dynamic-form',
-    component: DynamicFormComponent,
-  },*/
+  {
+    path: 'questionnaire-load',
+    component: QuestionnaireLoadComponent,
+  },
   {
     path: 'capabilityStatement',
     component: CapabilityStatementComponent

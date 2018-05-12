@@ -3,6 +3,7 @@ import { FormGroup } from '@angular/forms';
 
 import { QuestionBase } from '../questions/question-base';
 import { QuestionControlService } from '../services/question-control.service';
+import { SessionService } from '../services/session.service';
 
 
 
@@ -10,7 +11,10 @@ import { QuestionControlService } from '../services/question-control.service';
   selector: 'app-dynamic-form',
   templateUrl: './dynamic-form.component.html',
   styleUrls: ['./dynamic-form.component.css'],
-  providers: [QuestionControlService]
+  providers: [
+    QuestionControlService,
+    SessionService
+  ]
 })
 export class DynamicFormComponent implements OnInit {
 
@@ -20,11 +24,12 @@ export class DynamicFormComponent implements OnInit {
   payLoad = '';
 
   constructor(
-    private qcs: QuestionControlService,
+    private questionControlService: QuestionControlService,
+    private sessionService: SessionService,
   ) { }
 
   ngOnInit() {
-    this.form = this.qcs.toFormGroup(this.questions);
+    this.form = this.questionControlService.toFormGroup(this.questions);
   }
 
   onSubmit() {

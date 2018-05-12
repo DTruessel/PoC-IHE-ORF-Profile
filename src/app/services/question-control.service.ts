@@ -12,7 +12,9 @@ export class QuestionControlService {
 
   toFormGroup(questions: QuestionBase<any>[]) {
     let controls: {} = {};
+
     questions.forEach(question => this.addFormControlForQuestion(question, controls));
+
     return new FormGroup(controls);
   }
 

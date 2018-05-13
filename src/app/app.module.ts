@@ -33,9 +33,6 @@ import { QuestionnaireLoadComponent } from './questionnaires/questionnaire-load/
 import { QuestionService } from './services/question.service';
 import { ParserService } from './services/parser.service';
 
-
-
-
 @NgModule({
   declarations: [
     AppComponent,

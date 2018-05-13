@@ -1,6 +1,6 @@
 /// <reference path="../../../../node_modules/@types/fhir/index.d.ts" />
 
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, Output, EventEmitter } from '@angular/core';
 import { MatTableDataSource, PageEvent } from '@angular/material';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { Observable } from 'rxjs/Observable';
@@ -18,12 +18,16 @@ import { ParserService } from '../../services/parser.service';
 @Component({
   selector: 'app-questionnaires-list',
   templateUrl: './questionnaires-list.component.html',
-  styleUrls: ['./questionnaires-list.component.css']
+  styleUrls: ['./questionnaires-list.component.css'],
+  providers: [SessionService]
 })
+
 export class QuestionnairesListComponent implements OnInit {
 
   selectedRowIndex: any;
   row: any;
+
+  @Output() myevent = new EventEmitter();
 
   searched = false;
   bundle: fhir.Bundle;
@@ -40,13 +44,13 @@ export class QuestionnairesListComponent implements OnInit {
   private data$: BehaviorSubject<fhir.Bundle>;            // data$ ist ein observable
 
 
-  get selectedQuestionnaire(): any {
+  /*get selectedQuestionnaire(): any {
     return this.sessionService.selectedQuestionnaire;
   }
 
   set selectedQuestionnaire(value: any) {
     this.sessionService.selectedQuestionnaire = value;
-  }
+  }*/
 
 
 
@@ -57,8 +61,6 @@ export class QuestionnairesListComponent implements OnInit {
   ) {
     this.data$ = new BehaviorSubject(null);               // data$ gibt die Daten aus, die vom Backend empfangen worden sind.
     this.search(this.makeQuery(null));
-
-
   }
 
   private makeQuery(q: Object) {
@@ -100,12 +102,12 @@ export class QuestionnairesListComponent implements OnInit {
   }
 
   selectRow(row) {
-    let selectedQuestionnaire = row.resource;                         // row.resource in die Variable des sessionService setzen
+    this.sessionService.selectedQuestionnaire = row.resource;        // row.resource in die Variable des sessionService setzen
     alert('selected: ' + JSON.stringify(row.resource));
     // console.log(JSON.stringify(row.resource));
     // return (JSON.stringify(row.resource));
-    console.log(selectedQuestionnaire);
-    return selectedQuestionnaire;
+    console.log(this.sessionService.selectedQuestionnaire);
+    return this.sessionService.selectedQuestionnaire;
 
 
   }

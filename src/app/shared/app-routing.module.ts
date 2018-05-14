@@ -10,8 +10,7 @@ import { PatientDetailComponent } from '../patients/patient-detail/patient-detai
 import { PatientsComponent } from '../patients/patients/patients.component';
 import { DynamicFormQuestionComponent } from '../dynamic-form-question/dynamic-form-question.component';
 import { DynamicFormComponent } from '../dynamic-form/dynamic-form.component';
-import { QuestionnaireLoadComponent } from '../questionnaires/questionnaire-load/questionnaire-load.component';
-
+import { QuestionnaireFormComponent } from '../questionnaires/questionnaire-form/questionnaire-form.component';
 
 
 const routes: Routes = [
@@ -38,8 +37,8 @@ const routes: Routes = [
     data: {},
   },
   {
-    path: 'questionnaire-load',
-    component: QuestionnaireLoadComponent,
+    path: 'questionnaire-form',
+    component: QuestionnaireFormComponent,
   },
   {
     path: 'capabilityStatement',

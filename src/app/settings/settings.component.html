@@ -1,34 +1,13 @@
-<mat-card class="demo-panel">
-  <mat-card-title>
-    FHIR Testserver
-  </mat-card-title>
+<mat-card>
   <mat-card-content>
-    <mat-toolbar color="white">
-
-      <mat-toolbar-row>
-        <button mat-raised-button>
-          <a class="dropdown-item" href="http://fhirtest.uhn.ca/baseDstu3/">'http://fhirtest.uhn.ca/baseDstu3/'</a>
-        </button>
-      </mat-toolbar-row>
-
-      <mat-toolbar-row>
-        <button mat-raised-button>
-          <a class="dropdown-item" href="http://localhost:8080/baseDstu3">'http://localhost:8080/baseDstu3'</a>
-        </button>
-      </mat-toolbar-row>
-
-      <mat-toolbar-row>
-        <button mat-raised-button>
-          <a class="dropdown-item" href="http://test.fhir.org/r3">'http://test.fhir.org/r3'</a>
-        </button>
-      </mat-toolbar-row>
-
-      <mat-toolbar-row>
-        <button mat-raised-button>
-          <a class="dropdown-item" href="http://vonk.furore.com">'http://vonk.furore.com'</a>
-        </button>
-      </mat-toolbar-row>
-
-    </mat-toolbar>
+    <form>
+      <mat-form-field>
+        <mat-select placeholder="FHIR Server (ST3)" name="selectserver" [ngModel]="getSelectedValue()" (ngModelChange)="setSelectedValue($event)">
+          <mat-option *ngFor="let fhir of fhirServers" [value]="fhir">
+            {{fhir}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </form>
   </mat-card-content>
 </mat-card>

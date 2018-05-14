@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { Item } from '../models/item';
-import { SessionService } from './session.service';
 import { Questionnaire } from '../models/questionnaire';
 
 @Injectable()
@@ -8,12 +7,9 @@ export class ParserService {
 
   obj: any;
 
-  constructor(
-    private sessionService: SessionService,
-  ) { }
+  constructor() { }
 
   convertToQuestionnaire(obj: any): Questionnaire {
-    obj = this.sessionService.selectedQuestionnaire;
     let q = this.extractQuestionnaireHeader(obj);
     q.items = [];
     obj.item.forEach(i => q.items.push(this.extractItem(i)));
@@ -23,8 +19,6 @@ export class ParserService {
   private extractQuestionnaireHeader(selectedQuestionnaire: any): Questionnaire {
     let q = new Questionnaire();
     q.id = selectedQuestionnaire.id;
-    let text = 'Status: [' + selectedQuestionnaire.text.status + '] - Note: [' + selectedQuestionnaire.text.div.pre._text + ']';
-    q.text = text;
     q.url = selectedQuestionnaire.url;
     q.title = selectedQuestionnaire.title;
     q.status = selectedQuestionnaire.status;

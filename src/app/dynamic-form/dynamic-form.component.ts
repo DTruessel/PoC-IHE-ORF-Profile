@@ -15,7 +15,6 @@ import { QuestionService } from '../services/question.service';
   styleUrls: ['./dynamic-form.component.css'],
   providers: [
     QuestionControlService,
-    SessionService
   ],
 
 })

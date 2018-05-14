@@ -29,9 +29,9 @@ import { SessionService } from './services/session.service';
 import { DynamicFormComponent } from './dynamic-form/dynamic-form.component';
 import { DynamicFormQuestionComponent } from './dynamic-form-question/dynamic-form-question.component';
 import { QuestionnairesListComponent } from './questionnaires/questionnaires-list/questionnaires-list.component';
-import { QuestionnaireLoadComponent } from './questionnaires/questionnaire-load/questionnaire-load.component';
 import { QuestionService } from './services/question.service';
 import { ParserService } from './services/parser.service';
+import { QuestionnaireFormComponent } from './questionnaires/questionnaire-form/questionnaire-form.component';
 
 @NgModule({
   declarations: [
@@ -43,10 +43,10 @@ import { ParserService } from './services/parser.service';
     SettingsComponent,
     CapabilityStatementComponent,
     PageNotFoundComponent,
-    QuestionnaireLoadComponent,
     DynamicFormComponent,
     DynamicFormQuestionComponent,
     QuestionnairesListComponent,
+    QuestionnaireFormComponent,
 
   ],
 

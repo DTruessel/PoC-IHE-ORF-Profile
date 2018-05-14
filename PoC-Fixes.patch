@@ -213,7 +213,9 @@ index 4c2abd6..29eb391 100644
  
 -  @ViewChild('filter')
 +  @ViewChild('filter') // TODO mehrere Felder, je Suchkriterium...
-   private filterInput: ElementRef;
+   private filterInput: ElementRef; 
+
+
  
    private data$: BehaviorSubject<fhir.Bundle>;            // data$ ist ein observable
  

@@ -1,0 +1,405 @@
+ package-lock.json                                  | 10 +++
+ src/app/app.component.html                         |  7 +-
+ src/app/dynamic-form/dynamic-form.component.ts     |  2 +-
+ .../questionnaire-load.component.ts                | 71 +++++-----------
+ .../questionnaires-list.component.ts               | 98 ++++------------------
+ src/app/services/parser.service.ts                 | 14 ++--
+ src/app/shared/app-routing.module.ts               |  2 +-
+ 7 files changed, 64 insertions(+), 140 deletions(-)
+
+diff --git a/package-lock.json b/package-lock.json
+index 0eb143b..5db5ac9 100644
+--- a/package-lock.json
++++ b/package-lock.json
+@@ -241,6 +241,11 @@
+         "tslib": "1.9.0"
+       }
+     },
++    "@ng-bootstrap/ng-bootstrap": {
++      "version": "1.1.2",
++      "resolved": "https://registry.npmjs.org/@ng-bootstrap/ng-bootstrap/-/ng-bootstrap-1.1.2.tgz",
++      "integrity": "sha512-lPB4WdFk3s4k1OMKiZsmbxSE3r8qBFapov0HudEVi8HYkm6LBxZmWqy9I6KAC9NnhVUVIYnCixvRSNwOQvIwwA=="
++    },
+     "@ngtools/json-schema": {
+       "version": "1.2.0",
+       "resolved": "https://registry.npmjs.org/@ngtools/json-schema/-/json-schema-1.2.0.tgz",
+@@ -291,6 +296,11 @@
+         "semver-intersect": "1.3.1"
+       }
+     },
++    "@types/fhir": {
++      "version": "0.0.30",
++      "resolved": "https://registry.npmjs.org/@types/fhir/-/fhir-0.0.30.tgz",
++      "integrity": "sha512-vDU62tUFeAYBVQThiWAfGd6D25TiLLDDS5pV19vim52FLpwWTBliLMvotbF4D/U+BmjxBKIuHGZgFnoh/HtV5g=="
++    },
+     "@types/jasmine": {
+       "version": "2.8.6",
+       "resolved": "https://registry.npmjs.org/@types/jasmine/-/jasmine-2.8.6.tgz",
+diff --git a/src/app/app.component.html b/src/app/app.component.html
+index 73aaafb..4ddfdfa 100644
+--- a/src/app/app.component.html
++++ b/src/app/app.component.html
+@@ -31,7 +31,7 @@
+         <span>Patient</span>
+       </button>
+ 
+-      <button mat-menu-item routerLink="/questionnaires">
++      <button mat-menu-item routerLink="/questionnaires-list">
+         <mat-icon>info</mat-icon>
+         <span>Questionnaires</span>
+       </button>
+@@ -52,7 +52,7 @@
+ <div class="mat-typography">
+ </div>
+ 
+-
++<!-- TODO: remove! -->
+ <nav>
+   <a class="mat-raised-button" routerLink="/patients-list" routerLinkActive="active">Patients</a>
+   <a class="mat-raised-button" routerLink="/patients" routerLinkActive="active">My Patients</a>
+@@ -62,5 +62,6 @@
+   <a class="mat-raised-button" routerLink="/capabilityStatement" routerLinkActive="active">CapabilityStatement</a>
+   <a class="mat-raised-button" routerLink="/settings" routerLinkActive="active">Settings</a>
+ </nav>
++<!-- -->
+ 
+-<router-outlet></router-outlet>
+\ No newline at end of file
++<router-outlet></router-outlet>
+diff --git a/src/app/dynamic-form/dynamic-form.component.ts b/src/app/dynamic-form/dynamic-form.component.ts
+index 51bcc69..2c9582f 100644
+--- a/src/app/dynamic-form/dynamic-form.component.ts
++++ b/src/app/dynamic-form/dynamic-form.component.ts
+@@ -15,7 +15,7 @@ import { QuestionService } from '../services/question.service';
+   styleUrls: ['./dynamic-form.component.css'],
+   providers: [
+     QuestionControlService,
+-    SessionService
++    // SessionService -> unnötig hier
+   ],
+ 
+ })
+diff --git a/src/app/questionnaires/questionnaire-load/questionnaire-load.component.ts b/src/app/questionnaires/questionnaire-load/questionnaire-load.component.ts
+index cf6e84a..ba61005 100644
+--- a/src/app/questionnaires/questionnaire-load/questionnaire-load.component.ts
++++ b/src/app/questionnaires/questionnaire-load/questionnaire-load.component.ts
+@@ -4,72 +4,45 @@ import { SessionService } from '../../services/session.service';
+ import { Item } from '../../models/item';
+ import { QuestionBase } from '../../questions/question-base';
+ import { ParserService } from '../../services/parser.service';
++import { Questionnaire } from '../../models/questionnaire';
+ 
+ @Component({
+   selector: 'app-questionnaire-load',
+   templateUrl: './questionnaire-load.component.html',
+   styleUrls: ['./questionnaire-load.component.css'],
+-  providers: [
+-    QuestionService,
+-    SessionService,
+-    ParserService
+-  ]
++  // vgl. QuestionnairesListComponent!
++  // providers: [
++  //   QuestionService,
++  //   SessionService,
++  //   ParserService
++  // ]
+ })
+-export class QuestionnaireLoadComponent implements OnInit {
++export class QuestionnaireLoadComponent { // TODO Name wäre besser "QuestionnaireForm" o.dgl.
+ 
+   questions: any[];
+-  obj: any;
+-  questionnaireObject: any;
++  questionnaire: Questionnaire;
+ 
+-  @Input() selectedQuestionnaire = this.sessionService.selectedQuestionnaire;
++  // unnötig! @Input() selectedQuestionnaire = this.sessionService.selectedQuestionnaire;
+ 
+   constructor(
+     private questionService: QuestionService,
+     private sessionService: SessionService,
+     private parserService: ParserService
+   ) {
+-    // this.loadItems();
+-    // this.loadQuestionnaire();
+-
+-  }
+-
+-  ngOnInit() {
+-    this.sessionService.setSelectedQuestionnaire(this.questionnaireObject);
+-  }
+-
+-  loadItems(): any {
+-    // let jStr = this.parserService.parseXmlToJson(xml3.data3); // nicht nötig
+-    // obj: any = selectedQuestionnaire;
+-    let items: Item[] = [];
+-    for (let o of this.selectedQuestionnaire.item) {
+-      let i = this.parserService.extractItem(o);
+-      items.push(i);
+-    }
+-    this.questions = [];
+-    for (let i of items) {
+-      let question: QuestionBase<any> = this.questionService.getQuestionForItem(i, 0);
+-      this.questions.push(question);
++    // loadQuestionnaire (inkl. loadItems) nicht hier: das machen eben die beiden Services!
++    const rawQ = this.sessionService.selectedQuestionnaire;
++    if (rawQ) {
++      this.questionnaire = this.parserService.convertToQuestionnaire(rawQ);
++      this.questions = this.questionService.getQuestions(this.questionnaire);
++    } else {
++      alert('!! NO QUESTIONNAIRE FOUND IN SESSION !!');
++      // Navigation zur Suche ?!
+     }
+   }
+ 
+-  /*loadItems(): any {
+-  
+-    let items: Item[] = [];
+-    for (let o of this.sessionService.selectedQuestionnaire.item) {
+-      let i = this.parserService.extractItem(o);
+-      items.push(i);
+-    }
+-    this.questions = [];
+-    for (let i of items) {
+-      let question: QuestionBase<any> = this.questionService.getQuestionForItem(i, 0);
+-      this.questions.push(question);
+-    }
+-  }*/
++  // ngOnInit() {
++  // !! hier RAUSNEHMEN, nicht reintun ;-) !! 
++  // this.sessionService.setSelectedQuestionnaire(this.questionnaireObject);
++  // }
+ 
+-  loadQuestionnaire() {
+-    let questionnaire = this.sessionService.selectedQuestionnaire;
+-    this.questions = this.questionService.getQuestions(this.sessionService.selectedQuestionnaire);
+-  }
+ }
+-
+-
+diff --git a/src/app/questionnaires/questionnaires-list/questionnaires-list.component.ts b/src/app/questionnaires/questionnaires-list/questionnaires-list.component.ts
+index 4c2abd6..29eb391 100644
+--- a/src/app/questionnaires/questionnaires-list/questionnaires-list.component.ts
++++ b/src/app/questionnaires/questionnaires-list/questionnaires-list.component.ts
+@@ -19,7 +19,9 @@ import { ParserService } from '../../services/parser.service';
+   selector: 'app-questionnaires-list',
+   templateUrl: './questionnaires-list.component.html',
+   styleUrls: ['./questionnaires-list.component.css'],
+-  providers: [SessionService]
++  // so erstellst du einen EIGENEN SessionService für diese Comp.
++  // damit überlistest du den Mechanismus...!
++  // providers: [SessionService]
+ })
+ 
+ export class QuestionnairesListComponent implements OnInit {
+@@ -27,10 +29,10 @@ export class QuestionnairesListComponent implements OnInit {
+   selectedRowIndex: any;
+   row: any;
+ 
+-  @Output() myevent = new EventEmitter();
++  // ?? @Output() myevent = new EventEmitter();
+ 
+-  searched = false;
+-  bundle: fhir.Bundle;
++  // searched = false;
++  // bundle: fhir.Bundle;
+   dataSource = new MatTableDataSource<fhir.BundleEntry>();
+ 
+   length = 100;
+@@ -38,31 +40,31 @@ export class QuestionnairesListComponent implements OnInit {
+   oldPageIndex = 0;
+   pageSizeOptions = [this.pageSize];
+ 
+-  @ViewChild('filter')
++  @ViewChild('filter') // TODO mehrere Felder, je Suchkriterium...
+   private filterInput: ElementRef;
+ 
+   private data$: BehaviorSubject<fhir.Bundle>;            // data$ ist ein observable
+ 
+-
+   /*get selectedQuestionnaire(): any {
+     return this.sessionService.selectedQuestionnaire;
+   }
+-
+   set selectedQuestionnaire(value: any) {
+     this.sessionService.selectedQuestionnaire = value;
+   }*/
+ 
+-
+-
+   constructor(
+     private fhirHttpService: FhirJsHttpService,
+     private sessionService: SessionService,
+     private parserService: ParserService,
+   ) {
+     this.data$ = new BehaviorSubject(null);               // data$ gibt die Daten aus, die vom Backend empfangen worden sind.
+-    this.search(this.makeQuery(null));
++    this.search(this.makeQuery({ title: 'ebida' })); // TODO TMP: Vereinfachung zum Entw. :)
+   }
+ 
++  /*
++  TODO: makeQuery() so, dass alle Suchkrit. (... die eingegeben wurden) berücksichtigt werden
++  muss ein gen. Obj. erstellen à la { title: ..., id: ..., ... }
++  */
+   private makeQuery(q: Object) {
+     const base = { type: 'Questionnaire', query: { _count: this.pageSize } };
+     if (q) {
+@@ -83,7 +85,7 @@ export class QuestionnairesListComponent implements OnInit {
+   ngOnInit() {
+     this.data$.subscribe((questionnairesBundle: fhir.Bundle) => {
+       if (questionnairesBundle) {
+-        this.bundle = questionnairesBundle;
++        // this.bundle = questionnairesBundle;
+         this.dataSource.data = questionnairesBundle.entry;             // entry enthält generische Questionnaire-Objekte
+         this.length = questionnairesBundle.total;
+         for (const p of questionnairesBundle.entry) {
+@@ -91,6 +93,8 @@ export class QuestionnairesListComponent implements OnInit {
+         }
+       }
+     });
++    // TODO: statt Event-Listener besser & einfacher ein Button, mit (click)="doSearch()" um die Suche
++    // auszulösen; dieses doSearch() muss dann die Query zusammenstellen und die Suche beim fhirHttpService aufrufen.
+     // event listener für den Filter
+     Observable.fromEvent(this.filterInput.nativeElement, 'keyup')     // keyup ist der Event
+       .debounceTime(200)
+@@ -105,82 +109,16 @@ export class QuestionnairesListComponent implements OnInit {
+     this.sessionService.selectedQuestionnaire = row.resource;        // row.resource in die Variable des sessionService setzen
+     alert('selected: ' + JSON.stringify(row.resource));
+     // console.log(JSON.stringify(row.resource));
+-    // return (JSON.stringify(row.resource));
+-    console.log(this.sessionService.selectedQuestionnaire);
+-    return this.sessionService.selectedQuestionnaire;
++    // return this.sessionService.selectedQuestionnaire; -> braucht keinen return!
+ 
++    // TODO ('automatische') Navigation zur QuestionnaireLoadComponent-Ansicht!
+ 
+   }
+ 
+-  /*convertToQuestionnaire(selectedQuestionnaire: any): Questionnaire {
+-    selectedQuestionnaire = selectedQuestionnaire.Questionnaire;
+-    let q = this.extractQuestionnaireHeader(selectedQuestionnaire);
+-    q.items = [];
+-    selectedQuestionnaire.item.forEach(i => q.items.push(this.extractItem(i)));
+-    console.log(q);
+-    return q;
+-  }*/
+-
+-
+-
+-
+-
+-  /*private extractQuestionnaireHeader(obj: any): Questionnaire {
+-   let q = new Questionnaire();
+-   q.id = obj.id;
+-   let text = 'Status: [' + obj.text.status + '] - Note: [' + obj.text.div.pre._text + ']';
+-   q.text = text;
+-   q.url = obj.url;
+-   q.title = obj.title;
+-   q.status = obj.status;
+-   q.experimental = obj.experimental;
+-   q.date = obj.date;
+-   q.publisher = obj.publisher;
+-   q.subjectType = obj.subjectType;
+-   return q;
+- }*/
+-
+-  // accessible for tests
+-  /*extractItem(selectedQuestionnaire: any): Item {
+-    let item: Item = new Item();
+-    item.linkId = selectedQuestionnaire.linkId;
+-    item.text = selectedQuestionnaire.text;
+-    item.type = selectedQuestionnaire.type;
+-
+-    if (selectedQuestionnaire.option) {
+-      item.options = selectedQuestionnaire.option.map(o => o.valueString);
+-    }
+-    if (selectedQuestionnaire.item) {
+-      item.items = [];
+-      for (let i of selectedQuestionnaire.item) {
+-        item.items.push(this.extractItem(i));
+-      }
+-    }
+-    return item;
+-  }*/
+-
+-  /*extractItem(obj: any): Item {
+-    let item: Item = new Item();
+-    item.linkId = obj.linkId;
+-    item.text = obj.text;
+-    item.type = obj.type;
+-
+-    if (obj.option) {
+-      item.options = obj.option.map(o => o.valueString);
+-    }
+-    if (obj.item) {
+-      item.items = [];
+-      for (let i of obj.item) {
+-        item.items.push(this.extractItem(i));
+-      }
+-    }
+-    return item;
+-  }*/
+-
+   getQName(entry: fhir.BundleEntry) {
+     const quest = (<fhir.Questionnaire>entry.resource);
+     if (quest) {
+-      const line = quest.resourceType + ': ' + quest.title + ' | ' + quest.id;
++      const line = quest.title + ' | ' + quest.id;
+       return line;
+     }
+     return '-';
+diff --git a/src/app/services/parser.service.ts b/src/app/services/parser.service.ts
+index 292789c..6afda3a 100644
+--- a/src/app/services/parser.service.ts
++++ b/src/app/services/parser.service.ts
+@@ -1,19 +1,21 @@
+ import { Injectable } from '@angular/core';
+ import { Item } from '../models/item';
+-import { SessionService } from './session.service';
++// import { SessionService } from './session.service';
+ import { Questionnaire } from '../models/questionnaire';
+ 
+ @Injectable()
+ export class ParserService {
+ 
+-  obj: any;
++  // unnötig! obj: any;
+ 
+   constructor(
+-    private sessionService: SessionService,
++    // unnötig hier !
++    // private sessionService: SessionService,
+   ) { }
+ 
+   convertToQuestionnaire(obj: any): Questionnaire {
+-    obj = this.sessionService.selectedQuestionnaire;
++    // das obj kommt vom Argument der Methode!
++    // obj = this.sessionService.selectedQuestionnaire;
+     let q = this.extractQuestionnaireHeader(obj);
+     q.items = [];
+     obj.item.forEach(i => q.items.push(this.extractItem(i)));
+@@ -23,8 +25,8 @@ export class ParserService {
+   private extractQuestionnaireHeader(selectedQuestionnaire: any): Questionnaire {
+     let q = new Questionnaire();
+     q.id = selectedQuestionnaire.id;
+-    let text = 'Status: [' + selectedQuestionnaire.text.status + '] - Note: [' + selectedQuestionnaire.text.div.pre._text + ']';
+-    q.text = text;
++    // let text = 'Status: [' + selectedQuestionnaire.text.status + '] - Note: [' + selectedQuestionnaire.text.div.pre._text + ']';
++    // q.text = text;
+     q.url = selectedQuestionnaire.url;
+     q.title = selectedQuestionnaire.title;
+     q.status = selectedQuestionnaire.status;
+diff --git a/src/app/shared/app-routing.module.ts b/src/app/shared/app-routing.module.ts
+index 226bd74..96df6c5 100644
+--- a/src/app/shared/app-routing.module.ts
++++ b/src/app/shared/app-routing.module.ts
+@@ -37,7 +37,7 @@ const routes: Routes = [
+     component: QuestionnairesListComponent,
+     data: {},
+   },
+-  {
++  { // TODO besser keine direkte Navigation, sondern automatisch nach Auswahl!
+     path: 'questionnaire-load',
+     component: QuestionnaireLoadComponent,
+   },

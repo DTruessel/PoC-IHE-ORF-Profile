@@ -15,6 +15,8 @@ import { Item } from '../../models/item';
 import { SessionService } from '../../services/session.service';
 import { ParserService } from '../../services/parser.service';
 import { QuestionService } from '../../services/question.service';
+import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-questionnaires-list',
@@ -35,21 +37,29 @@ export class QuestionnairesListComponent implements OnInit {
   pageSizeOptions = [this.pageSize];
 
 
-  @ViewChild('filter_id')
-  private filter_id: ElementRef;
+  @ViewChild('id')
+  private elId: ElementRef;
 
-  @ViewChild('filter_code')
-  private filter_code: ElementRef;
+  @ViewChild('code')
+  private elCode: ElementRef;
 
   @ViewChild('identifier')
-  private identifier: ElementRef;
+  private elIdentifier: ElementRef;
 
   @ViewChild('publisher')
-  private publisher: ElementRef;
+  private elPublisher: ElementRef;
+
+  @ViewChild('status')
+  private elStatus: ElementRef;
+
+  @ViewChild('title')
+  private elTitle: ElementRef;
+
+  @ViewChild('version')
+  private elVersion: ElementRef;
 
 
-  //  @ViewChild('filter')
-  //  private filterInput: ElementRef;
+
 
   private data$: BehaviorSubject<fhir.Bundle>;            // data$ ist ein observable
 
@@ -57,6 +67,7 @@ export class QuestionnairesListComponent implements OnInit {
     private fhirHttpService: FhirJsHttpService,
     private sessionService: SessionService,
     private parserService: ParserService,
+    private router: Router,
   ) {
     this.data$ = new BehaviorSubject(null);               // data$ gibt die Daten aus, die vom Backend empfangen worden sind.
     this.search(this.makeQuery({ title: 'ebida' }));
@@ -98,11 +109,14 @@ export class QuestionnairesListComponent implements OnInit {
         this.search(this.makeQuery({ title: searchString }));         // Filter z.B. Ebida im Suchfeld; title
       });*/
   }
+  doSearch() { };
+
 
   selectRow(row) {
     this.sessionService.selectedQuestionnaire = row.resource;        // row.resource in die Variable des sessionService setzen
     alert('selected: ' + JSON.stringify(row.resource));
     console.log(this.sessionService.selectedQuestionnaire);
+    this.router.navigate(['/questionnaire-form']);
   }
 
   getQName(entry: fhir.BundleEntry) {

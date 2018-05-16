@@ -4,7 +4,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
-import { AppRoutingModule } from './shared/app-routing.module';
+
 
 import { HomeComponent } from './home/home.component';
 import { PatientsListComponent } from './patients/patients-list/patients-list.component';
@@ -33,6 +33,8 @@ import { QuestionService } from './services/question.service';
 import { ParserService } from './services/parser.service';
 import { QuestionnaireFormComponent } from './questionnaires/questionnaire-form/questionnaire-form.component';
 
+import { AppRoutingModule } from './shared/app-routing.module';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -53,17 +55,17 @@ import { QuestionnaireFormComponent } from './questionnaires/questionnaire-form/
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
-    AppRoutingModule,
     HttpClientModule,
     NgFhirjsModule,
     FormsModule,
     MaterialModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    AppRoutingModule,
   ],
 
   providers: [
     { provide: FHIR_HTTP_CONFIG, useValue: FHIR_JS_CONFIG },
-    AppRoutingModule, MessageService, PatientService,
+    MessageService, PatientService,
     SelectivePreloadingStrategy,
     SessionService,
     QuestionService,

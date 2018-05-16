@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { Routes, RouterModule, Router } from '@angular/router';
 import { CapabilityStatementComponent } from '../capability-statement/capability-statement.component';
 import { HomeComponent } from '../home/home.component';
 import { SettingsComponent } from '../settings/settings.component';

@@ -56,8 +56,12 @@
     </mat-paginator>
   </mat-card-content>
 
-  <button mat-menu-item routerLink="/">
+  <button mat-raised-button routerLink="/">
     <span>Home</span>
+  </button>
+
+  <button mat-raised-button (click)="doSearch()">
+    <span>Search</span>
   </button>
 
 </mat-card>

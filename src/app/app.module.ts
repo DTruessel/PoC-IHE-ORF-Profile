@@ -69,7 +69,7 @@ import { AppRoutingModule } from './shared/app-routing.module';
     SelectivePreloadingStrategy,
     SessionService,
     QuestionService,
-    ParserService
+    ParserService,
   ],
 
   bootstrap: [AppComponent]

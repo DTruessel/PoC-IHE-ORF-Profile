@@ -16,7 +16,7 @@ import { SessionService } from '../../services/session.service';
 import { ParserService } from '../../services/parser.service';
 import { QuestionService } from '../../services/question.service';
 import { Router } from '@angular/router';
-
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-questionnaires-list',
@@ -35,7 +35,7 @@ export class QuestionnairesListComponent implements OnInit {
   pageSize = 10;
   oldPageIndex = 0;
   pageSizeOptions = [this.pageSize];
-
+  searchString: any;
 
   @ViewChild('id')
   private elId: ElementRef;
@@ -58,9 +58,6 @@ export class QuestionnairesListComponent implements OnInit {
   @ViewChild('version')
   private elVersion: ElementRef;
 
-
-
-
   private data$: BehaviorSubject<fhir.Bundle>;            // data$ ist ein observable
 
   constructor(
@@ -69,23 +66,25 @@ export class QuestionnairesListComponent implements OnInit {
     private parserService: ParserService,
     private router: Router,
   ) {
+
     this.data$ = new BehaviorSubject(null);               // data$ gibt die Daten aus, die vom Backend empfangen worden sind.
-    this.search(this.makeQuery({ title: 'ebida' }));
+    // this.search(this.makeQuery({ title: 'ebida' }));   // {} ist immer ein objekt
+
   }
 
-  private makeQuery(q: Object) {
-    const base = { type: 'Questionnaire', query: { _count: this.pageSize } };
+  private makeQuery(q: Object) {                                                      // literales Objekt
+
+    const baseQuery = { type: 'Questionnaire', query: { _count: this.pageSize } };    //Liste von Questionnaires ausgeben; query: { _count:                                                                                    this.pageSize } _wir wollen die ersten 10 s
     if (q) {
-      return Object.assign({}, base, { query: Object.assign(base.query, q) });
+      return Object.assign({}, baseQuery, { query: Object.assign(baseQuery.query, q) });
     }
-    return base;
+    return baseQuery;
   }
 
-  private search(query) {                                               // macht REST CALL
+  private search(query) {                                                             // macht REST CALL
     console.log('** before fhirHttpService.search, query: ' + JSON.stringify(query));
-
     this.fhirHttpService.search(query).then(response => {
-      this.data$.next(<fhir.Bundle>response.data);                      // data ist eine property von response.
+      this.data$.next(<fhir.Bundle>response.data);                                    // data ist eine property von response.
       console.log('** after fhirHttpService.search, hits: ' + this.length);
     });
   }
@@ -93,27 +92,17 @@ export class QuestionnairesListComponent implements OnInit {
   ngOnInit() {
     this.data$.subscribe((questionnairesBundle: fhir.Bundle) => {
       if (questionnairesBundle) {
-        this.dataSource.data = questionnairesBundle.entry;             // entry enthält generische Questionnaire-Objekte
+        this.dataSource.data = questionnairesBundle.entry;                            // entry enthält generische Questionnaire-Objekte
         this.length = questionnairesBundle.total;
         for (const p of questionnairesBundle.entry) {
           console.log(p);
         }
       }
     });
-    // event listener für den Filter
-    /*Observable.fromEvent(this.filterInput.nativeElement, 'keyup')     // keyup ist der Event
-      .debounceTime(200)
-      .distinctUntilChanged()
-      .subscribe(() => {
-        const searchString = this.filterInput.nativeElement.value;
-        this.search(this.makeQuery({ title: searchString }));         // Filter z.B. Ebida im Suchfeld; title
-      });*/
   }
-  doSearch() { };
-
 
   selectRow(row) {
-    this.sessionService.selectedQuestionnaire = row.resource;        // row.resource in die Variable des sessionService setzen
+    this.sessionService.selectedQuestionnaire = row.resource;
     alert('selected: ' + JSON.stringify(row.resource));
     console.log(this.sessionService.selectedQuestionnaire);
     this.router.navigate(['/questionnaire-form']);
@@ -122,10 +111,43 @@ export class QuestionnairesListComponent implements OnInit {
   getQName(entry: fhir.BundleEntry) {
     const quest = (<fhir.Questionnaire>entry.resource);
     if (quest) {
-      const line = quest.title + ' | ' + quest.id;
+      const line = quest.title + ' | ' + quest.id + ' | ' + quest.publisher; // Anzeige Questionnaire in questionnaire-list
       return line;
     }
     return '-';
   }
-}
 
+  doSearch() {
+
+    const idSearchString = this.elId.nativeElement.value;
+    const codeSearchString = this.elCode.nativeElement.value;
+    const identifierSearchString = this.elIdentifier.nativeElement.value;
+    const publisherSearchString = this.elPublisher.nativeElement.value;
+    const statusSearchString = this.elStatus.nativeElement.value;
+    const titleSearchString = this.elTitle.nativeElement.value;
+    const versionSearchString = this.elVersion.nativeElement.value;
+
+    if (idSearchString) {
+      this.search(this.makeQuery({ id: idSearchString }));
+    }
+    if (codeSearchString) {
+      this.search(this.makeQuery({ code: codeSearchString }));
+    }
+    if (identifierSearchString) {
+      this.search(this.makeQuery({ identifier: identifierSearchString }));
+    }
+    if (publisherSearchString) {
+      this.search(this.makeQuery({ publisher: publisherSearchString }));
+    }
+    if (statusSearchString) {
+      this.search(this.makeQuery({ status: statusSearchString }));
+    }
+    if (titleSearchString) {
+      this.search(this.makeQuery({ title: titleSearchString }));
+    }
+    if (versionSearchString) {
+      this.search(this.makeQuery({ version: versionSearchString }));
+    }
+
+  }
+}

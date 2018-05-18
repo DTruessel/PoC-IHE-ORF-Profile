@@ -103,7 +103,7 @@ export class QuestionnairesListComponent implements OnInit {
 
   selectRow(row) {
     this.sessionService.selectedQuestionnaire = row.resource;
-    alert('selected: ' + JSON.stringify(row.resource));
+    // alert('selected: ' + JSON.stringify(row.resource));
     console.log(this.sessionService.selectedQuestionnaire);
     this.router.navigate(['/questionnaire-form']);
   }
@@ -118,7 +118,6 @@ export class QuestionnairesListComponent implements OnInit {
   }
 
   doSearch() {
-
     const idSearchString = this.elId.nativeElement.value;
     const codeSearchString = this.elCode.nativeElement.value;
     const identifierSearchString = this.elIdentifier.nativeElement.value;

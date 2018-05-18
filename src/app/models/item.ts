@@ -1,5 +1,6 @@
 
-export class Item {
+export class
+    Item {
 
     linkId: string;
     text: string;

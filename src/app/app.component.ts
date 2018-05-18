@@ -15,18 +15,22 @@ export class AppComponent {
   constructor(private fhirHttpService: FhirJsHttpService, private router: Router) { }
 
   getTitle(): string {
+
     switch (this.router.url) {
+
       case '/patients-list':
         return this.title + ' - ' + 'Patients';
       case '/CapabilityStatement':
         return this.title + ' - ' + 'CapabilityStatement';
       case '/settings':
         return this.title + ' - ' + 'Settings';
-      case '/questionnaires':
+      case '/questionnaires-list':
         return this.title + ' - ' + 'Questionnaires';
-      case '/questionnaire-load':
+      case '/questionnaire-form':
         return this.title + ' - ' + 'Selected Questionnaire';
+
     }
+
     return this.title;
   }
 

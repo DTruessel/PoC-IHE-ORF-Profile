@@ -36,11 +36,16 @@ export class DynamicFormComponent implements OnInit {
 
   ngOnInit() {
     this.form = this.questionControlService.toFormGroup(this.questions);
-
   }
 
   onSubmit() {
+    const selectedQuestionnaire = this.sessionService.selectedQuestionnaire;
     this.payLoad = JSON.stringify(this.form.value);
+
+
+    return Object.assign({}, this.payLoad, selectedQuestionnaire);
+    const p = Object.assign({}, this.payLoad, selectedQuestionnaire);
+    console.log(p);
   }
 }
 

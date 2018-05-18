@@ -10,6 +10,7 @@ import 'rxjs/add/operator/distinctUntilChanged';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { FhirJsHttpService, FHIR_HTTP_CONFIG } from 'ng-fhirjs';
 import { AppRoutingModule } from '../../shared/app-routing.module';
+import { SessionService } from '../../services/session.service';
 
 
 @Component({
@@ -34,7 +35,10 @@ export class PatientsListComponent implements OnInit {
 
   private data$: BehaviorSubject<fhir.Bundle>;
 
-  constructor(private fhirHttpService: FhirJsHttpService) {
+  constructor(
+    private fhirHttpService: FhirJsHttpService,
+    private sessionService: SessionService, ) {
+
     this.data$ = new BehaviorSubject(null);
     this.search(this.makeQuery(null));
 
@@ -89,10 +93,11 @@ export class PatientsListComponent implements OnInit {
   }
 
   selectRow(row) {
+    this.sessionService.selectedQuestionnaire = row.resource;
     alert('selected: ' + JSON.stringify(row.resource));
+    console.log(this.sessionService.selectedQuestionnaire);
+    // this.router.navigate(['/questionnaire-form']);
   }
-
-
 
   getPatientFamilyName(entry: fhir.BundleEntry): string {
     const patient = (<fhir.Patient>entry.resource);

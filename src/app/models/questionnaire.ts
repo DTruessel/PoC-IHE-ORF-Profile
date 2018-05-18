@@ -1,7 +1,7 @@
 import { Item } from './item';
 
 export class Questionnaire {
-    id: string;
+    id: any;                                                 // string geändert in any 18.05.2018
     text: string;
     url: string;
     title: string;

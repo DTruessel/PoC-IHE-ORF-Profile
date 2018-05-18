@@ -4,7 +4,7 @@
 
     <div class="searchPanel">
       <mat-input-container floatPlaceholder="never">
-        <input matInput #filter placeholder="Suchen...">
+        <input matInput #filter placeholder="Search">
       </mat-input-container>
     </div>
 
@@ -37,12 +37,6 @@
 
     </mat-table>
 
-
-    <!--<mat-table #table [dataSource]="dataSource">
-
-      <mat-header-row *matHeaderRowDef="['familyNameCol', 'givenNamesCol', 'birthDateCol','addressLinesCol','addressCityCol']"></mat-header-row>
-      <mat-row *matRowDef="let row; columns: ['familyNameCol', 'givenNamesCol', 'birthDateCol','addressLinesCol','addressCityCol']"></mat-row>
-    </mat-table>-->
     <mat-paginator [length]="length" [pageSize]="size" [pageSizeOptions]="pageSizeOptions" (page)="goToPage($event)">
     </mat-paginator>
   </mat-card-content>

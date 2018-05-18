@@ -5,6 +5,7 @@ import { Item } from '../../models/item';
 import { QuestionBase } from '../../questions/question-base';
 import { ParserService } from '../../services/parser.service';
 import { Questionnaire } from '../../models/questionnaire';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-questionnaire-form',
@@ -19,16 +20,19 @@ export class QuestionnaireFormComponent implements OnInit {
   constructor(
     private questionService: QuestionService,
     private sessionService: SessionService,
-    private parserService: ParserService
+    private parserService: ParserService,
+    private router: Router,
   ) {
 
     const rawQ = this.sessionService.selectedQuestionnaire;
     if (rawQ) {
       this.questionnaire = this.parserService.convertToQuestionnaire(rawQ);
       this.questions = this.questionService.getQuestions(this.questionnaire);
-    } else {
-      alert('!! NO QUESTIONNAIRE FOUND IN SESSION !!');
+    }
+    else if (alert) {                                                                   // neu 18.05.2018
+      alert('No Questionnaire found in Session');
       // Navigation zur Suche ?! ev link zum wieder suchen
+      this.router.navigate(['/questionnaires-list']);                                     // neu 18.05.2018
     }
 
   }

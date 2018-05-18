@@ -23,7 +23,6 @@ import { FHIR_HTTP_CONFIG } from 'ng-fhirjs';
 import { FHIR_JS_CONFIG } from './settings/settings.component.spec';
 import { MessageService } from './message.service';
 import { PatientService } from './patients/patient.service';
-import { SelectivePreloadingStrategy } from './selective-preloading-strategy';
 import { SessionService } from './services/session.service';
 
 import { DynamicFormComponent } from './dynamic-form/dynamic-form.component';
@@ -34,6 +33,7 @@ import { ParserService } from './services/parser.service';
 import { QuestionnaireFormComponent } from './questionnaires/questionnaire-form/questionnaire-form.component';
 
 import { AppRoutingModule } from './shared/app-routing.module';
+import { BundleComponent } from './bundle/bundle.component';
 
 @NgModule({
   declarations: [
@@ -49,6 +49,7 @@ import { AppRoutingModule } from './shared/app-routing.module';
     DynamicFormQuestionComponent,
     QuestionnairesListComponent,
     QuestionnaireFormComponent,
+    BundleComponent,
 
   ],
 
@@ -66,7 +67,6 @@ import { AppRoutingModule } from './shared/app-routing.module';
   providers: [
     { provide: FHIR_HTTP_CONFIG, useValue: FHIR_JS_CONFIG },
     MessageService, PatientService,
-    SelectivePreloadingStrategy,
     SessionService,
     QuestionService,
     ParserService,

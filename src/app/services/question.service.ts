@@ -13,12 +13,7 @@ import { QuestionDescription } from '../questions/question-description';
 import { Item } from '../models/item';
 
 // TODO TMP
-const todoText = 'TODOs:\n'
-  + '* <value> element f. Items im Questionnaire XML\n'
-  + '* Required-Attr. im Questionnaire XML\n'
-  + '  (ev. weitere Validierungen als Ausblick...)\n'
-  + '* Attribut zur Unterscheidung DropDown/RadioButtons im Questionnaire XML\n'
-  + '* Struktur Questionaire.Text ?!\n';
+const todoText = 'Freitext';
 
 
 @Injectable()
@@ -87,7 +82,7 @@ export class QuestionService {
           key: item.linkId,
           label: item.text,
           options: [
-            { label: 'auswählen', value: true },
+            { label: 'auswählen', value: true, },
           ]
         });
         break;
@@ -102,7 +97,6 @@ export class QuestionService {
         for (let o of item.options) {
           selectOptions.push({ label: o, value: o });
         }
-        // TODO Unterscheidung Dropdown / Radio
         if (selectOptions.length > 2) {
           widget = new DropdownQuestion({
             key: item.linkId,

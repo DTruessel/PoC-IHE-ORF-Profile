@@ -49,4 +49,21 @@ export class ParserService {
     return item;
   }
 
+  /*extractOptions(item: Item): any[] {
+    const selectOptions = [];
+    if (item.options) {
+      for (const o of item.options) {
+        selectOptions.push({ label: o.label, value: o.value });
+      }
+    } else {
+      selectOptions.push({ label: 'NO OPTIONS FOUND', value: null });
+      console.log('!!!choice item without options!!! ' + JSON.stringify(item));
+    }
+    return selectOptions;
+  }*/
+
+
+
+
+
 }

@@ -1,6 +1,6 @@
 /// <reference path="../../../../node_modules/@types/fhir/index.d.ts" />
 
-import { Component, OnInit, ViewChild, ElementRef, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, Output, EventEmitter, ViewChildren } from '@angular/core';
 import { MatTableDataSource, PageEvent } from '@angular/material';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { Observable } from 'rxjs/Observable';
@@ -37,8 +37,12 @@ export class QuestionnairesListComponent implements OnInit {
   pageSizeOptions = [this.pageSize];
   searchString: any;
 
+
   @ViewChild('id')
   private elId: ElementRef;
+
+  @ViewChild('url')
+  private elUrl: ElementRef;
 
   @ViewChild('code')
   private elCode: ElementRef;
@@ -52,11 +56,17 @@ export class QuestionnairesListComponent implements OnInit {
   @ViewChild('status')
   private elStatus: ElementRef;
 
+  @ViewChild('name')
+  private elName: ElementRef;
+
   @ViewChild('title')
   private elTitle: ElementRef;
 
   @ViewChild('version')
   private elVersion: ElementRef;
+
+  @ViewChild('date')
+  private elDate: ElementRef;
 
   private data$: BehaviorSubject<fhir.Bundle>;            // data$ ist ein observable
 
@@ -73,13 +83,13 @@ export class QuestionnairesListComponent implements OnInit {
   }
 
   private makeQuery(q: Object) {                                                      // literales Objekt
-
     const baseQuery = { type: 'Questionnaire', query: { _count: this.pageSize } };    //Liste von Questionnaires ausgeben; query: { _count:                                                                                    this.pageSize } _wir wollen die ersten 10 s
     if (q) {
       return Object.assign({}, baseQuery, { query: Object.assign(baseQuery.query, q) });
     }
     return baseQuery;
   }
+
 
   private search(query) {                                                             // macht REST CALL
     console.log('** before fhirHttpService.search, query: ' + JSON.stringify(query));
@@ -111,7 +121,7 @@ export class QuestionnairesListComponent implements OnInit {
   getQName(entry: fhir.BundleEntry) {
     const quest = (<fhir.Questionnaire>entry.resource);
     if (quest) {
-      const line = quest.title + ' | ' + quest.id + ' | ' + quest.publisher; // Anzeige Questionnaire in questionnaire-list
+      const line = quest.title + ' | ' + quest.name + ' | ' + quest.id + ' | ' + quest.publisher; // Anzeige Questionnaire in questionnaire-list
       return line;
     }
     return '-';
@@ -119,15 +129,21 @@ export class QuestionnairesListComponent implements OnInit {
 
   doSearch() {
     const idSearchString = this.elId.nativeElement.value;
+    const urlSearchString = this.elUrl.nativeElement.value;
     const codeSearchString = this.elCode.nativeElement.value;
     const identifierSearchString = this.elIdentifier.nativeElement.value;
     const publisherSearchString = this.elPublisher.nativeElement.value;
     const statusSearchString = this.elStatus.nativeElement.value;
+    const nameSearchString = this.elName.nativeElement.value;
     const titleSearchString = this.elTitle.nativeElement.value;
+    const dateSearchString = this.elDate.nativeElement.value;
     const versionSearchString = this.elVersion.nativeElement.value;
 
     if (idSearchString) {
-      this.search(this.makeQuery({ id: idSearchString }));
+      this.search(this.makeQuery({ _id: idSearchString }));
+    }
+    if (urlSearchString) {
+      this.search(this.makeQuery({ url: urlSearchString }));
     }
     if (codeSearchString) {
       this.search(this.makeQuery({ code: codeSearchString }));
@@ -141,12 +157,19 @@ export class QuestionnairesListComponent implements OnInit {
     if (statusSearchString) {
       this.search(this.makeQuery({ status: statusSearchString }));
     }
+    if (nameSearchString) {
+      this.search(this.makeQuery({ name: nameSearchString }));
+    }
     if (titleSearchString) {
       this.search(this.makeQuery({ title: titleSearchString }));
     }
     if (versionSearchString) {
       this.search(this.makeQuery({ version: versionSearchString }));
     }
-
+    if (dateSearchString) {
+      this.search(this.makeQuery({ date: dateSearchString }));
+    }
   }
+
+  goToPage() { };
 }

@@ -44,8 +44,8 @@ export class DynamicFormComponent implements OnInit {
 
 
     return Object.assign({}, this.payLoad, selectedQuestionnaire);
-    const p = Object.assign({}, this.payLoad, selectedQuestionnaire);
-    console.log(p);
+    // const p = Object.assign({}, this.payLoad, selectedQuestionnaire);
+    // console.log(p);
   }
 }
 

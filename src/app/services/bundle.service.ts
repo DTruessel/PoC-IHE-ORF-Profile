@@ -6,7 +6,7 @@ export class BundleService {
 
   constructor(private fhirHttpService: FhirJsHttpService) {
 
-    bundle: IResource;
+    // bundle: IResource;
 
     // entry =
 

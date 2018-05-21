@@ -35,20 +35,36 @@ export class PatientsListComponent implements OnInit {
 
   private data$: BehaviorSubject<fhir.Bundle>;
 
-  constructor(
+  constructor
+    (
     private fhirHttpService: FhirJsHttpService,
-    private sessionService: SessionService, ) {
+    private sessionService: SessionService,
+  ) {
 
     this.data$ = new BehaviorSubject(null);
     this.search(this.makeQuery(null));
 
-    /*fhirHttpService.search({ type: 'Patient', query: { _count: this.pageSize } }).then(response => {
+    fhirHttpService.search({ type: 'Patient', query: { _count: this.pageSize } }).then(response => {
       this.bundle = <fhir.Bundle>response.data;
       this.dataSource.data = this.bundle.entry;
       this.length = this.bundle.total;
       console.log('called ');
-    });*/
+    });
+  }
 
+  /**
+  * Bundles have their 'page back' link called 'previous'
+  * fhir.js in node_modules calls it 'prev'.
+  * As a simple fix patch bundle...
+  */
+  patchPrevBug(bundleData) {
+    if (bundleData && bundleData.link) {
+      bundleData.link.forEach(link => {
+        if (link.relation === 'previous') {
+          link.relation = 'prev';
+        }
+      });
+    }
   }
 
   private makeQuery(q: Object) {
@@ -139,6 +155,8 @@ export class PatientsListComponent implements OnInit {
     return '';
   }
 
+  //goToPage kontrolliert 21.05.2018; patchPrevBug eingefügt
+
   goToPage(event: PageEvent) {
     if (event.pageIndex > this.oldPageIndex) {
       this.fhirHttpService.nextPage({ bundle: this.bundle }).then(response => {
@@ -149,7 +167,9 @@ export class PatientsListComponent implements OnInit {
         console.log('next page called ');
       });
     } else {
+      this.patchPrevBug(this.bundle);
       this.fhirHttpService.prevPage({ bundle: this.bundle }).then(response => {
+        //this.fhirHttpService.prevPage({ bundle: this.bundle }).then(response => { //korrigiert 20.05.2018
         this.oldPageIndex = event.pageIndex;
         this.bundle = <fhir.Bundle>response.data;
         this.length = this.bundle.total;
@@ -158,6 +178,4 @@ export class PatientsListComponent implements OnInit {
       });
     }
   }
-
-
 }

@@ -33,6 +33,13 @@
       </select>
     </div>
 
+    <div *ngSwitchCase="'valueCoding'" class="singleQuestionDiv">
+      <span class="qLabel">{{question.label}}</span>
+      <select [formControlName]="question.key" [id]="question.key" class="selectQ">
+        <option *ngFor="let opt of question.options" [value]="opt.key">{{opt.value}}</option>
+      </select>
+    </div>
+
     <div *ngSwitchCase="'radio-button'" [id]="question.key" class="singleQuestionDiv">
       <span class="qLabel">{{question.label}}</span>
       <div class="radioGroup">
@@ -60,6 +67,10 @@
     <div *ngSwitchCase="'date'" [id]="question.key" class="singleQuestionDiv">
       <span class="qLabel">{{question.label}}</span>
       <input *ngSwitchCase="'date'" [formControlName]="question.key" [id]="question.key" [type]="question.type" class="dateInputQ">
+    </div>
+
+    <div *ngSwitchCase="'definition'" class="descriptionQ">
+      <span class="descriptionLabel">{{definiton.label}}</span>
     </div>
 
   </div>

@@ -50,7 +50,6 @@ import { BundleComponent } from './bundle/bundle.component';
     QuestionnairesListComponent,
     QuestionnaireFormComponent,
     BundleComponent,
-
   ],
 
   imports: [

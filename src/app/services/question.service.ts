@@ -59,6 +59,17 @@ export class QuestionService {
         }
         widget = groupWidget;
         break;
+      case 'question':
+        let questionWidget: QuestionGroup = new QuestionGroup({
+          key: item.linkId,
+          label: item.text,
+        });
+        questionWidget.nestingLevel = nestingLevel;
+        for (let i of item.items) {
+          questionWidget.children.push(this.getQuestionForItem(i, nestingLevel + 1));
+        }
+        widget = questionWidget;
+        break;
       case 'string':
         widget = new TextboxQuestion({
           key: item.linkId,
@@ -72,10 +83,6 @@ export class QuestionService {
           rows: 12,
           span: 3,
         });
-        // TODO TMP!
-        if (item.linkId === 'command.examiniation.text') {
-          widget.value = todoText;
-        }
         break;
       case 'boolean':
         widget = new CheckboxQuestion({
@@ -110,6 +117,47 @@ export class QuestionService {
             options: selectOptions,
           });
         }
+        break;
+      /*case 'valueCoding':
+        let valueCodingWidget: QuestionGroup = new QuestionGroup({
+          key: item.linkId,
+          label: item.text,
+        });
+        valueCodingWidget.nestingLevel = nestingLevel;
+        for (let i of item.items) {
+          valueCodingWidget.children.push(this.getQuestionForItem(i, nestingLevel + 1));
+        }
+        widget = valueCodingWidget;
+        break;*/
+      /*case 'valueCoding':
+        let selectValueCoding = [];
+        for (let o of item.options) {
+          selectValueCoding.push({ value: o });
+        }
+        if (selectValueCoding.length > 2) {
+          widget = new DropdownQuestion({
+            key: item.linkId,
+            label: item.text,
+            options: selectValueCoding,
+          });
+        } else {
+          widget = new RadioButtonQuestion({
+            key: item.linkId,
+            label: item.text,
+            options: selectValueCoding,
+          });
+        }
+
+
+        break;*/
+
+      case 'display':
+        widget = new TextareaQuestion({
+          key: item.linkId,
+          label: item.text,
+          rows: 12,
+          span: 3,
+        });
         break;
     }
     return widget;

@@ -42,7 +42,7 @@ export class DynamicFormComponent implements OnInit {
     const selectedQuestionnaire = this.sessionService.selectedQuestionnaire;
     this.payLoad = JSON.stringify(this.form.value);
 
-
+    //ein versuch, die questionnaireResponse zu erstellen
     return Object.assign({}, this.payLoad, selectedQuestionnaire);
     // const p = Object.assign({}, this.payLoad, selectedQuestionnaire);
     // console.log(p);

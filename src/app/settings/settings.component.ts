@@ -16,7 +16,7 @@ export class SettingsComponent implements OnInit {
   fhirServers = ['http://test.fhir.org/r3',
     'http://localhost:8080/baseDstu3',
     'http://vonk.furore.com',
-    'http://fhirtest.uhn.ca/baseDstu3'
+    'http://fhirtest.uhn.ca/baseDstu3',
   ];
 
   constructor(private fhirHttpService: FhirJsHttpService) { }

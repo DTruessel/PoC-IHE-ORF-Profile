@@ -61,9 +61,4 @@ export class ParserService {
     }
     return selectOptions;
   }
-
-
-
-
-
 }

@@ -9,6 +9,7 @@ export class
     code: string;
     system: string;
     display: string;
+    subject: string;
     options?: string[];
     items?: Item[];
 

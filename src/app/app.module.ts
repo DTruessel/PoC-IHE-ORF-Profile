@@ -34,6 +34,8 @@ import { QuestionnaireFormComponent } from './questionnaires/questionnaire-form/
 
 import { AppRoutingModule } from './shared/app-routing.module';
 import { BundleComponent } from './bundle/bundle.component';
+import { QuestionnaireResponseComponent } from './questionnaires/questionnaire-response/questionnaire-response.component';
+import { QuestionControlService } from './services/question-control.service';
 
 @NgModule({
   declarations: [
@@ -50,6 +52,7 @@ import { BundleComponent } from './bundle/bundle.component';
     QuestionnairesListComponent,
     QuestionnaireFormComponent,
     BundleComponent,
+    QuestionnaireResponseComponent,
   ],
 
   imports: [
@@ -69,6 +72,7 @@ import { BundleComponent } from './bundle/bundle.component';
     SessionService,
     QuestionService,
     ParserService,
+    QuestionControlService,
   ],
 
   bootstrap: [AppComponent]

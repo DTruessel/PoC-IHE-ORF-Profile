@@ -10,7 +10,7 @@ export class QuestionControlService {
 
   constructor() { }
 
-  toFormGroup(questions: QuestionBase<any>[]) {
+  toFormGroup(questions: QuestionBase<any>[]) {    //FormGroup: Tracks the value and validity state of a group of FormControl instances
     let controls: {} = {};
 
     questions.forEach(question => this.addFormControlForQuestion(question, controls));

@@ -6,13 +6,4 @@ export class SessionService {
   public selectedQuestionnaire: any;
 
   constructor() { }
-
-  getSelectedQuestionnaire() {
-    return this.selectedQuestionnaire;
-  }
-
-  setSelectedQuestionnaire(data: any[]) {
-    this.selectedQuestionnaire = data;
-  }
-
 }

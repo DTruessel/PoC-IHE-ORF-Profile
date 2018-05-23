@@ -80,7 +80,6 @@ export class PatientsListComponent implements OnInit {
    */
   private search(query) {
     console.log('** before fhirHttpService.search, query: ' + JSON.stringify(query));
-
     this.fhirHttpService.search(query).then(response => {
       this.data$.next(<fhir.Bundle>response.data);
       console.log('** after fhirHttpService.search, hits: ' + this.length);

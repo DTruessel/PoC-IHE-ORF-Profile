@@ -118,6 +118,19 @@ export class QuestionService {
           });
         }
         break;
+      case 'display':
+        widget = new TextareaQuestion({
+          key: item.linkId,
+          label: item.text,
+          rows: 12,
+          span: 3,
+        });
+        break;
+    }
+    return widget;
+  }
+}
+
       /*case 'valueCoding':
         let valueCodingWidget: QuestionGroup = new QuestionGroup({
           key: item.linkId,
@@ -151,16 +164,5 @@ export class QuestionService {
 
         break;*/
 
-      case 'display':
-        widget = new TextareaQuestion({
-          key: item.linkId,
-          label: item.text,
-          rows: 12,
-          span: 3,
-        });
-        break;
-    }
-    return widget;
-  }
-}
+
 

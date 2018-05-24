@@ -6,36 +6,31 @@ import { Item } from '../models/item';
 @Injectable()
 export class BundleService {
 
-  constructor() { }
+  obj: any;
+
+  constructor(
+    private fhirHttpService: FhirJsHttpService,
+  ) { }
 
   convertToQuestionnaireResponse(obj: any): QuestionnaireResponse {
-    let q = this.extractQuestionnaireResponseHeader(obj);
-    q.items = [];
-    obj.item.forEach(i => q.items.push(this.extractItem(i)));
-    return q;
+    let qr = this.extractQuestionnaireResponseHeader(obj);
+    qr.items = [];
+    obj.item.forEach(i => qr.items.push(this.extractItem(i)));
+    return qr;
   }
 
-
-  private extractQuestionnaireResponseHeader(selectedQuestionnaire: any): QuestionnaireResponse {
+  private extractQuestionnaireResponseHeader(payload): QuestionnaireResponse {
     let qr = new QuestionnaireResponse();
-    qr.identifier = selectedQuestionnaire.identifier;
-    qr.basedOn = selectedQuestionnaire.basedOn;
-    qr.parent = '';
-    qr.questionnaire = selectedQuestionnaire;
-    qr.status = selectedQuestionnaire.status;
-    qr.subject = selectedQuestionnaire.subject;
+    qr.identifier = payload.identifier;
+    qr.basedOn = '';
+    qr.parent = payload.order.number;
+    qr.questionnaire = payload.title;
+    qr.status = payload.status;
     qr.context = '';
-    qr.authored = selectedQuestionnaire.date;                   //Datum des Erstellens der QR nicht des Q
-    qr.author = '';
+    qr.authored = payload.date;                   //Datum des Erstellens der QR nicht des Q
+    qr.author = payload.orderer.dataenterer;
     qr.source = '';
 
-    qr.url = selectedQuestionnaire.url;
-    qr.title = selectedQuestionnaire.title;
-
-    qr.experimental = selectedQuestionnaire.experimental;
-    qr.date = selectedQuestionnaire.date;
-    qr.publisher = selectedQuestionnaire.publisher;
-    qr.subjectType = selectedQuestionnaire.subjectType;
     console.log(qr);
     return qr;
   }
@@ -94,7 +89,6 @@ export class BundleService {
     }
     return selectOptions;
   }
-
 }
 
 

@@ -8,27 +8,27 @@ import { ParserService } from '../services/parser.service';
 import { QuestionService } from '../services/question.service';
 import { FhirJsHttpService } from 'ng-fhirjs';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import { EventEmitter } from '@angular/core';
 
 
 @Component({
   selector: 'app-dynamic-form',
   templateUrl: './dynamic-form.component.html',
   styleUrls: ['./dynamic-form.component.css'],
-  providers: [
-  ],
+  providers: [],
 
 })
 
 export class DynamicFormComponent implements OnInit {
 
   form: FormGroup;
-  payLoad = '';
+  payLoad: any;                                               // 24.05.2018 geändert von '' in {}
   private data$: BehaviorSubject<fhir.Bundle>;
 
   @Input() questions: QuestionBase<any>[] = [];
   @Input() selectedQuestionnaire = this.sessionService.selectedQuestionnaire;
 
-  // @Output();
+  @Output() formValueChange = new EventEmitter();
 
   constructor(
     private questionControlService: QuestionControlService,
@@ -44,36 +44,19 @@ export class DynamicFormComponent implements OnInit {
     this.form = this.questionControlService.toFormGroup(this.questions);
   }
 
-  onSubmit() {
-    let questionnaireResponse = this.sessionService.selectedQuestionnaire
-    this.fhirHttpService.create(questionnaireResponse).then(response => {
-      this.data$.next(<fhir.Bundle>response.data);
-      console.log(response.data);
-    })
-
-    this.payLoad = JSON.stringify(this.form.value);
+  onEmit() {
+    this.payLoad = this.form.value;                   //geändert 24.05.2018: this.payLoad = JSON.stringify(this.form.value);
     console.log(this.payLoad);
-    //ein versuch, die questionnaireResponse zu erstellen
-    //return Object.assign({}, this.payLoad, selectedQuestionnaire);
-    // const p = Object.assign({}, this.payLoad, selectedQuestionnaire);
-    // console.log(p);
+    this.formValueChange.emit(this.payLoad);
   }
 
-
-
-
-  /* onSubmit() {
-     const selectedQuestionnaire = this.sessionService.selectedQuestionnaire;
-     this.payLoad = JSON.stringify(this.form.value);
-     console.log(this.payLoad);
-     //ein versuch, die questionnaireResponse zu erstellen
-     return Object.assign({}, this.payLoad, selectedQuestionnaire);
-     // const p = Object.assign({}, this.payLoad, selectedQuestionnaire);
-     // console.log(p);
-   }*/
 }
 
-
+ /*let questionnaireResponse = this.sessionService.selectedQuestionnaire
+    this.fhirHttpService.create(questionnaireResponse).then(response => {
+    this.data$.next(<fhir.Bundle>response.data);
+    console.log(response.data);
+    })*/
 
 
 

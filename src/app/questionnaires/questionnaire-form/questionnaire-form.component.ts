@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 import { QuestionService } from '../../services/question.service';
 import { SessionService } from '../../services/session.service';
 import { Item } from '../../models/item';
@@ -7,6 +7,8 @@ import { ParserService } from '../../services/parser.service';
 import { Questionnaire } from '../../models/questionnaire';
 import { Router } from '@angular/router';
 import { QuestionnaireResponse } from '../../models/questionnaire-response';
+import { BundleService } from '../../services/bundle.service';
+import { FhirJsHttpService } from 'ng-fhirjs';
 
 @Component({
   selector: 'app-questionnaire-form',
@@ -15,15 +17,22 @@ import { QuestionnaireResponse } from '../../models/questionnaire-response';
 
 })
 export class QuestionnaireFormComponent implements OnInit {
+
+  @Input()
+  @Output() questToQuestResponse = new EventEmitter();
+
   questions: any[];
   questionnaire: Questionnaire;
   questionnaireResponse: QuestionnaireResponse;
+  formValue = {};
 
   constructor(
     private questionService: QuestionService,
     private sessionService: SessionService,
     private parserService: ParserService,
     private router: Router,
+    private bundleService: BundleService,
+    private fhirHttpService: FhirJsHttpService,
   ) {
 
     const rawQ = this.sessionService.selectedQuestionnaire;
@@ -36,10 +45,33 @@ export class QuestionnaireFormComponent implements OnInit {
       // Navigation zur Suche ?! ev link zum wieder suchen
       this.router.navigate(['/questionnaires-list']);                                     // neu 18.05.2018
     }
-
   }
 
   ngOnInit() { }
+
+  private formValueChanged(payload) {                                       //EventEmitter() aus dynamic-form
+    payload = this.formValueChanged;
+    console.log(payload);
+    this.formValue = Object.assign(this.formValue, { payload })
+  }
+
+  /*private convertformValueToQuestResponse() {
+    this.questionnaireResponse = this.bundleService.convertToQuestionnaireResponse(this.formValue);
+  }*/
+
+
+
+
+  private createQuestionnaireResponse(formValue) {
+    const questionnaireResponse: Entry = {
+      resource: {
+        resourceType: 'QuestionnaireResponse'
+
+      }
+    }
+    this.fhirHttpService.create(questionnaireResponse);
+    console.log(questionnaireResponse);
+  }
 
 }
 

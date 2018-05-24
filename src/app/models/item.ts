@@ -1,7 +1,7 @@
 
-export class
-    Item {
+export class Item {
 
+    // ItemQuestionnaire
     linkId: string;             // https://www.hl7.org/fhir/questionnaire.html#def
     definition: string;
     code: any;
@@ -44,5 +44,23 @@ export class
     items: Item[];
     options?: string[];
 
+    //ItemQuestionnaireResponse
+
+    //item: items
+    //item.linkId: string;
+    //item.definition: string;
+    //item.text: string;
+    //item.subject: any;
+    //item.answer;
+    //item.answer.value[x]
+    //item.answer.item
+    //item.item
+
     constructor() { }
 }
+
+
+
+/*	If a QuestionnaireResponse references a Questionnaire, then the QuestionnaireResponse structure
+must be consistent with the Questionnaire (i.e. questions must be organized into the same groups,
+nested questions must still be nested, etc.).*/

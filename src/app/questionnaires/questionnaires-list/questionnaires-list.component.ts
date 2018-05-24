@@ -148,7 +148,7 @@ export class QuestionnairesListComponent implements OnInit {
   selectRow(row) {
     this.sessionService.selectedQuestionnaire = row.resource;
     // alert('selected: ' + JSON.stringify(row.resource));
-    console.log(this.sessionService.selectedQuestionnaire);
+    console.log('SelectedQuestionnaire:' + this.sessionService.selectedQuestionnaire);
     this.router.navigate(['/questionnaire-form']);
   }
 

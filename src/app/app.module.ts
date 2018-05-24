@@ -36,6 +36,7 @@ import { AppRoutingModule } from './shared/app-routing.module';
 import { BundleComponent } from './bundle/bundle.component';
 import { QuestionnaireResponseComponent } from './questionnaires/questionnaire-response/questionnaire-response.component';
 import { QuestionControlService } from './services/question-control.service';
+import { BundleService } from './services/bundle.service';
 
 @NgModule({
   declarations: [
@@ -73,6 +74,7 @@ import { QuestionControlService } from './services/question-control.service';
     QuestionService,
     ParserService,
     QuestionControlService,
+    BundleService,
   ],
 
   bootstrap: [AppComponent]

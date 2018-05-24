@@ -25,7 +25,6 @@ export class Questionnaire {
     subjectType: string[];
     effective: Date;
     items: Item[];
-
     ;
 
 

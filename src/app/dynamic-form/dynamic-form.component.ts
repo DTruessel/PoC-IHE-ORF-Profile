@@ -28,6 +28,8 @@ export class DynamicFormComponent implements OnInit {
   @Input() questions: QuestionBase<any>[] = [];
   @Input() selectedQuestionnaire = this.sessionService.selectedQuestionnaire;
 
+  // @Output();
+
   constructor(
     private questionControlService: QuestionControlService,
     private sessionService: SessionService,
@@ -43,7 +45,7 @@ export class DynamicFormComponent implements OnInit {
   }
 
   onSubmit() {
-    let questionnaireResponse = this.form.value
+    let questionnaireResponse = this.sessionService.selectedQuestionnaire
     this.fhirHttpService.create(questionnaireResponse).then(response => {
       this.data$.next(<fhir.Bundle>response.data);
       console.log(response.data);

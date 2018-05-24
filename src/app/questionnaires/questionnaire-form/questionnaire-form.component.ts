@@ -6,6 +6,7 @@ import { QuestionBase } from '../../questions/question-base';
 import { ParserService } from '../../services/parser.service';
 import { Questionnaire } from '../../models/questionnaire';
 import { Router } from '@angular/router';
+import { QuestionnaireResponse } from '../../models/questionnaire-response';
 
 @Component({
   selector: 'app-questionnaire-form',
@@ -16,6 +17,7 @@ import { Router } from '@angular/router';
 export class QuestionnaireFormComponent implements OnInit {
   questions: any[];
   questionnaire: Questionnaire;
+  questionnaireResponse: QuestionnaireResponse;
 
   constructor(
     private questionService: QuestionService,
@@ -43,4 +45,5 @@ export class QuestionnaireFormComponent implements OnInit {
 
 
 
-
+//submit form.value
+//

@@ -11,6 +11,7 @@ import { QuestionGroup } from '../questions/question-group';
 import { Questionnaire } from '../models/questionnaire';
 import { QuestionDescription } from '../questions/question-description';
 import { Item } from '../models/item';
+import { ValueCodingQuestion } from '../questions/question-valueCoding';
 
 // TODO TMP
 const todoText = 'Freitext';
@@ -32,14 +33,28 @@ export class QuestionService {
   private pushQuestionnaireDescriptions(q, res) {
     let group = new QuestionGroup({ key: q.id, label: 'Questionnaire Kopfdaten' });
     group.nestingLevel = 0;
-    group.children.push(new QuestionDescription({ label: 'ID', value: q.id }));
-    group.children.push(new QuestionDescription({ label: 'Text', value: q.text }));
+
     group.children.push(new QuestionDescription({ label: 'URL', value: q.url }));
+    group.children.push(new QuestionDescription({ label: 'Identifier', value: q.identifier }));
+    group.children.push(new QuestionDescription({ label: 'Version', value: q.version }));
+    group.children.push(new QuestionDescription({ label: 'Name', value: q.name }));
     group.children.push(new QuestionDescription({ label: 'Title', value: q.title }));
     group.children.push(new QuestionDescription({ label: 'Status', value: q.status }));
     group.children.push(new QuestionDescription({ label: 'Experimental', value: q.experimental }));
     group.children.push(new QuestionDescription({ label: 'Date', value: q.date }));
     group.children.push(new QuestionDescription({ label: 'Publisher', value: q.publisher }));
+    group.children.push(new QuestionDescription({ label: 'Description', value: q.description }));
+    group.children.push(new QuestionDescription({ label: 'Purpose', value: q.purpose }));
+    group.children.push(new QuestionDescription({ label: 'ApprovalDate', value: q.approvalDate }));
+    group.children.push(new QuestionDescription({ label: 'LastReviewDate', value: q.lastReviewDate }));
+    group.children.push(new QuestionDescription({ label: 'EffectivePeriod', value: q.effectivePeriod }));
+    group.children.push(new QuestionDescription({ label: 'UseContext', value: q.useContext }));
+    group.children.push(new QuestionDescription({ label: 'Jurisdiction', value: q.jurisdiction }));
+    group.children.push(new QuestionDescription({ label: 'Contact', value: q.contact }));
+    group.children.push(new QuestionDescription({ label: 'Copyright', value: q.copyright }));
+    group.children.push(new QuestionDescription({ label: 'Code', value: q.code }));
+    group.children.push(new QuestionDescription({ label: 'ID', value: q.id }));
+    group.children.push(new QuestionDescription({ label: 'Text', value: q.text }));
     group.children.push(new QuestionDescription({ label: 'Subject Type', value: q.subjectType }));
     res.push(group);
   }
@@ -59,16 +74,37 @@ export class QuestionService {
         }
         widget = groupWidget;
         break;
-      case 'question':
-        let questionWidget: QuestionGroup = new QuestionGroup({
+      case 'display':
+        widget = new TextareaQuestion({
+          key: item.linkId,
+          label: item.text,
+          rows: 1,
+          span: 3,
+        });
+        break;
+      case 'boolean':
+        widget = new TextboxQuestion({
           key: item.linkId,
           label: item.text,
         });
-        questionWidget.nestingLevel = nestingLevel;
-        for (let i of item.items) {
-          questionWidget.children.push(this.getQuestionForItem(i, nestingLevel + 1));
-        }
-        widget = questionWidget;
+        break;
+      case 'decimal':
+        widget = new TextboxQuestion({
+          key: item.linkId,
+          label: item.text,
+        });
+        break;
+      case 'integer':
+        widget = new TextboxQuestion({
+          key: item.linkId,
+          label: item.text,
+        });
+        break;
+      case 'dateTime+':
+        widget = new TextboxQuestion({
+          key: item.linkId,
+          label: item.text,
+        });
         break;
       case 'string':
         widget = new TextboxQuestion({
@@ -80,17 +116,8 @@ export class QuestionService {
         widget = new TextareaQuestion({
           key: item.linkId,
           label: item.text,
-          rows: 12,
+          rows: 6,
           span: 3,
-        });
-        break;
-      case 'boolean':
-        widget = new CheckboxQuestion({
-          key: item.linkId,
-          label: item.text,
-          options: [
-            { label: 'auswählen', value: true, },
-          ]
         });
         break;
       case 'date':
@@ -118,51 +145,16 @@ export class QuestionService {
           });
         }
         break;
-      case 'display':
-        widget = new TextareaQuestion({
-          key: item.linkId,
-          label: item.text,
-          rows: 12,
-          span: 3,
-        });
+      case 'valueCoding':
+        let options = [];
+        for (let o of item.options) {
+          options.push({ display: o });
+          widget = new ValueCodingQuestion({
+            key: item.linkId,
+          });
+        }
         break;
     }
     return widget;
   }
 }
-
-      /*case 'valueCoding':
-        let valueCodingWidget: QuestionGroup = new QuestionGroup({
-          key: item.linkId,
-          label: item.text,
-        });
-        valueCodingWidget.nestingLevel = nestingLevel;
-        for (let i of item.items) {
-          valueCodingWidget.children.push(this.getQuestionForItem(i, nestingLevel + 1));
-        }
-        widget = valueCodingWidget;
-        break;*/
-      /*case 'valueCoding':
-        let selectValueCoding = [];
-        for (let o of item.options) {
-          selectValueCoding.push({ value: o });
-        }
-        if (selectValueCoding.length > 2) {
-          widget = new DropdownQuestion({
-            key: item.linkId,
-            label: item.text,
-            options: selectValueCoding,
-          });
-        } else {
-          widget = new RadioButtonQuestion({
-            key: item.linkId,
-            label: item.text,
-            options: selectValueCoding,
-          });
-        }
-
-
-        break;*/
-
-
-

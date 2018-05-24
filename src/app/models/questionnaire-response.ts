@@ -25,7 +25,7 @@ export class QuestionnaireResponse {
 
     patient: string;                        //reference
     id: number;
-    _language: string;
+    language: string;
     date: Date;
     code: string;
     jurisdiction: string;
@@ -36,7 +36,6 @@ export class QuestionnaireResponse {
     effective: Date;
     name: string;
     publisher: string;
-    _id: any;                           // string geändert in any 18.05.2018                        
     experimental: boolean;
     subjectType: string;
 

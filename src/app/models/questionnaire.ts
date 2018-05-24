@@ -2,12 +2,13 @@ import { Item } from './item';
 
 export class Questionnaire {
 
+    id: any;  // string geändert in any 18.05.2018: in https://www.hl7.org/fhir/questionnaire.html nicht aufgeführt
     url: string;
     identifier: string;             //token
     version: string;                //token
     name: string;
     title: string;
-    status: string;
+    status: string;                 //draft | active | retired | unknown
     experimental: boolean;
     date: Date;
     publisher: string
@@ -21,35 +22,16 @@ export class Questionnaire {
     contact: Element;
     copyright: string;
     code: string;                   //token
-    subjectType: string;
-
+    subjectType: string[];
     effective: Date;
     items: Item[];
-    linkId: string;                 //item.linkId
-    definition: string;             //item.definition
-    //item.code: string;
-    //item.prefix
-    //item.text
-    //item.type
-    //item.enableWhen
-    //item.enableWhen.question
-    //item.enableWhen.hasAnswer
-    //item.enableWhen.answer[x]
-    //item.required
-    //item.repeats
-    //item.readOnly
-    //item.maxLength
-    //item.options
-    //item.option
-    //item.option.value[x]
-    //item.initial[x]
-    //item.item
+
     ;
 
 
 
 
-    id: any;  // string geändert in any 18.05.2018: in https://www.hl7.org/fhir/questionnaire.html nicht aufgeführt
+
 
 
 

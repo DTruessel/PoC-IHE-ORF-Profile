@@ -12,10 +12,11 @@ export class BundleService {
     private fhirHttpService: FhirJsHttpService,
   ) { }
 
-  convertToQuestionnaireResponse(obj: any): QuestionnaireResponse {
-    let qr = this.extractQuestionnaireResponseHeader(obj);
+  convertToQuestionnaireResponse(questionnaire, submittedEvent): QuestionnaireResponse {
+
+    let qr = this.extractQuestionnaireResponseHeader(questionnaire);
     qr.items = [];
-    obj.item.forEach(i => qr.items.push(this.extractItem(i)));
+    questionnaire.item.forEach(i => qr.items.push(this.extractItem(i)));
     return qr;
   }
 

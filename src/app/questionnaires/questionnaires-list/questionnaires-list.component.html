@@ -1,114 +1,68 @@
 <mat-card class="Questionnaires" (keyup.enter)="doSearch()">
   <mat-card-content>
-
     <div class="searchPanel">
+      <mat-card-subtitle>Search Parameters</mat-card-subtitle>
       <mat-input-container floatPlaceholder="never">
-        <input matInput #language placeholder="_language Search Parameter">
+        <input matInput #language placeholder="language">
+      </mat-input-container>
+      <mat-input-container floatPlaceholder="never">
+        <input matInput #date placeholder="date">
+      </mat-input-container>
+      <mat-input-container floatPlaceholder="never">
+        <input matInput #identifier placeholder="identifier">
+      </mat-input-container>
+      <mat-input-container floatPlaceholder="never">
+        <input matInput #code placeholder="code">
+      </mat-input-container>
+      <mat-input-container floatPlaceholder="never">
+        <input matInput #jurisdiction placeholder="jurisdiction">
+      </mat-input-container>
+      <mat-input-container floatPlaceholder="never">
+        <input matInput #description placeholder="description">
+      </mat-input-container>
+      <mat-input-container floatPlaceholder="never">
+        <input matInput #title placeholder="title">
+      </mat-input-container>
+      <mat-input-container floatPlaceholder="never">
+        <input matInput #version placeholder="version">
+      </mat-input-container>
+      <mat-input-container floatPlaceholder="never">
+        <input matInput #url placeholder="url">
+      </mat-input-container>
+      <mat-input-container floatPlaceholder="never">
+        <input matInput #effective placeholder="effective">
+      </mat-input-container>
+      <mat-input-container floatPlaceholder="never">
+        <input matInput #name placeholder="name">
+      </mat-input-container>
+      <mat-input-container floatPlaceholder="never">
+        <input matInput #publisher placeholder="publisher">
+      </mat-input-container>
+      <mat-input-container floatPlaceholder="never">
+        <input matInput #id placeholder="id">
+      </mat-input-container>
+      <mat-input-container floatPlaceholder="never">
+        <input matInput #status placeholder="status">
       </mat-input-container>
     </div>
-
-    <div class="searchPanel">
-      <mat-input-container floatPlaceholder="never">
-        <input matInput #date placeholder="date Search Parameter">
-      </mat-input-container>
-    </div>
-
-    <div class="searchPanel">
-      <mat-input-container floatPlaceholder="never">
-        <input matInput #identifier placeholder="identifier Search Parameter">
-      </mat-input-container>
-    </div>
-
-    <div class="searchPanel">
-      <mat-input-container floatPlaceholder="never">
-        <input matInput #code placeholder="code Search Parameter">
-      </mat-input-container>
-    </div>
-
-    <div class="searchPanel">
-      <mat-input-container floatPlaceholder="never">
-        <input matInput #jurisdiction placeholder="jurisdiction Search Parameter">
-      </mat-input-container>
-    </div>
-
-    <div class="searchPanel">
-      <mat-input-container floatPlaceholder="never">
-        <input matInput #description placeholder="description Search Parameter">
-      </mat-input-container>
-    </div>
-
-    <div class="searchPanel">
-      <mat-input-container floatPlaceholder="never">
-        <input matInput #title placeholder="title Search Parameter">
-      </mat-input-container>
-    </div>
-
-    <div class="searchPanel">
-      <mat-input-container floatPlaceholder="never">
-        <input matInput #version placeholder="version Search Parameter">
-      </mat-input-container>
-    </div>
-
-    <div class="searchPanel">
-      <mat-input-container floatPlaceholder="never">
-        <input matInput #url placeholder="url Search Parameter">
-      </mat-input-container>
-    </div>
-
-    <div class="searchPanel">
-      <mat-input-container floatPlaceholder="never">
-        <input matInput #effective placeholder="effective Search Parameter">
-      </mat-input-container>
-    </div>
-
-    <div class="searchPanel">
-      <mat-input-container floatPlaceholder="never">
-        <input matInput #name placeholder="name Search Parameter">
-      </mat-input-container>
-    </div>
-
-    <div class="searchPanel">
-      <mat-input-container floatPlaceholder="never">
-        <input matInput #publisher placeholder="publisher Search Parameter">
-      </mat-input-container>
-    </div>
-
-    <div class="searchPanel">
-      <mat-input-container floatPlaceholder="never">
-        <input matInput #id placeholder="_id Search Parameter">
-      </mat-input-container>
-    </div>
-
-    <div class="searchPanel">
-      <mat-input-container floatPlaceholder="never">
-        <input matInput #status placeholder="status Search Parameter">
-      </mat-input-container>
-    </div>
-
+    <br>
+    <button mat-raised-button (click)="doSearch()">
+      <span>Query Questionnaire</span>
+    </button>
+    <br>
+    <br>
     <mat-table #table [dataSource]="dataSource">
       <mat-header-row *matHeaderRowDef="['questionnaireCol']">
         <!--Array mit nur einem Eintrag-->
       </mat-header-row>
       <mat-row *matRowDef="let row; columns: ['questionnaireCol']" (click)="selectRow(row)">
       </mat-row>
-
       <ng-container matColumnDef="questionnaireCol">
         <mat-header-cell *matHeaderCellDef>Questionnaire</mat-header-cell>
         <mat-cell *matCellDef="let entry">{{ getQName(entry) }}</mat-cell>
       </ng-container>
-
     </mat-table>
-
     <mat-paginator [length]="length" [pageSize]="size" [pageSizeOptions]="pageSizeOptions" (page)="goToPage($event)">
     </mat-paginator>
   </mat-card-content>
-
-  <button mat-raised-button routerLink="/">
-    <span>Home</span>
-  </button>
-
-  <button mat-raised-button (click)="doSearch()">
-    <span>Query Questionnaire</span>
-  </button>
-
 </mat-card>

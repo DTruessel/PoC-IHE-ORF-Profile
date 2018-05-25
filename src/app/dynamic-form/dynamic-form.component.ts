@@ -23,12 +23,12 @@ export class DynamicFormComponent implements OnInit {
 
   form: FormGroup;
   payLoad: any;                                               // 24.05.2018 geändert von '' in {}
-  private data$: BehaviorSubject<fhir.Bundle>;
+
 
   @Input() questions: QuestionBase<any>[] = [];
   @Input() selectedQuestionnaire = this.sessionService.selectedQuestionnaire;
 
-  @Output() formValueChange = new EventEmitter();
+  @Output() submittedEvent = new EventEmitter();
 
   constructor(
     private questionControlService: QuestionControlService,
@@ -37,26 +37,18 @@ export class DynamicFormComponent implements OnInit {
     private questionService: QuestionService,
     private fhirHttpService: FhirJsHttpService,
   ) {
-    this.data$ = new BehaviorSubject(null);
+
   }
 
   ngOnInit() {
     this.form = this.questionControlService.toFormGroup(this.questions);
   }
 
-  onEmit() {
-    this.payLoad = this.form.value;                   //geändert 24.05.2018: this.payLoad = JSON.stringify(this.form.value);
-    console.log(this.payLoad);
-    this.formValueChange.emit(this.payLoad);
+  emitFormData() {
+    console.log(this.form.value);
+    this.submittedEvent.emit(this.form.value);
   }
-
 }
-
- /*let questionnaireResponse = this.sessionService.selectedQuestionnaire
-    this.fhirHttpService.create(questionnaireResponse).then(response => {
-    this.data$.next(<fhir.Bundle>response.data);
-    console.log(response.data);
-    })*/
 
 
 

@@ -32,7 +32,7 @@ export class QuestionnairesListComponent implements OnInit {
 
   dataSource = new MatTableDataSource<fhir.BundleEntry>();
 
-  length = 100;
+  length = 0;
   pageSize = 10;
   oldPageIndex = 0;
   pageSizeOptions = [this.pageSize];
@@ -138,11 +138,9 @@ export class QuestionnairesListComponent implements OnInit {
       if (questionnairesBundle) {
         this.dataSource.data = questionnairesBundle.entry;                            // entry enthält generische Questionnaire-Objekte
         this.length = questionnairesBundle.total;
-        /*for (const p of questionnairesBundle.entry) {
-          console.log(p);*/
+        this.bundle = questionnairesBundle;
       }
-    }
-    );
+    });
   }
 
   selectRow(row) {
@@ -275,9 +273,7 @@ export class QuestionnairesListComponent implements OnInit {
       this.fhirHttpService.prevPage({ bundle: this.bundle }).then(response => {
         //this.fhirHttpService.prevPage({ bundle: this.bundle }).then(response => { //korrigiert 20.05.2018
         this.oldPageIndex = event.pageIndex;
-        this.bundle = <fhir.Bundle>response.data;
-        this.length = this.bundle.total;
-        this.dataSource.data = this.bundle.entry;
+        this.data$.next(<fhir.Bundle>response.data);
         console.log('previous page called ');
       });
     }

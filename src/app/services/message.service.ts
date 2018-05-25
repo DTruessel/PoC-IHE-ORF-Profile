@@ -14,3 +14,6 @@ export class MessageService {
     this.messages = [];
   }
 }
+
+//Das FHIR Bundle wurde erfolgreich verschickt
+//Der Empfänger konnte das Bundle nicht empfangen

@@ -5,3 +5,10 @@ export class Patient {
     birhtDate: Date;
 
 }
+
+    //id: number;
+    //familyName: string;
+    // givenNames: string;
+    // birthDate: string;
+    // addressLines: string;
+    // addressCity: string;

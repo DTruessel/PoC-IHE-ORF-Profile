@@ -1,9 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Patient } from '../patient';
-import { PatientService } from '../patient.service';
+import { Patient } from '../../models/patient';
+import { PatientService } from '../../services/patient.service';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
-
 
 @Component({
   selector: 'app-patient-detail',
@@ -34,5 +33,4 @@ export class PatientDetailComponent implements OnInit {
   goBack(): void {
     this.location.back();
   }
-
 }

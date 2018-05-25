@@ -40,7 +40,7 @@ export class QuestionnaireFormComponent implements OnInit {
       this.questionnaire = this.parserService.convertToQuestionnaire(rawQ);
       this.questions = this.questionService.getQuestions(this.questionnaire);
     }
-    else if (alert) {                                                                   // neu 18.05.2018
+    else {                                                                  // neu 18.05.2018
       alert('No Questionnaire found in Session');
       // Navigation zur Suche ?! ev link zum wieder suchen
       this.router.navigate(['/questionnaires-list']);                                     // neu 18.05.2018
@@ -49,18 +49,16 @@ export class QuestionnaireFormComponent implements OnInit {
 
   ngOnInit() { }
 
-  private formValueChanged(payload) {                                       //EventEmitter() aus dynamic-form
-    payload = this.formValueChanged;
-    console.log(payload);
-    this.formValue = Object.assign(this.formValue, { payload })
+  private formValuesFromDynForm(submittedEvent) {                                       //FormValues aus dynamic-form
+    console.log('--HIER SIND DIE EINGABEN --');
+    console.log(submittedEvent);
+    console.log('---------------------------');
+    const questionnaireResp = this.bundleService.convertToQuestionnaireResponse(this.questionnaire, submittedEvent);
   }
 
   /*private convertformValueToQuestResponse() {
     this.questionnaireResponse = this.bundleService.convertToQuestionnaireResponse(this.formValue);
   }*/
-
-
-
 
   private createQuestionnaireResponse(formValue) {
     const questionnaireResponse: Entry = {

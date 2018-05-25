@@ -25,7 +25,7 @@ export class PatientsListComponent implements OnInit {
   bundle: fhir.Bundle;
   dataSource = new MatTableDataSource<fhir.BundleEntry>();
 
-  length = 100;
+  length = 0;
   pageSize = 10;
   oldPageIndex = 0;
   pageSizeOptions = [this.pageSize];

@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { FhirJsHttpService } from 'ng-fhirjs';
 import { QuestionnaireResponse } from '../models/questionnaire-response';
 import { Item } from '../models/item';
+import { Questionnaire } from '../models/questionnaire';
+import { SessionService } from './session.service';
 
 @Injectable()
 export class BundleService {
@@ -10,6 +12,7 @@ export class BundleService {
 
   constructor(
     private fhirHttpService: FhirJsHttpService,
+    private sessionService: SessionService
   ) { }
 
   convertToQuestionnaireResponse(questionnaire, submittedEvent): QuestionnaireResponse {
@@ -20,16 +23,16 @@ export class BundleService {
     return qr;
   }
 
-  private extractQuestionnaireResponseHeader(payload): QuestionnaireResponse {
+  private extractQuestionnaireResponseHeader(questionnaire: Questionnaire): QuestionnaireResponse {
     let qr = new QuestionnaireResponse();
-    qr.identifier = payload.identifier;
+    qr.identifier = questionnaire.identifier;
     qr.basedOn = '';
-    qr.parent = payload.order.number;
-    qr.questionnaire = payload.title;
-    qr.status = payload.status;
+    //qr.parent = questionnaire.order.number;
+    qr.questionnaire = questionnaire.url;
+    qr.status = questionnaire.status;
     qr.context = '';
-    qr.authored = payload.date;                   //Datum des Erstellens der QR nicht des Q
-    qr.author = payload.orderer.dataenterer;
+    qr.authored = questionnaire.date;                   //Datum des Erstellens der QR nicht des Q
+    //qr.author = questionnaire.orderer.dataenterer;
     qr.source = '';
 
     console.log(qr);
@@ -43,10 +46,10 @@ export class BundleService {
     item.text = obj.text;
     item.subject = obj.subject;
     item.type = obj.type;
-    //item.answer =;
-    //item.answer.value[x]
-    //item.answer.item
-    //item.item
+    item.answer = '';
+    item.answer.value
+    item.answer.item
+    item.items
 
     if (obj.option) {
       item.options = obj.option.map(o => o.valueString);

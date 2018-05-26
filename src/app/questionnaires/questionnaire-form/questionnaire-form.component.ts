@@ -64,7 +64,6 @@ export class QuestionnaireFormComponent implements OnInit {
     const questionnaireResponse: Entry = {
       resource: {
         resourceType: 'QuestionnaireResponse'
-
       }
     }
     this.fhirHttpService.create(questionnaireResponse);

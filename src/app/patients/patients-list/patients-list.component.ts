@@ -86,6 +86,12 @@ export class PatientsListComponent implements OnInit {
     });
   }
 
+  selectRow(row) {
+    this.sessionService.selectedQuestionnaire = row.resource;
+    alert('selected: ' + JSON.stringify(row.resource));
+    //this.router.navigate(['/questionnaire-form']);
+  }
+
   ngOnInit() {
     this.data$.subscribe((patientsBundle: fhir.Bundle) => {
       if (patientsBundle) {
@@ -105,13 +111,6 @@ export class PatientsListComponent implements OnInit {
         const searchString = this.filterInput.nativeElement.value;
         this.search(this.makeQuery({ family: searchString }));
       });
-  }
-
-  selectRow(row) {
-    this.sessionService.selectedQuestionnaire = row.resource;
-    alert('selected: ' + JSON.stringify(row.resource));
-    console.log(this.sessionService.selectedQuestionnaire);
-    // this.router.navigate(['/questionnaire-form']);
   }
 
   getPatientFamilyName(entry: fhir.BundleEntry): string {

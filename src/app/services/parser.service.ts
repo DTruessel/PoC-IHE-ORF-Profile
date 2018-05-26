@@ -18,13 +18,26 @@ export class ParserService {
 
   private extractQuestionnaireHeader(selectedQuestionnaire: any): Questionnaire {
     let q = new Questionnaire();
-    q.id = selectedQuestionnaire.id;
+    // q.id = selectedQuestionnaire.id;
     q.url = selectedQuestionnaire.url;
+    q.identifier = selectedQuestionnaire.identifier;
+    q.version = selectedQuestionnaire.version;
+    q.name = selectedQuestionnaire.name;
     q.title = selectedQuestionnaire.title;
     q.status = selectedQuestionnaire.status;
     q.experimental = selectedQuestionnaire.experimental;
     q.date = selectedQuestionnaire.date;
     q.publisher = selectedQuestionnaire.publisher;
+    q.description = selectedQuestionnaire.description;
+    q.purpose = selectedQuestionnaire.purpose;
+    q.approvalDate = selectedQuestionnaire.approvalDate;
+    q.lastReviewDate = selectedQuestionnaire.lastReviewDate;
+    q.effectivePeriod = selectedQuestionnaire.effectivePeriod;
+    q.useContext = selectedQuestionnaire.useContext;
+    q.jurisdiction = selectedQuestionnaire.jurisdiction;
+    q.contact = selectedQuestionnaire.contact;
+    q.copyright = selectedQuestionnaire.copyright;
+    q.code = selectedQuestionnaire.code;
     q.subjectType = selectedQuestionnaire.subjectType;
     console.log(q);
     return q;
@@ -34,6 +47,9 @@ export class ParserService {
   extractItem(obj: any): Item {
     let item: Item = new Item();
     item.linkId = obj.linkId;
+    item.definition = obj.definition;
+    item.code = obj.code;
+    item.prefix = obj.prefix;
     item.text = obj.text;
     item.type = obj.type;
 

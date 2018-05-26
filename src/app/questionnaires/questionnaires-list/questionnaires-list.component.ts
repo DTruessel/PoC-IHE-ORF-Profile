@@ -115,8 +115,8 @@ export class QuestionnairesListComponent implements OnInit {
       type: 'Questionnaire',                              //Liste von Questionnaires ausgeben; query: { _count: 10 Seiten
       query: {
         _count: this.pageSize,
-        //  _summary: true
-      },
+        //_summary: true,
+      }
     };
 
     if (q) {
@@ -188,72 +188,58 @@ export class QuestionnairesListComponent implements OnInit {
 
     if (titleSearchString) {
       searchParams = Object.assign(searchParams, { title: titleSearchString })
-      // this.search(this.makeQuery(searchParams));
     }
 
     if (publisherSearchString) {
       searchParams = Object.assign(searchParams, { publisher: publisherSearchString })
-      // this.search(this.makeQuery(searchParams));
     }
 
     if (idSearchString) {
       searchParams = Object.assign(searchParams, { _id: idSearchString })
-      // this.search(this.makeQuery(searchParams));
     }
 
     if (languageSearchString) {
       searchParams = Object.assign(searchParams, { _language: languageSearchString })
-      // this.search(this.makeQuery(searchParams));
     }
 
     if (codeSearchString) {
       searchParams = Object.assign(searchParams, { code: codeSearchString })
-      //this.search(this.makeQuery(searchParams));
     }
 
     if (dateSearchString) {
       searchParams = Object.assign(searchParams, { date: dateSearchString })
-      //this.search(this.makeQuery(searchParams));
     }
 
     if (descriptionSearchString) {
       searchParams = Object.assign(searchParams, { description: descriptionSearchString })
-      // this.search(this.makeQuery(searchParams));
     }
 
     if (effectiveSearchString) {
       searchParams = Object.assign(searchParams, { effective: effectiveSearchString })
-      //this.search(this.makeQuery(searchParams));
     }
 
     if (identifierSearchString) {
       searchParams = Object.assign(searchParams, { identifier: identifierSearchString })
-      //this.search(this.makeQuery(searchParams));
     }
 
     if (jurisdictionSearchString) {
       searchParams = Object.assign(searchParams, { jurisdiction: jurisdictionSearchString })
-      //this.search(this.makeQuery(searchParams));
     }
 
     if (nameSearchString) {
       searchParams = Object.assign(searchParams, { name: nameSearchString })
-      //this.search(this.makeQuery(searchParams));
     }
 
     if (statusSearchString) {
       searchParams = Object.assign(searchParams, { status: statusSearchString })
-      // this.search(this.makeQuery(searchParams));
     }
 
     if (urlSearchString) {
       searchParams = Object.assign(searchParams, { url: urlSearchString })
-      //this.search(this.makeQuery(searchParams));
     }
 
     if (versionSearchString) {
       searchParams = Object.assign(searchParams, { version: versionSearchString })
-      //this.search(this.makeQuery(searchParams));
     }
     this.search(this.makeQuery(searchParams));
 

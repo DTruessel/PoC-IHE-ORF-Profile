@@ -51,7 +51,7 @@ export class Item {
     //item.definition: string;
     //item.text: string;
     //item.subject: any;
-    //item.answer;
+    answer;
     //item.answer.value[x]
     //item.answer.item
     //item.item

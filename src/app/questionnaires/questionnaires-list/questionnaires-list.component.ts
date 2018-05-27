@@ -115,7 +115,7 @@ export class QuestionnairesListComponent implements OnInit {
       type: 'Questionnaire',                              //Liste von Questionnaires ausgeben; query: { _count: 10 Seiten
       query: {
         _count: this.pageSize,
-        //_summary: true,
+        //_summary: "true",
       }
     };
 

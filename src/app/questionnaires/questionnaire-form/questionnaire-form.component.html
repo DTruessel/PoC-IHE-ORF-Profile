@@ -1,5 +1,5 @@
 <div id="container">
 
-  <app-dynamic-form [questions]="questions" (formValuesFromDynForm)="submittedEvent($event)">
+  <app-dynamic-form [questions]="questions" (submittedEvent)="formValuesFromDynForm($event)">
   </app-dynamic-form>
 </div>

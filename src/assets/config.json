@@ -1,6 +1,4 @@
-
 {
   "patientsUrl": "http://test.fhir.org/r3",
-  "userUrl": "https://jsonplaceholder.typicode.com/users/",
   "textfile": "assets/textfile.txt"
 }

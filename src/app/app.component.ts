@@ -1,4 +1,3 @@
-
 import { Component } from '@angular/core';
 import { Router, RouterModule, Routes } from '@angular/router';
 import { FhirJsHttpService, FHIR_HTTP_CONFIG } from 'ng-fhirjs';
@@ -20,7 +19,7 @@ export class AppComponent {
 
       case '/patients-list':
         return this.title + ' - ' + 'Patients';
-      case '/CapabilityStatement':
+      case '/capabilityStatement':
         return this.title + ' - ' + 'CapabilityStatement';
       case '/settings':
         return this.title + ' - ' + 'Settings';
@@ -28,11 +27,7 @@ export class AppComponent {
         return this.title + ' - ' + 'Questionnaires';
       case '/questionnaire-form':
         return this.title + ' - ' + 'Selected Questionnaire';
-
     }
-
     return this.title;
   }
-
-
 }

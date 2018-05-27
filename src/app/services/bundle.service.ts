@@ -16,10 +16,9 @@ export class BundleService {
   ) { }
 
   convertToQuestionnaireResponse(questionnaire, submittedEvent): QuestionnaireResponse {
-
     let qr = this.extractQuestionnaireResponseHeader(questionnaire);
     qr.items = [];
-    questionnaire.item.forEach(i => qr.items.push(this.extractItem(i)));
+    questionnaire.items.forEach(i => qr.items.push(this.extractItem(i)));
     return qr;
   }
 
@@ -27,10 +26,10 @@ export class BundleService {
     let qr = new QuestionnaireResponse();
     qr.identifier = questionnaire.identifier;
     qr.basedOn = '';
-    //qr.parent = questionnaire.order.number;
+    qr.parent = questionnaire.name;
     qr.questionnaire = questionnaire.url;
     qr.status = questionnaire.status;
-    qr.context = '';
+    qr.context = questionnaire.useContext;
     qr.authored = questionnaire.date;                   //Datum des Erstellens der QR nicht des Q
     //qr.author = questionnaire.orderer.dataenterer;
     qr.source = '';
@@ -39,24 +38,20 @@ export class BundleService {
     return qr;
   }
 
-  extractItem(obj: any): Item {
+  extractItem(submittedEvent: any): Item {
     let item: Item = new Item();
-    item.linkId = obj.linkId;
-    item.definition = obj.linkId;
-    item.text = obj.text;
-    item.subject = obj.subject;
-    item.type = obj.type;
-    item.answer = '';
-    item.answer.value
-    item.answer.item
-    item.items
+    item.linkId = submittedEvent.linkId;
+    item.definition = submittedEvent.definition;
+    item.subject = submittedEvent.subject;
+    item.type = submittedEvent.type;
+    item.answer = submittedEvent.linkId.value;
 
-    if (obj.option) {
-      item.options = obj.option.map(o => o.valueString);
+    if (submittedEvent.option) {
+      item.options = submittedEvent.option.map(o => o.value);   //valueString
     }
-    if (obj.item) {
+    if (submittedEvent.item) {
       item.items = [];
-      for (let i of obj.item) {
+      for (let i of submittedEvent.item) {
         item.items.push(this.extractItem(i));
       }
     }

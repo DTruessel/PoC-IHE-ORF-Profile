@@ -49,9 +49,9 @@ export class QuestionnaireFormComponent implements OnInit {
 
   ngOnInit() { }
 
-  private formValuesFromDynForm(submittedEvent) {                                       //FormValues aus dynamic-form
+  private formValuesFromDynForm(submittedEvent) {
     console.log('--HIER SIND DIE EINGABEN --');
-    console.log(submittedEvent);
+    console.log('SubmittedEvent:', submittedEvent);
     console.log('---------------------------');
     const questionnaireResp = this.bundleService.convertToQuestionnaireResponse(this.questionnaire, submittedEvent);
   }

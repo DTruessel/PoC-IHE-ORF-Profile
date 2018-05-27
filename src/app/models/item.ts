@@ -1,3 +1,5 @@
+import { Answer } from "./answer";
+
 
 export class Item {
 
@@ -43,18 +45,21 @@ export class Item {
     initialReference: string;       //sollte Reference(Any) sein                 
     items: Item[];
     options?: string[];
+    answer:
+    'boolean' |
+    'decimal' |
+    'integer' |
+    'date' |
+    'dateTime' |
+    'time' |
+    'string' |
+    'uri' |
+    'Attachment' |
+    'Coding' |
+    'Quantity' |
+    'Reference(Any)'
+    ;
 
-    //ItemQuestionnaireResponse
-
-    //item: items
-    //item.linkId: string;
-    //item.definition: string;
-    //item.text: string;
-    //item.subject: any;
-    answer;
-    //item.answer.value[x]
-    //item.answer.item
-    //item.item
 
     constructor() { }
 }

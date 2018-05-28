@@ -38,20 +38,20 @@ export class BundleService {
     return qr;
   }
 
-  extractItem(submittedEvent: any): Item {
+  extractItem(obj: any): Item {
     let item: Item = new Item();
-    item.linkId = submittedEvent.linkId;
-    item.definition = submittedEvent.definition;
-    item.subject = submittedEvent.subject;
-    item.type = submittedEvent.type;
-    item.answer = submittedEvent.linkId.value;
+    item.linkId = obj.linkId;
+    item.definition = obj.definition;
+    item.subject = obj.subject;
+    item.type = obj.type;
+    item.answer = obj.answer;
 
-    if (submittedEvent.option) {
-      item.options = submittedEvent.option.map(o => o.value);   //valueString
+    if (obj.option) {
+      item.options = obj.option.map(o => o.value);   //valueString
     }
-    if (submittedEvent.item) {
+    if (obj.item) {
       item.items = [];
-      for (let i of submittedEvent.item) {
+      for (let i of obj.item) {
         item.items.push(this.extractItem(i));
       }
     }

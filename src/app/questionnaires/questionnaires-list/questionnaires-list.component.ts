@@ -29,6 +29,7 @@ export class QuestionnairesListComponent implements OnInit {
   selectedRowIndex: any;
   row: any;
   bundle: fhir.Bundle;
+  selectedQuestionnaire: any;
 
   dataSource = new MatTableDataSource<fhir.BundleEntry>();
 
@@ -115,6 +116,21 @@ export class QuestionnairesListComponent implements OnInit {
       type: 'Questionnaire',                              //Liste von Questionnaires ausgeben; query: { _count: 10 Seiten
       query: {
         _count: this.pageSize,
+        _summary: "true",
+      }
+    };
+
+    if (q) {
+      return Object.assign({}, baseQuery, { query: Object.assign(baseQuery.query, q) });
+    }
+    return baseQuery;                                     //else
+  }
+
+  private makeRetrieve(q: Object) {                          // literales Objekt
+    const baseQuery = {
+      type: 'Questionnaire',                              //Liste von Questionnaires ausgeben; query: { _count: 10 Seiten
+      query: {
+        _count: this.pageSize,
         //_summary: "true",
       }
     };
@@ -125,10 +141,30 @@ export class QuestionnairesListComponent implements OnInit {
     return baseQuery;                                     //else
   }
 
-  private search(query) {                                                             // macht REST CALL
+
+  private searchQuery(query) {                                                             // macht REST CALL
     console.log('** before fhirHttpService.search, query: ' + JSON.stringify(query));
     this.fhirHttpService.search(query).then(response => {
       this.data$.next(<fhir.Bundle>response.data);                                    // data ist eine property von response.
+      console.log('** after fhirHttpService.search, hits: ' + this.length);
+
+    });
+  }
+
+  //anschliessend Suche nach id Klick auf row =>
+  private searchID(id) {
+    const read = { id: '', type: 'Questionnaire' }
+    this.fhirHttpService.read(read).then(response => {
+      this.data$.next(<fhir.Bundle>response.data);
+      console.log(response.data);
+    })
+  }
+
+  private searchRetrieve(retrieve) {                                                             // macht REST CALL
+    console.log('** before fhirHttpService.search, query: ' + JSON.stringify(retrieve));
+    this.fhirHttpService.search(retrieve).then(response => {
+      this.data$.next(<fhir.Bundle>response.data);
+      // data ist eine property von response.
       console.log('** after fhirHttpService.search, hits: ' + this.length);
     });
   }
@@ -144,7 +180,7 @@ export class QuestionnairesListComponent implements OnInit {
   }
 
   selectRow(row) {
-    this.sessionService.selectedQuestionnaire = row.resource;
+    this.sessionService.selectedQuestionnaire = row.resource;             //row.resource
     // alert('selected: ' + JSON.stringify(row.resource));
     console.log('SelectedQuestionnaire:' + this.sessionService.selectedQuestionnaire);
     this.router.navigate(['/questionnaire-form']);
@@ -167,7 +203,7 @@ export class QuestionnairesListComponent implements OnInit {
     return '-';
   }
 
-  doSearch() {
+  doSearchQuery() {
 
     const languageSearchString = this.elLanguage.nativeElement.value;
     const dateSearchString = this.elDate.nativeElement.value;
@@ -241,8 +277,84 @@ export class QuestionnairesListComponent implements OnInit {
     if (versionSearchString) {
       searchParams = Object.assign(searchParams, { version: versionSearchString })
     }
-    this.search(this.makeQuery(searchParams));
+    this.searchQuery(this.makeQuery(searchParams));
+  }
 
+  doSearchRetrieve() {
+
+    const languageSearchString = this.elLanguage.nativeElement.value;
+    const dateSearchString = this.elDate.nativeElement.value;
+    const identifierSearchString = this.elIdentifier.nativeElement.value;
+    const codeSearchString = this.elCode.nativeElement.value;
+    const jurisdictionSearchString = this.elJurisdiction.nativeElement.value;
+    const descriptionSearchString = this.elDescription.nativeElement.value;
+    const titleSearchString = this.elTitle.nativeElement.value;
+    const versionSearchString = this.elVersion.nativeElement.value;
+    const urlSearchString = this.elUrl.nativeElement.value;
+    const effectiveSearchString = this.elEffective.nativeElement.value;
+    const nameSearchString = this.elName.nativeElement.value;
+    const publisherSearchString = this.elPublisher.nativeElement.value;
+    const idSearchString = this.elId.nativeElement.value;
+    const statusSearchString = this.elStatus.nativeElement.value;
+
+    let searchParams = {}
+
+    if (titleSearchString) {
+      searchParams = Object.assign(searchParams, { title: titleSearchString })
+    }
+
+    if (publisherSearchString) {
+      searchParams = Object.assign(searchParams, { publisher: publisherSearchString })
+    }
+
+    if (idSearchString) {
+      searchParams = Object.assign(searchParams, { _id: idSearchString })
+    }
+
+    if (languageSearchString) {
+      searchParams = Object.assign(searchParams, { _language: languageSearchString })
+    }
+
+    if (codeSearchString) {
+      searchParams = Object.assign(searchParams, { code: codeSearchString })
+    }
+
+    if (dateSearchString) {
+      searchParams = Object.assign(searchParams, { date: dateSearchString })
+    }
+
+    if (descriptionSearchString) {
+      searchParams = Object.assign(searchParams, { description: descriptionSearchString })
+    }
+
+    if (effectiveSearchString) {
+      searchParams = Object.assign(searchParams, { effective: effectiveSearchString })
+    }
+
+    if (identifierSearchString) {
+      searchParams = Object.assign(searchParams, { identifier: identifierSearchString })
+    }
+
+    if (jurisdictionSearchString) {
+      searchParams = Object.assign(searchParams, { jurisdiction: jurisdictionSearchString })
+    }
+
+    if (nameSearchString) {
+      searchParams = Object.assign(searchParams, { name: nameSearchString })
+    }
+
+    if (statusSearchString) {
+      searchParams = Object.assign(searchParams, { status: statusSearchString })
+    }
+
+    if (urlSearchString) {
+      searchParams = Object.assign(searchParams, { url: urlSearchString })
+    }
+
+    if (versionSearchString) {
+      searchParams = Object.assign(searchParams, { version: versionSearchString })
+    }
+    this.searchRetrieve(this.makeRetrieve(searchParams));
   }
 
   goToPage(event: PageEvent) {

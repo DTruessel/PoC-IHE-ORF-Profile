@@ -1,5 +1,3 @@
-import { Answer } from "./answer";
-
 
 export class Item {
 
@@ -26,7 +24,7 @@ export class Item {
     repeats: boolean;
     readOnly: boolean;
     maxLength: string;              // sollte integer sein
-    option: string;                 // value[x] valueInteger, valueDate, valueTime, valueString, valueCoding
+    option: any;                 // value[x] valueInteger, valueDate, valueTime, valueString, valueCoding
     initial: string;                // integer|date|time|string|Coding
     initialBoolean: boolean;
     initialDecimal: string;         //sollte decimal sein
@@ -35,7 +33,7 @@ export class Item {
     initialDateTime: string;        // sollte dateTime sein
     time: string;                   // sollte time sein
     initialString: string;
-    initialUri: string;                    //sollte uri sein          
+    initialUri: string;             //sollte uri sein          
     initialAttachment: string;      //sollte Attachment sein
     initialCoding: string;          //sollte Coding sein
     initialQuantity: string;        // sollte Quantity sein   
@@ -43,23 +41,9 @@ export class Item {
     display: string;
     subject: string;
     initialReference: string;       //sollte Reference(Any) sein                 
-    items: Item[];
+    item: Item[];
     options?: string[];
-    answer:
-    'boolean' |
-    'decimal' |
-    'integer' |
-    'date' |
-    'dateTime' |
-    'time' |
-    'string' |
-    'uri' |
-    'Attachment' |
-    'Coding' |
-    'Quantity' |
-    'Reference(Any)'
-    ;
-
+    answer: any
 
     constructor() { }
 }

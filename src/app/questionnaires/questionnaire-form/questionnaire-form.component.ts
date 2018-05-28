@@ -19,7 +19,6 @@ import { FhirJsHttpService } from 'ng-fhirjs';
 export class QuestionnaireFormComponent implements OnInit {
 
   @Input()
-  @Output() questToQuestResponse = new EventEmitter();
 
   questions: any[];
   questionnaire: Questionnaire;
@@ -60,7 +59,7 @@ export class QuestionnaireFormComponent implements OnInit {
     this.questionnaireResponse = this.bundleService.convertToQuestionnaireResponse(this.formValue);
   }*/
 
-  private createQuestionnaireResponse(formValue) {
+  private createQuestionnaireResponse(submittedEvent) {
     const questionnaireResponse: Entry = {
       resource: {
         resourceType: 'QuestionnaireResponse'

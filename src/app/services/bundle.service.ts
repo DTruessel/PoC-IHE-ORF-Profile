@@ -1,80 +1,74 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Input } from '@angular/core';
 import { FhirJsHttpService } from 'ng-fhirjs';
 import { QuestionnaireResponse } from '../models/questionnaire-response';
 import { Item } from '../models/item';
 import { Questionnaire } from '../models/questionnaire';
 import { SessionService } from './session.service';
+import { FormGroup } from '@angular/forms';
+import { QuestionService } from './question.service';
+import { QuestionBase } from '../questions/question-base';
 
 @Injectable()
 export class BundleService {
 
-  obj: any;
+  @Input() questions: QuestionBase<any>[] = [];
+  @Input() selectedQuestionnaire = this.sessionService.selectedQuestionnaire;
+
+  items = [];
 
   constructor(
     private fhirHttpService: FhirJsHttpService,
-    private sessionService: SessionService
+    private sessionService: SessionService,
+    private questionService: QuestionService
   ) { }
 
-  convertToQuestionnaireResponse(questionnaire, submittedEvent): QuestionnaireResponse {
-    let qr = this.extractQuestionnaireResponseHeader(questionnaire);
-    qr.items = [];
-    questionnaire.items.forEach(i => qr.items.push(this.extractItem(i)));
+  convertToQuestionnaireResponse(selectedQuestionnaire, submittedEvent): QuestionnaireResponse {
+    let qr = this.extractQuestionnaireResponseHeader(selectedQuestionnaire);
+    qr.item = [];
+    this.items.forEach(i => qr.item.push(this.extractItem(i)));
     return qr;
   }
 
-  private extractQuestionnaireResponseHeader(questionnaire: Questionnaire): QuestionnaireResponse {
+  private extractQuestionnaireResponseHeader(selectedQuestionnaire: Questionnaire): QuestionnaireResponse {
     let qr = new QuestionnaireResponse();
-    qr.identifier = questionnaire.identifier;
-    qr.basedOn = '';
-    qr.parent = questionnaire.name;
-    qr.questionnaire = questionnaire.url;
-    qr.status = questionnaire.status;
-    qr.context = questionnaire.useContext;
-    qr.authored = questionnaire.date;                   //Datum des Erstellens der QR nicht des Q
-    //qr.author = questionnaire.orderer.dataenterer;
+    qr.identifier = selectedQuestionnaire.identifier;
+    qr.basedOn = selectedQuestionnaire.title;
+    qr.parent = selectedQuestionnaire.name;
+    qr.questionnaire = selectedQuestionnaire.url;
+    qr.status = selectedQuestionnaire.status;
+    qr.subject = selectedQuestionnaire.subjectType;
+    qr.context = selectedQuestionnaire.useContext;
+    qr.authored = selectedQuestionnaire.date;                   //Datum des Erstellens der QR nicht des Q
+    qr.author = '';
     qr.source = '';
 
     console.log(qr);
     return qr;
   }
 
-  extractItem(obj: any): Item {
+  extractItem(items): Item {
     let item: Item = new Item();
-    item.linkId = obj.linkId;
-    item.definition = obj.definition;
-    item.subject = obj.subject;
-    item.type = obj.type;
-    item.answer = obj.answer;
+    item.linkId = this.selectedQuestionnaire.item.linkId;
+    item.definition = this.selectedQuestionnaire.item.definition;
+    item.code = this.selectedQuestionnaire.item.code;
+    item.prefix = this.selectedQuestionnaire.item.prefix;
+    item.text = this.selectedQuestionnaire.item.text;
+    item.type = this.selectedQuestionnaire.item.type;
+    item.answer = this.selectedQuestionnaire.item.text;
+    item.answer = this.selectedQuestionnaire.item.definition;
 
-    if (obj.option) {
-      item.options = obj.option.map(o => o.value);   //valueString
+
+    if (item.option) {
+      item.options = item.option.map(o => o.value);
     }
-    if (obj.item) {
-      item.items = [];
-      for (let i of obj.item) {
-        item.items.push(this.extractItem(i));
+    if (item.item) {
+      item.item = [];
+      for (let i of item.item) {
+        item.item.push(this.extractItem(i));
       }
     }
     return item;
   }
-
-  /*  extractItemValue(obj: any): Item {
-      let item: Item = new Item();
-      item.linkId = obj.linkId;
-      item.text = obj.text;
-      item.type = obj.type;
-  
-      if (obj.option) {
-        item.options = obj.option.map(o => o.valueString);
-      }
-      if (obj.item) {
-        item.items = [];
-        for (let i of obj.item) {
-          item.items.push(this.extractItemValue(i));
-        }
-      }
-      return item;
-    }*/
 
   extractOptions(item: Item): any[] {
     const selectOptions = [];

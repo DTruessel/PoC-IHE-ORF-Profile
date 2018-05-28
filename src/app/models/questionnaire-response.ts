@@ -6,10 +6,11 @@ export class QuestionnaireResponse {
     basedOn: string;                       //reference    
     parent: string;                         //reference    
     questionnaire: string;                  //reference
-    status: string;                         //token
+    status: string;                         //in-progress | completed | amended | entered-in-error | stopped
+    subject: string;                        //reference
     context: string;                        //reference
     authored: Date;                          //date
     author: string;                         //reference
     source: string;                         //reference
-    items: Item[];
+    item: Item[];
 }

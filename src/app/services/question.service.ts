@@ -23,7 +23,7 @@ export class QuestionService {
   getQuestions(q: Questionnaire): QuestionBase<any>[] {
     let res: QuestionBase<any>[] = [];
     this.pushQuestionnaireDescriptions(q, res);
-    for (let i of q.items) {
+    for (let i of q.item) {
       res.push(this.getQuestionForItem(i, 1));
     }
     return res;
@@ -69,7 +69,7 @@ export class QuestionService {
           label: item.text,
         });
         groupWidget.nestingLevel = nestingLevel;
-        for (let i of item.items) {
+        for (let i of item.item) {
           groupWidget.children.push(this.getQuestionForItem(i, nestingLevel + 1));
         }
         widget = groupWidget;

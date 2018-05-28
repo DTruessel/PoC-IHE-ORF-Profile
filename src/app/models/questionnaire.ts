@@ -22,8 +22,8 @@ export class Questionnaire {
     contact: Element;
     copyright: string;
     code: string;                   //token
-    subjectType: string[];
+    subjectType: string;
     effective: Date;
-    items: Item[];
+    item: Item[];
 }
 

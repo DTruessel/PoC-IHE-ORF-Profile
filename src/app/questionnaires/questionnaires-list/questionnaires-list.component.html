@@ -67,7 +67,9 @@
       <mat-header-row *matHeaderRowDef="['questionnaireCol']">
         <!--Array mit nur einem Eintrag-->
       </mat-header-row>
-      <mat-row *matRowDef="let row; columns: ['questionnaireCol']" (click)="selectRow(row)">
+      <!--      <mat-row *matRowDef="let row1; columns: ['questionnaireCol']" (click)="selectRowQuery(row)">
+      </mat-row>>-->
+      <mat-row *matRowDef="let row; columns: ['questionnaireCol']" (click)="selectRowRetrieve(row)">
       </mat-row>
       <ng-container matColumnDef="questionnaireCol">
         <mat-header-cell *matHeaderCellDef>Questionnaire</mat-header-cell>

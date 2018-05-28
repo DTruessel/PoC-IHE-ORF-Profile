@@ -153,10 +153,10 @@ export class QuestionnairesListComponent implements OnInit {
 
   //anschliessend Suche nach id Klick auf row =>
   private searchID(id) {
-    const read = { id: '', type: 'Questionnaire' }
+    const read = { id: '3788298', type: 'Questionnaire' }
     this.fhirHttpService.read(read).then(response => {
       this.data$.next(<fhir.Bundle>response.data);
-      console.log(response.data);
+      console.log(read);
     })
   }
 
@@ -179,7 +179,18 @@ export class QuestionnairesListComponent implements OnInit {
     });
   }
 
-  selectRow(row) {
+  selectRowQuery(row) {
+    this.sessionService.selectedQuestionnaire = row.resource;
+    const read = { id: '3788298', type: 'Questionnaire' }
+    this.fhirHttpService.read(read).then(response => {
+      this.data$.next(<fhir.Bundle>response.data);
+      console.log(read);
+    })
+    console.log('** after fhirHttpService.search, hits: ' + this.length);
+    //this.router.navigate(['/questionnaire-form']); 
+  }
+
+  selectRowRetrieve(row) {
     this.sessionService.selectedQuestionnaire = row.resource;             //row.resource
     // alert('selected: ' + JSON.stringify(row.resource));
     console.log('SelectedQuestionnaire:' + this.sessionService.selectedQuestionnaire);

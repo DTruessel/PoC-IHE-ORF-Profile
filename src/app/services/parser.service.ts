@@ -11,8 +11,8 @@ export class ParserService {
 
   convertToQuestionnaire(obj: any): Questionnaire {
     let q = this.extractQuestionnaireHeader(obj);
-    q.items = [];
-    obj.item.forEach(i => q.items.push(this.extractItem(i)));
+    q.item = [];
+    obj.item.forEach(i => q.item.push(this.extractItem(i)));
     return q;
   }
 
@@ -57,9 +57,9 @@ export class ParserService {
       item.options = obj.option.map(o => o.valueString);
     }
     if (obj.item) {
-      item.items = [];
+      item.item = [];
       for (let i of obj.item) {
-        item.items.push(this.extractItem(i));
+        item.item.push(this.extractItem(i));
       }
     }
     return item;

@@ -65,7 +65,7 @@ export class QuestionService {
     switch (item.type) {
       case 'group':
         let groupWidget: QuestionGroup = new QuestionGroup({
-          key: item.linkId,
+          key: item.linkId,                       //zB order.number aus EBIDA-Formular
           label: item.text,
         });
         groupWidget.nestingLevel = nestingLevel;

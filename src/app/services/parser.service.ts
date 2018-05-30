@@ -5,7 +5,7 @@ import { Questionnaire } from '../models/questionnaire';
 @Injectable()
 export class ParserService {
 
-  obj: any;
+  obj: any; //generisches Objekt, das der Http-Service zurückgibt
 
   constructor() { }
 

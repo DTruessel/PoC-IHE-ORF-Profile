@@ -11,10 +11,7 @@ import { QuestionBase } from '../questions/question-base';
 @Injectable()
 export class BundleService {
 
-  @Input() questions: QuestionBase<any>[] = [];
-  @Input() selectedQuestionnaire = this.sessionService.selectedQuestionnaire;
-
-  items = [];
+  dateObj = new Date()
 
   constructor(
     private fhirHttpService: FhirJsHttpService,
@@ -22,49 +19,67 @@ export class BundleService {
     private questionService: QuestionService
   ) { }
 
-  convertToQuestionnaireResponse(selectedQuestionnaire, submittedEvent): QuestionnaireResponse {
-    let qr = this.extractQuestionnaireResponseHeader(selectedQuestionnaire);
+  copyQuestionnaire(questionnaire, submittedEvent): QuestionnaireResponse {
+    let qr = this.copyQuestionnaireHeader(questionnaire);
     qr.item = [];
-    this.items.forEach(i => qr.item.push(this.extractItem(i)));
+    questionnaire.item.forEach(i => qr.item.push(this.copyItem(questionnaire, submittedEvent))); //questionnaire.item ist ein Array
+    console.log(qr)
+
     return qr;
   }
 
-  private extractQuestionnaireResponseHeader(selectedQuestionnaire: Questionnaire): QuestionnaireResponse {
+  copyQuestionnaireHeader(questionnaire): QuestionnaireResponse {
     let qr = new QuestionnaireResponse();
-    qr.identifier = selectedQuestionnaire.identifier;
-    qr.basedOn = selectedQuestionnaire.title;
-    qr.parent = selectedQuestionnaire.name;
-    qr.questionnaire = selectedQuestionnaire.url;
-    qr.status = selectedQuestionnaire.status;
-    qr.subject = selectedQuestionnaire.subjectType;
-    qr.context = selectedQuestionnaire.useContext;
-    qr.authored = selectedQuestionnaire.date;                   //Datum des Erstellens der QR nicht des Q
+    qr.identifier = questionnaire.identifier;                       //Mapping noch überprüfen
+    qr.basedOn = questionnaire.title;
+    qr.parent = questionnaire.name;
+    qr.questionnaire = questionnaire.url;
+    qr.status = questionnaire.status;
+    qr.subject = questionnaire.subjectType;
+    qr.context = questionnaire.useContext;
+    qr.authored = this.dateObj;
     qr.author = '';
     qr.source = '';
 
-    console.log(qr);
     return qr;
   }
 
-  extractItem(items): Item {
+  copyItem(questionnaire, submittedEvent): Item {
+
+    let qItems = [];
+    let qrItems = [];
     let item: Item = new Item();
-    item.linkId = this.selectedQuestionnaire.item.linkId;
-    item.definition = this.selectedQuestionnaire.item.definition;
-    item.code = this.selectedQuestionnaire.item.code;
-    item.prefix = this.selectedQuestionnaire.item.prefix;
-    item.text = this.selectedQuestionnaire.item.text;
-    item.type = this.selectedQuestionnaire.item.type;
-    item.answer = this.selectedQuestionnaire.item.text;
-    item.answer = this.selectedQuestionnaire.item.definition;
 
+    //Array mit den Values von submittedEvent: Muss in item.answer
+    let submittedEventValues = Object.values(submittedEvent); //liefert ein Array, dessen Elemente Strings sind und die aufzählbaren Eigenschaften des Objekts respräsentieren.
+    //console.log('BundleService submittedEventValues:' + submittedEventValues)
 
-    if (item.option) {
+    //Array mit den Keys von submittedEvent: muss mit Item.linkId übereinstimmen
+    let submittedEventKeys = Object.keys(submittedEvent);
+    //console.log('BundleService submittedEventKeys:' + submittedEventKeys)
+
+    for (let keyLinkId in submittedEvent) {
+      //console.log('BundleService submittedEvent:' + keyLinkId, submittedEvent[keyLinkId]);
+      item.linkId = keyLinkId;
+    }
+    //item.linkId = questionnaire.item.linkId;
+    item.definition = questionnaire.definition;
+    item.code = questionnaire.code;
+    item.prefix = questionnaire.prefix;
+    item.text = questionnaire.text;
+    item.type = questionnaire.type;
+    item.answer = submittedEventValues;
+
+    questionnaire.item.forEach(i => qrItems.push(i));
+    //console.log('qrItems:' + qrItems)
+
+    if (item.option) { //choice
       item.options = item.option.map(o => o.value);
     }
-    if (item.item) {
+    if (item.item) { //gruppe
       item.item = [];
       for (let i of item.item) {
-        item.item.push(this.extractItem(i));
+        item.item.push(this.copyItem(questionnaire, submittedEvent));
       }
     }
     return item;
@@ -84,7 +99,37 @@ export class BundleService {
   }
 }
 
+    /*for (let item in qrItems) {
+      qrItems.push(item)
+      console.log('qrItems:' + qrItems)
+    }*/
 
+    //questionnaire.item.forEach(i => qrItems.push(item));
+
+    //Array mit den QItems zum Kopieren in QRItems: 
+    //item.forEach(i => qrItems.push(i))
+    //console.log('BundleService qitems:' + qitems);
+
+    //Array mit den Keys von submittedEvent: muss mit Item.linkId übereinstimmen
+    //let submittedEventKeys = Object.keys(submittedEvent);
+    //console.log('BundleService submittedEventKeys:' + submittedEventKeys)
+
+    //item.answer = submittedEventKeys[key]
+
+    //for (let keyValuePair in submittedEvent) {
+    //console.log('BundleService submittedEvent:' + keyValuePair, submittedEvent[keyValuePair]);
+    //}
+
+    //submittedEventKeys.forEach(i => submittedEventValues.push(i))
+    //console.log('qrItemanswers: ' + submittedEventValues)
+
+    ///item.forEach(qrItems.push(this.copyItem(questionnaire, submittedEvent))); //questionnaire.item ist ein Array
+
+    //questionnaire.item.forEach(i => qrItems.push(i));
+
+    //question.service.ts: key: item.linkId,
+
+    //questionnaire.item.forEach(i => qrItemanswers.push(submittedEvent['item.linkId']));
   // bundle: IResource;
 
   // entry =

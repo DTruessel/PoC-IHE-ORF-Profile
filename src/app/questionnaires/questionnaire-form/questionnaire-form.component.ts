@@ -9,6 +9,7 @@ import { Router } from '@angular/router';
 import { QuestionnaireResponse } from '../../models/questionnaire-response';
 import { BundleService } from '../../services/bundle.service';
 import { FhirJsHttpService } from 'ng-fhirjs';
+import { MessageService } from '../../services/message.service';
 
 @Component({
   selector: 'app-questionnaire-form',
@@ -32,6 +33,7 @@ export class QuestionnaireFormComponent implements OnInit {
     private router: Router,
     private bundleService: BundleService,
     private fhirHttpService: FhirJsHttpService,
+    private messageService: MessageService,
   ) {
 
     const rawQ = this.sessionService.selectedQuestionnaire;
@@ -49,15 +51,35 @@ export class QuestionnaireFormComponent implements OnInit {
   ngOnInit() { }
 
   private formValuesFromDynForm(submittedEvent) {
-    console.log('--HIER SIND DIE EINGABEN --');
-    console.log('SubmittedEvent:', submittedEvent);
-    console.log('---------------------------');
-    const questionnaireResp = this.bundleService.convertToQuestionnaireResponse(this.questionnaire, submittedEvent);
-  }
 
-  /*private convertformValueToQuestResponse() {
-    this.questionnaireResponse = this.bundleService.convertToQuestionnaireResponse(this.formValue);
-  }*/
+    console.log('--HIER SIND DIE EINGABEN --');// log ist eine methode
+    console.log('SubmittedEvent:' + submittedEvent); //formdata
+    console.log('---------------------------');
+    const questionnaireResp = this.bundleService.copyQuestionnaire(this.questionnaire, submittedEvent); //argumente
+    console.log('QuestionnaireResp' + questionnaireResp);
+    //  console.log(Object.keys(submittedEvent));          
+    //  console.log(Object.values(submittedEvent));
+
+
+    /*  for (let key in submittedEvent) {
+        console.log('Key ' + key);
+      }
+      for (let value of submittedEvent) {
+        console.log('Value ' + value);
+      }
+      let listeKeys = Object.keys(submittedEvent);
+      console.log('Liste Keys:' + listeKeys);
+  
+      let listeValues = Object.values(submittedEvent);
+      console.log('Liste Values:' + listeValues);
+  
+      for (let keyValuePair in submittedEvent) {
+        console.log(keyValuePair, submittedEvent[keyValuePair]);
+      }*/
+
+
+
+  }
 
   private createQuestionnaireResponse(submittedEvent) {
     const questionnaireResponse: Entry = {
@@ -69,9 +91,12 @@ export class QuestionnaireFormComponent implements OnInit {
     console.log(questionnaireResponse);
   }
 
+  private messageToUser() {
+    //HTTP 200 (OK) Questionnaire Resource is returned
+    //HTTP 200 (OK) Resource Bundle mit 0 Resultaten is returned
+    //HTTP 406 (Not Acceptable) Server kann im verlangen Format _format keine Antwort schicken
+    //HTTP 200 (OK) Questionnaire mit gesuchter resourceID gesendet
+    //HTTP 404 (Not Found) OperationsOutcome: Resource nicht gefunden
+
+  }
 }
-
-
-
-//submit form.value
-//

@@ -141,7 +141,6 @@ export class QuestionnairesListComponent implements OnInit {
     return baseQuery;                                     //else
   }
 
-
   private searchQuery(query) {                                                             // macht REST CALL
     console.log('** before fhirHttpService.search, query: ' + JSON.stringify(query));
     this.fhirHttpService.search(query).then(response => {

@@ -1,4 +1,3 @@
-
 export class Item {
 
     // ItemQuestionnaire
@@ -45,7 +44,9 @@ export class Item {
     options?: string[];
     answer: any
 
-    constructor() { }
+    constructor() {
+
+    }
 }
 
 

@@ -17,3 +17,5 @@ export class MessageService {
 
 //Das FHIR Bundle wurde erfolgreich verschickt
 //Der Empfänger konnte das Bundle nicht empfangen
+
+//alert('No Questionnaire found in Session');

@@ -17,12 +17,29 @@ export class PatientService {
     return of(PATIENTS);
   }
 
+
+  getPatientFamilyName(entry: fhir.BundleEntry): string {
+    const patient = (<fhir.Patient>entry.resource);
+    if (patient.name && patient.name.length > 0 && patient.name[0].family) {
+      return patient.name[0].family;
+    }
+    return '';
+  }
+
   /*getPatient(id: number): Observable<Patient> {
     // TODO: send the message _after_ fetching the patient
     this.messageService.add(`PatientService: fetched patient id=${id}`);
     return of(PATIENTS.find(patient => patient.id === id));
   }*/
 }
+
+/*onst read: ReadObj = { id: '46912', type: 'Patient' };
+
+this.fhirHttpService.read(read).then(response => {
+  expect(response.status).toBe(200);
+  expect(response.data.id).toBe('46912');
+  expect(response.data.meta.id.versionId).toBe('1');
+});*/
 
 
 

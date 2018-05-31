@@ -1,14 +1,15 @@
 export class Patient {
 
-    name: string;
-    firstName: string;
+    familyName: string;
+    givenNames: string;
     birhtDate: Date;
-
+    addressLines: string;
+    addressCity: string;
 }
 
     //id: number;
     //familyName: string;
     // givenNames: string;
     // birthDate: string;
-    // addressLines: string;
-    // addressCity: string;
+    // 
+    // 

@@ -1,9 +1,5 @@
 import { Patient } from "../models/patient";
 
-
-
-
-
 export const PATIENTS: Patient[] = [
     //{ id: 11, familyName: 'Mr. Nice' },
     //{ id: 12, familyName: 'Narco' },
@@ -15,4 +11,8 @@ export const PATIENTS: Patient[] = [
     //{ id: 18, familyName: 'Dr IQ' },
     //{ id: 19, familyName: 'Magma' },
     //{ id: 20, familyName: 'Tornado' }
+
+    //{{ getPatientFamilyName(entry) }}
+    //{{ getPatientGivenNames(entry) }}
+    //{{ getPatientBirthDate(entry) }}
 ];

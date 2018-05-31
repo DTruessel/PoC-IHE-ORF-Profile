@@ -30,16 +30,16 @@ export class BundleService {
 
   copyQuestionnaireHeader(questionnaire): QuestionnaireResponse {
     let qr = new QuestionnaireResponse();
-    qr.identifier = questionnaire.identifier;                       //Mapping noch überprüfen
-    qr.basedOn = questionnaire.title;
-    qr.parent = questionnaire.name;
-    qr.questionnaire = questionnaire.url;
-    qr.status = questionnaire.status;
-    qr.subject = questionnaire.subjectType;
-    qr.context = questionnaire.useContext;
+    qr.identifier = questionnaire.identifier;
+    qr.basedOn = 'The order, proposal or plan that is fulfilled in whole or in part by this QuestionnaireResponse.';
+    qr.parent = 'A procedure or observation that this questionnaire was performed as part of the execution of.';
+    qr.questionnaire = questionnaire.title;
+    qr.status = 'in-progress | completed | amended | entered-in-error | stopped';
+    qr.subject = 'The subject of the questionnaire response. This could be a patient, organization, practitioner, device, etc.';
+    qr.context = 'The encounter or episode of care with primary association to the questionnaire response.';
     qr.authored = this.dateObj;
-    qr.author = '';
-    qr.source = '';
+    qr.author = 'Person who received the answers to the questions in the QuestionnaireResponse and recorded them in the system.';
+    qr.source = 'The person who answered the questions about the subject.';
 
     return qr;
   }
@@ -71,7 +71,6 @@ export class BundleService {
     item.answer = submittedEventValues;
 
     questionnaire.item.forEach(i => qrItems.push(i));
-    //console.log('qrItems:' + qrItems)
 
     if (item.option) { //choice
       item.options = item.option.map(o => o.value);
@@ -136,6 +135,12 @@ export class BundleService {
 
 
   // create bundle
+
+  /** Create a new resource with a server assigned id
+   *  create(entry: Entry): Promise<ResponseObj>;
+   * fhirHttpService.create(entry).then(response => {
+   */
+
 
   /** Create Objects */
   // interface Tag { term: string; schema: string; label: string }

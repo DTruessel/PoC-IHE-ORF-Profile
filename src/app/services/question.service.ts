@@ -23,7 +23,7 @@ export class QuestionService {
   getQuestions(q: Questionnaire): QuestionBase<any>[] {
     let res: QuestionBase<any>[] = [];
     this.pushQuestionnaireDescriptions(q, res);
-    for (let i of q.item) {
+    for (let i of q.items) {
       res.push(this.getQuestionForItem(i, 1));
     }
     return res;

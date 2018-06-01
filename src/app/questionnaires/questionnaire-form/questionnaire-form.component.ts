@@ -24,7 +24,8 @@ export class QuestionnaireFormComponent implements OnInit {
   questions: any[];
   questionnaire: Questionnaire;
   questionnaireResponse: QuestionnaireResponse;
-  formValue = {};
+  formValue = {}
+  bundle: Entry;
 
   constructor(
     private questionService: QuestionService,
@@ -50,18 +51,39 @@ export class QuestionnaireFormComponent implements OnInit {
 
   ngOnInit() { }
 
-  private formValuesFromDynForm(submittedEvent) {
+  private formValuesFromDynForm(formData) {
 
     console.log('--HIER SIND DIE EINGABEN --');// log ist eine methode
-    console.log('SubmittedEvent:' + submittedEvent); //formdata
+    console.log(formData);
     console.log('---------------------------');
-    const questionnaireResp = this.bundleService.copyQuestionnaire(this.questionnaire, submittedEvent); //argumente
+    const questionnaireResp = this.bundleService.convertToQuestionnaireResponse(this.questionnaire, formData); //argumente
     console.log('QuestionnaireResp' + questionnaireResp);
+  }
+
+  private createBundle() {
+    const questionnaireResponse: Entry = {
+      resource: {
+        resourceType: 'QuestionnaireResponse'
+      }
+    }
+    this.fhirHttpService.create(this.bundle).then(response => {
+      console.log(questionnaireResponse);
+    })
+  }
+}
+
+  /**private messageToUser() {
+    //HTTP 200 (OK) Questionnaire Resource is returned
+    //HTTP 200 (OK) Resource Bundle mit 0 Resultaten is returned
+    //HTTP 406 (Not Acceptable) Server kann im verlangen Format _format keine Antwort schicken
+    //HTTP 200 (OK) Questionnaire mit gesuchter resourceID gesendet
+    //HTTP 404 (Not Found) OperationsOutcome: Resource nicht gefunden
+
     //  console.log(Object.keys(submittedEvent));          
     //  console.log(Object.values(submittedEvent));
 
 
-    /*  for (let key in submittedEvent) {
+    /**  for (let key in submittedEvent) {
         console.log('Key ' + key);
       }
       for (let value of submittedEvent) {
@@ -74,29 +96,4 @@ export class QuestionnaireFormComponent implements OnInit {
       console.log('Liste Values:' + listeValues);
   
       for (let keyValuePair in submittedEvent) {
-        console.log(keyValuePair, submittedEvent[keyValuePair]);
-      }*/
-
-
-
-  }
-
-  private createQuestionnaireResponse(submittedEvent) {
-    const questionnaireResponse: Entry = {
-      resource: {
-        resourceType: 'QuestionnaireResponse'
-      }
-    }
-    this.fhirHttpService.create(questionnaireResponse);
-    console.log(questionnaireResponse);
-  }
-
-  private messageToUser() {
-    //HTTP 200 (OK) Questionnaire Resource is returned
-    //HTTP 200 (OK) Resource Bundle mit 0 Resultaten is returned
-    //HTTP 406 (Not Acceptable) Server kann im verlangen Format _format keine Antwort schicken
-    //HTTP 200 (OK) Questionnaire mit gesuchter resourceID gesendet
-    //HTTP 404 (Not Found) OperationsOutcome: Resource nicht gefunden
-
-  }
-}
+        console.log(keyValuePair, submittedEvent[keyValuePair]);*/

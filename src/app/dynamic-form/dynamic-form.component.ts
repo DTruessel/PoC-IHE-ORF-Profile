@@ -28,7 +28,7 @@ export class DynamicFormComponent implements OnInit {
   @Input() questions: QuestionBase<any>[] = [];
   @Input() selectedQuestionnaire = this.sessionService.selectedQuestionnaire;
 
-  @Output() submittedEvent = new EventEmitter();
+  @Output() formData = new EventEmitter();
 
   constructor(
     private questionControlService: QuestionControlService,
@@ -46,7 +46,7 @@ export class DynamicFormComponent implements OnInit {
 
   emitFormData() {
     console.log(this.form.value);
-    this.submittedEvent.emit(this.form.value);
+    this.formData.emit(this.form.value);
   }
 }
 

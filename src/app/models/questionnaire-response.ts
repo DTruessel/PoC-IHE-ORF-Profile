@@ -12,5 +12,5 @@ export class QuestionnaireResponse {
     authored: Date;                          //date
     author: string;                         //reference
     source: string;                         //reference
-    item: Item[];
+    items: Item[];
 }

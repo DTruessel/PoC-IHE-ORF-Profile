@@ -11,8 +11,8 @@ export class ParserService {
 
   convertToQuestionnaire(obj: any): Questionnaire {
     let q = this.extractQuestionnaireHeader(obj);
-    q.item = [];
-    obj.item.forEach(i => q.item.push(this.extractItem(i)));
+    q.items = [];
+    obj.item.forEach(i => q.items.push(this.extractItem(i)));
     return q;
   }
 

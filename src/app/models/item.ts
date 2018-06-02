@@ -40,7 +40,7 @@ export class Item {
     display: string;
     subject: string;
     initialReference: string;       //sollte Reference(Any) sein                 
-    item: Item[];
+    items: Item[];
     options?: string[];
     answer: any
 

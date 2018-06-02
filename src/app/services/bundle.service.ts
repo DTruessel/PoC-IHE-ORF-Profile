@@ -14,17 +14,11 @@ export class BundleService {
   ) { }
 
   convertToQuestionnaireResponse(questionnaire, formData): QuestionnaireResponse {
-    let qr = this.extractQuestionnaireHeader(questionnaire);
+    const qr = this.extractQuestionnaireHeader(questionnaire);
     qr.items = [];
     let item: Item;
-
-    //Kopieren der Items, die direkt in der Items-Liste des Questionnnaires sind - noch ohne Antworten
-    questionnaire.item.forEach(i => qr.items.push(this.makeCopyOfItemQuest(item)));
-
-    //Setzen der Antwort aus formData in die Liste mit den kopierten Items = qr.items
-
+    questionnaire.items.forEach(i => qr.items.push(this.extractItem(i, formData)));
     console.log(qr)
-
     return qr;
   }
 
@@ -44,26 +38,19 @@ export class BundleService {
     return qr;
   }
 
-  extractItem(item, formData) {
-    let itemResponse: Item
-    let itemsGroup = [];
-
-    if (item.item) {
-      itemResponse.answer = formData[item.linkId];
-      item.item.forEach(i => itemsGroup.push(this.makeCopyOfItemQuest(i)));
+  extractItem(originalItem: Item, formData: {}) {
+    const responseItem = this.makeCopyOfItemQuest(originalItem);
+    if (originalItem.type === 'group') {
+      responseItem.items = [];
+      originalItem.items.forEach(child => responseItem.items.push(this.extractItem(child, formData)));
+    } else {
+      responseItem.answer = formData[originalItem.linkId];
     }
-
-    if (item.type = 'group') {
-      item.forEach(i => itemsGroup.push(this.makeCopyOfItemQuest(i)));
-    }
-
-    return itemResponse;
+    return responseItem;
   }
 
-  makeCopyOfItemQuest(item) {
-
+  makeCopyOfItemQuest(item): Item {
     let itemCopy: Item = new Item();
-
     itemCopy.linkId = item.linkId;
     itemCopy.definition = item.definition;
     itemCopy.code = item.code;
@@ -71,8 +58,6 @@ export class BundleService {
     itemCopy.text = item.text;
     itemCopy.type = item.type;
     itemCopy.answer = '';
-
     return itemCopy
   }
-
 }  

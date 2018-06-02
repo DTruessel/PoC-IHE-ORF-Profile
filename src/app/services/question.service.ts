@@ -16,7 +16,6 @@ import { ValueCodingQuestion } from '../questions/question-valueCoding';
 // TODO TMP
 const todoText = 'Freitext';
 
-
 @Injectable()
 export class QuestionService {
 
@@ -69,7 +68,7 @@ export class QuestionService {
           label: item.text,
         });
         groupWidget.nestingLevel = nestingLevel;
-        for (let i of item.item) {
+        for (let i of item.items) {
           groupWidget.children.push(this.getQuestionForItem(i, nestingLevel + 1));
         }
         widget = groupWidget;

@@ -51,7 +51,7 @@ export class QuestionnaireFormComponent implements OnInit {
 
   ngOnInit() { }
 
-  private formValuesFromDynForm(formData) {
+  private formDataFromDynForm(formData) {
 
     console.log('--HIER SIND DIE EINGABEN --');// log ist eine methode
     console.log(formData);

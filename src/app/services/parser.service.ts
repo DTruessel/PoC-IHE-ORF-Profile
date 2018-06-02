@@ -57,9 +57,9 @@ export class ParserService {
       item.options = obj.option.map(o => o.valueString);
     }
     if (obj.item) {
-      item.item = [];
+      item.items = [];
       for (let i of obj.item) {
-        item.item.push(this.extractItem(i));
+        item.items.push(this.extractItem(i));
       }
     }
     return item;

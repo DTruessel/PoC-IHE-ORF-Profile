@@ -11,7 +11,6 @@ import { QuestionGroup } from '../questions/question-group';
 import { Questionnaire } from '../models/questionnaire';
 import { QuestionDescription } from '../questions/question-description';
 import { Item } from '../models/item';
-import { ValueCodingQuestion } from '../questions/question-valueCoding';
 
 // TODO TMP
 const todoText = 'Freitext';
@@ -128,7 +127,7 @@ export class QuestionService {
       case 'choice':
         let selectOptions = [];
         for (let o of item.options) {
-          selectOptions.push({ label: o, value: o });
+          selectOptions.push({ label: o, value: o, display: o });
         }
         if (selectOptions.length > 2) {
           widget = new DropdownQuestion({
@@ -141,15 +140,6 @@ export class QuestionService {
             key: item.linkId,
             label: item.text,
             options: selectOptions,
-          });
-        }
-        break;
-      case 'valueCoding':
-        let options = [];
-        for (let o of item.options) {
-          options.push({ display: o });
-          widget = new ValueCodingQuestion({
-            key: item.linkId,
           });
         }
         break;

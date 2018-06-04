@@ -12,7 +12,6 @@ export class PatientsComponent implements OnInit {
 
   patients: Patient[];
   messages: string[] = [];
-  entry: fhir.BundleEntry;
 
   constructor(
     private patientService: PatientService,
@@ -20,7 +19,7 @@ export class PatientsComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.getPatients();
+
   }
 
   getPatients(): void {
@@ -28,11 +27,6 @@ export class PatientsComponent implements OnInit {
       .subscribe(patients => this.patients = patients);
   }
 
-  /*getPatientFamilyName(): void {
-    this.patientService.getPatientFamilyName(this.entry)
-      .subscribe(patients => this.patients = patients);
-
-  }*/
 
   add(message: string) {
     this.messages.push(message);

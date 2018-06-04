@@ -23,9 +23,9 @@ export class QuestionnaireFormComponent implements OnInit {
 
   questions: any[];
   questionnaire: Questionnaire;
-  questionnaireResponse: QuestionnaireResponse;
   formValue = {}
-  bundle: Entry;
+  bundle: fhir.Bundle;
+  resource: QuestionnaireResponse;
 
   constructor(
     private questionService: QuestionService,
@@ -57,43 +57,27 @@ export class QuestionnaireFormComponent implements OnInit {
     console.log(formData);
     console.log('---------------------------');
     const questionnaireResp = this.bundleService.convertToQuestionnaireResponse(this.questionnaire, formData); //argumente
+    const bundle = this.createBundle(questionnaireResp);
     console.log('QuestionnaireResp' + questionnaireResp);
   }
 
-  private createBundle() {
-    const questionnaireResponse: Entry = {
+  private createBundle(questionnaireResp: QuestionnaireResponse) {
+    const bundleQR: Entry = {
       resource: {
-        resourceType: 'QuestionnaireResponse'
+        'resourceType': 'QuestionnaireResponse',
+        'text': {
+          'status': 'generated',
+          'div': '<div xmlns=\'http://fhirtest.uhn.ca/baseDstu3\'>questionnaireResp</div>'
+        },
       }
     }
-    this.fhirHttpService.create(this.bundle).then(response => {
-      console.log(questionnaireResponse);
+    this.fhirHttpService.create(bundleQR).then(response => {
+      let message = response.status;
+      console.log(bundleQR);
+      console.log(response.status);
+      alert('Bundle created' + '' + message)
+      return this.fhirHttpService.create(bundleQR);
     })
   }
 }
 
-  /**private messageToUser() {
-    //HTTP 200 (OK) Questionnaire Resource is returned
-    //HTTP 200 (OK) Resource Bundle mit 0 Resultaten is returned
-    //HTTP 406 (Not Acceptable) Server kann im verlangen Format _format keine Antwort schicken
-    //HTTP 200 (OK) Questionnaire mit gesuchter resourceID gesendet
-    //HTTP 404 (Not Found) OperationsOutcome: Resource nicht gefunden
-
-    //  console.log(Object.keys(submittedEvent));          
-    //  console.log(Object.values(submittedEvent));
-
-
-    /**  for (let key in submittedEvent) {
-        console.log('Key ' + key);
-      }
-      for (let value of submittedEvent) {
-        console.log('Value ' + value);
-      }
-      let listeKeys = Object.keys(submittedEvent);
-      console.log('Liste Keys:' + listeKeys);
-  
-      let listeValues = Object.values(submittedEvent);
-      console.log('Liste Values:' + listeValues);
-  
-      for (let keyValuePair in submittedEvent) {
-        console.log(keyValuePair, submittedEvent[keyValuePair]);*/

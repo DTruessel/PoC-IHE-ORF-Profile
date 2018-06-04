@@ -1,6 +1,18 @@
+<!--<ul class="patients">
+  <li *ngFor="let patient of patients">
+    <a routerLink="/patient-detail/:id/{{patient.id}}">
+      <span class="badge">{{patient.id}}</span> {{ getPatientFamilyName(entry) }}
+    </a>
+  </li>
+</ul>-->
+
+
+
+
+
 <ul class="patients">
   <li *ngFor="let patient of patients">
-    <a routerLink="/patient-detail/{{patient.id}}">
+    <a routerLink="/patient-detail/:id/{{patient.id}}">
       <span class="badge">{{patient.id}}</span> {{patient.familyName}}
     </a>
   </li>

@@ -82,6 +82,8 @@ export class QuestionnairesListComponent implements OnInit {
   private elStatus: ElementRef;
 
   private data$: BehaviorSubject<fhir.Bundle>;            // data$ ist ein observable
+  private headers$: BehaviorSubject<fhir.Bundle>;
+
 
   constructor
     (
@@ -93,6 +95,7 @@ export class QuestionnairesListComponent implements OnInit {
   ) {
 
     this.data$ = new BehaviorSubject(null);               // data$ gibt die Daten aus, die vom Backend empfangen worden sind.
+    this.headers$ = new BehaviorSubject(null);
     // this.search(this.makeQuery({ title: 'ebida' }));   // {} ist immer ein objekt
   }
 
@@ -131,7 +134,7 @@ export class QuestionnairesListComponent implements OnInit {
       type: 'Questionnaire',                              //Liste von Questionnaires ausgeben; query: { _count: 10 Seiten
       query: {
         _count: this.pageSize,
-        //_summary: "true",
+        _summary: "false",
       }
     };
 
@@ -150,20 +153,10 @@ export class QuestionnairesListComponent implements OnInit {
     });
   }
 
-  //anschliessend Suche nach id Klick auf row =>
-  private searchID(id) {
-    const read = { id: '3788298', type: 'Questionnaire' }
-    this.fhirHttpService.read(read).then(response => {
-      this.data$.next(<fhir.Bundle>response.data);
-      console.log(read);
-    })
-  }
-
   private searchRetrieve(retrieve) {                                                             // macht REST CALL
     console.log('** before fhirHttpService.search, query: ' + JSON.stringify(retrieve));
     this.fhirHttpService.search(retrieve).then(response => {
-      this.data$.next(<fhir.Bundle>response.data);
-      // data ist eine property von response.
+      this.data$.next(<fhir.Bundle>response.data);                                              // data ist eine property von response.
       console.log('** after fhirHttpService.search, hits: ' + this.length);
     });
   }
@@ -178,20 +171,9 @@ export class QuestionnairesListComponent implements OnInit {
     });
   }
 
-  selectRowQuery(row) {
-    this.sessionService.selectedQuestionnaire = row.resource;
-    const read = { id: '3788298', type: 'Questionnaire' }
-    this.fhirHttpService.read(read).then(response => {
-      this.data$.next(<fhir.Bundle>response.data);
-      console.log(read);
-    })
-    console.log('** after fhirHttpService.search, hits: ' + this.length);
-    //this.router.navigate(['/questionnaire-form']); 
-  }
-
-  selectRowRetrieve(row) {
+  selectRow(row) {
     this.sessionService.selectedQuestionnaire = row.resource;             //row.resource
-    // alert('selected: ' + JSON.stringify(row.resource));
+    //alert('selected: ' + JSON.stringify(row.resource));
     console.log('SelectedQuestionnaire:' + this.sessionService.selectedQuestionnaire);
     this.router.navigate(['/questionnaire-form']);
   }

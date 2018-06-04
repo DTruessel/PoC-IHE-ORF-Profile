@@ -18,7 +18,7 @@ export class AppComponent {
     switch (this.router.url) {
 
       case '/patients-list':
-        return this.title + ' - ' + 'Patients';
+        return this.title + ' - ' + 'Patients List';
       case '/capabilityStatement':
         return this.title + ' - ' + 'CapabilityStatement';
       case '/settings':
@@ -27,6 +27,10 @@ export class AppComponent {
         return this.title + ' - ' + 'Questionnaires';
       case '/questionnaire-form':
         return this.title + ' - ' + 'Selected Questionnaire';
+      case '/patient-detail/:id/':
+        return this.title + ' - ' + 'Selected Patient';
+      case '/patients':
+        return this.title + ' - ' + 'Mock Patients';
     }
     return this.title;
   }

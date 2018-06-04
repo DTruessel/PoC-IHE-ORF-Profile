@@ -2,7 +2,7 @@ import { Item } from './item';
 
 export class Questionnaire {
 
-    id: any;  // string geändert in any 18.05.2018: in https://www.hl7.org/fhir/questionnaire.html nicht aufgeführt
+    id: string;
     url: string;
     identifier: string;             //token
     version: string;                //token

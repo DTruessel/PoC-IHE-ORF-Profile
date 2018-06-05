@@ -6,7 +6,6 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { PatientsListComponent } from './patients/patients-list/patients-list.component';
 import { PatientsComponent } from './patients/patients/patients.component';
-import { PatientDetailComponent } from './patients/patient-detail/patient-detail.component';
 import { SettingsComponent } from './settings/settings.component';
 import { CapabilityStatementComponent } from './capability-statement/capability-statement.component';
 import { PageNotFoundComponent } from './page-not-found.component';
@@ -30,6 +29,8 @@ import { QuestionnaireResponseComponent } from './questionnaires/questionnaire-r
 import { QuestionControlService } from './services/question-control.service';
 import { BundleService } from './services/bundle.service';
 import { PatientService } from './services/patient.service';
+import { MessagesComponent } from './messages/messages.component';
+import { PatientDetailComponent } from './patient-detail/patient-detail.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,6 @@ import { PatientService } from './services/patient.service';
     HomeComponent,
     PatientsListComponent,
     PatientsComponent,
-    PatientDetailComponent,
     SettingsComponent,
     CapabilityStatementComponent,
     PageNotFoundComponent,
@@ -47,6 +47,8 @@ import { PatientService } from './services/patient.service';
     QuestionnaireFormComponent,
     BundleComponent,
     QuestionnaireResponseComponent,
+    MessagesComponent,
+    PatientDetailComponent,
   ],
 
   imports: [

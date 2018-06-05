@@ -95,7 +95,7 @@ export class QuestionnairesListComponent implements OnInit {
   ) {
 
     this.data$ = new BehaviorSubject(null);               // data$ gibt die Daten aus, die vom Backend empfangen worden sind.
-    this.headers$ = new BehaviorSubject(null);
+    //this.headers$ = new BehaviorSubject(null);
     // this.search(this.makeQuery({ title: 'ebida' }));   // {} ist immer ein objekt
   }
 

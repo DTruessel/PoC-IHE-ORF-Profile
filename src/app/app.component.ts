@@ -20,7 +20,7 @@ export class AppComponent {
       case '/patients-list':
         return this.title + ' - ' + 'Patients List';
       case '/capabilityStatement':
-        return this.title + ' - ' + 'CapabilityStatement';
+        return this.title + ' - ' + 'Capability Statement';
       case '/settings':
         return this.title + ' - ' + 'Settings';
       case '/questionnaires-list':
@@ -30,7 +30,9 @@ export class AppComponent {
       case '/patient-detail/:id/':
         return this.title + ' - ' + 'Selected Patient';
       case '/patients':
-        return this.title + ' - ' + 'Mock Patients';
+        return this.title + ' - ' + 'My Patients';
+      case '/messages':
+        return this.title + ' - ' + 'Messages';
     }
     return this.title;
   }

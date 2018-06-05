@@ -26,11 +26,11 @@ export class PatientService {
     return '';
   }*/
 
-  getPatient(id: number): Observable<Patient> {
+  /*getPatient(id: number): Observable<Patient> {
     // TODO: send the message _after_ fetching the patient
     this.messageService.add(`PatientService: fetched patient id=${id}`);
     return of(PATIENTS.find(patient => patient.id === id));
-  }
+  }*/
 }
 
 /*onst read: ReadObj = { id: '46912', type: 'Patient' };

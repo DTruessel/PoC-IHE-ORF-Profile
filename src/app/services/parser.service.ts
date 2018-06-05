@@ -21,7 +21,7 @@ export class ParserService {
 
   private extractQuestionnaireHeader(selectedQuestionnaire: any): Questionnaire {
     let q = new Questionnaire();
-    // q.id = selectedQuestionnaire.id;
+    q.id = selectedQuestionnaire.id;
     q.url = selectedQuestionnaire.url;
     q.identifier = selectedQuestionnaire.identifier;
     q.version = selectedQuestionnaire.version;

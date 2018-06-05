@@ -45,7 +45,6 @@ export class Item {
     answer: any
 
     constructor() {
-
     }
 }
 

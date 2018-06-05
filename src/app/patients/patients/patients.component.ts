@@ -10,26 +10,23 @@ import { Patient } from '../../models/patient';
 })
 export class PatientsComponent implements OnInit {
 
-  patients: Patient[];
-  messages: string[] = [];
+  selectedPatient: Patient;
 
-  constructor(
-    private patientService: PatientService,
-    private messageService: MessageService,
-  ) { }
+  patients: Patient[];
+
+  constructor(private patientService: PatientService) { }
 
   ngOnInit() {
+    this.getPatients();
+  }
 
+  onSelect(patient: Patient): void {
+    this.selectedPatient = patient;
   }
 
   getPatients(): void {
     this.patientService.getPatients()
       .subscribe(patients => this.patients = patients);
-  }
-
-
-  add(message: string) {
-    this.messages.push(message);
   }
 
 }

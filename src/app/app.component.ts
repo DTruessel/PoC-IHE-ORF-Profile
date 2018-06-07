@@ -27,7 +27,7 @@ export class AppComponent {
         return this.title + ' - ' + 'Questionnaires';
       case '/questionnaire-form':
         return this.title + ' - ' + 'Selected Questionnaire';
-      case '/patient-detail/:id/':
+      case '/patient-detail':
         return this.title + ' - ' + 'Selected Patient';
       case '/patients':
         return this.title + ' - ' + 'My Patients';

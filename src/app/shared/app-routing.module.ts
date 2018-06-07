@@ -11,6 +11,7 @@ import { DynamicFormQuestionComponent } from '../dynamic-form-question/dynamic-f
 import { DynamicFormComponent } from '../dynamic-form/dynamic-form.component';
 import { QuestionnaireFormComponent } from '../questionnaires/questionnaire-form/questionnaire-form.component';
 import { MessagesComponent } from '../messages/messages.component';
+import { PatientDetailComponent } from '../patient-detail/patient-detail.component';
 
 
 const routes: Routes = [
@@ -26,6 +27,10 @@ const routes: Routes = [
   {
     path: 'patients',
     component: PatientsComponent,
+  },
+  {
+    path: 'patient-detail',
+    component: PatientDetailComponent,
   },
   { // Liste der Questionnaires und Suchfelder
     path: 'questionnaires-list',

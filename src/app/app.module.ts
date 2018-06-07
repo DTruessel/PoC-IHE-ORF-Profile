@@ -25,7 +25,6 @@ import { ParserService } from './services/parser.service';
 import { QuestionnaireFormComponent } from './questionnaires/questionnaire-form/questionnaire-form.component';
 import { AppRoutingModule } from './shared/app-routing.module';
 import { BundleComponent } from './bundle/bundle.component';
-import { QuestionnaireResponseComponent } from './questionnaires/questionnaire-response/questionnaire-response.component';
 import { QuestionControlService } from './services/question-control.service';
 import { BundleService } from './services/bundle.service';
 import { PatientService } from './services/patient.service';
@@ -46,7 +45,6 @@ import { PatientDetailComponent } from './patient-detail/patient-detail.componen
     QuestionnairesListComponent,
     QuestionnaireFormComponent,
     BundleComponent,
-    QuestionnaireResponseComponent,
     MessagesComponent,
     PatientDetailComponent,
   ],

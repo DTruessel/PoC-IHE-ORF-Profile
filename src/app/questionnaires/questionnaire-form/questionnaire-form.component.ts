@@ -23,7 +23,6 @@ export class QuestionnaireFormComponent implements OnInit {
 
   questions: any[];
   questionnaire: Questionnaire;
-  formValue = {}
   bundle: fhir.Bundle;
   resource: QuestionnaireResponse;
 
@@ -42,10 +41,10 @@ export class QuestionnaireFormComponent implements OnInit {
       this.questionnaire = this.parserService.convertToQuestionnaire(rawQ);
       this.questions = this.questionService.getQuestions(this.questionnaire);
     }
-    else {                                                                  // neu 18.05.2018
+    else {
       alert('No Questionnaire found in Session');
       // Navigation zur Suche ?! ev link zum wieder suchen
-      this.router.navigate(['/questionnaires-list']);                                     // neu 18.05.2018
+      this.router.navigate(['/questionnaires-list']);
     }
   }
 
@@ -53,31 +52,10 @@ export class QuestionnaireFormComponent implements OnInit {
 
   private formDataFromDynForm(formData) {
 
-    console.log('--HIER SIND DIE EINGABEN --');// log ist eine methode
+    console.log('--HIER SIND DIE EINGABEN --');
     console.log(formData);
     console.log('---------------------------');
     const questionnaireResp = this.bundleService.convertToQuestionnaireResponse(this.questionnaire, formData); //argumente
-    const bundle = this.createBundle(questionnaireResp);
-    console.log('QuestionnaireResp' + questionnaireResp);
-  }
-
-  private createBundle(questionnaireResp: QuestionnaireResponse) {
-    const bundleQR: Entry = {
-      resource: {
-        'resourceType': 'QuestionnaireResponse',
-        'text': {
-          'status': 'generated',
-          'div': '<div xmlns=\'http://fhirtest.uhn.ca/baseDstu3\'>questionnaireResp</div>'
-        },
-      }
-    }
-    this.fhirHttpService.create(bundleQR).then(response => {
-      let message = response.status;
-      console.log(bundleQR);
-      console.log(response.status);
-      alert('Bundle created' + '' + message)
-      return this.fhirHttpService.create(bundleQR);
-    })
+    const bundle = this.bundleService.createBundle(questionnaireResp);
   }
 }
-

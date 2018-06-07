@@ -40,10 +40,9 @@ export class Item {
     display: string;
     subject: string;
     initialReference: string;       //sollte Reference(Any) sein                 
-    items: Item[];
+    item: Item[];
     options?: string[];
-    answer: any
-
+    answer: any[]
     constructor() {
     }
 }

@@ -21,7 +21,7 @@ export class QuestionService {
   getQuestions(q: Questionnaire): QuestionBase<any>[] {
     let res: QuestionBase<any>[] = [];
     this.pushQuestionnaireDescriptions(q, res);
-    for (let i of q.items) {
+    for (let i of q.item) {
       res.push(this.getQuestionForItem(i, 1));
     }
     return res;
@@ -63,11 +63,11 @@ export class QuestionService {
     switch (item.type) {
       case 'group':
         let groupWidget: QuestionGroup = new QuestionGroup({
-          key: item.linkId,                       //zB order.number aus EBIDA-Formular
+          key: item.linkId,
           label: item.text,
         });
         groupWidget.nestingLevel = nestingLevel;
-        for (let i of item.items) {
+        for (let i of item.item) {
           groupWidget.children.push(this.getQuestionForItem(i, nestingLevel + 1));
         }
         widget = groupWidget;

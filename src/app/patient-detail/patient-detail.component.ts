@@ -8,7 +8,9 @@ import { Patient } from '../models/patient';
 })
 export class PatientDetailComponent implements OnInit {
 
-  @Input() patient: Patient;
+  @Input()
+  patient: Patient;
+
   constructor() { }
 
   ngOnInit() {

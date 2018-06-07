@@ -22,8 +22,7 @@ import { EventEmitter } from '@angular/core';
 export class DynamicFormComponent implements OnInit {
 
   form: FormGroup;
-  payLoad: any;                                               // 24.05.2018 geändert von '' in {}
-
+  payLoad: any;
 
   @Input() questions: QuestionBase<any>[] = [];
   @Input() selectedQuestionnaire = this.sessionService.selectedQuestionnaire;
@@ -37,7 +36,6 @@ export class DynamicFormComponent implements OnInit {
     private questionService: QuestionService,
     private fhirHttpService: FhirJsHttpService,
   ) {
-
   }
 
   ngOnInit() {
@@ -49,6 +47,7 @@ export class DynamicFormComponent implements OnInit {
     this.formData.emit(this.form.value);
   }
 }
+
 
 
 

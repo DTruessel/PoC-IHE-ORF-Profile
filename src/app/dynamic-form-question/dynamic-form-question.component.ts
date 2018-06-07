@@ -17,7 +17,6 @@ export class DynamicFormQuestionComponent {
   get isValid() {
     return this.form.controls[this.question.key].valid;
   }
-
 }
 
 

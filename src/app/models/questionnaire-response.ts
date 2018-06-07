@@ -12,5 +12,8 @@ export class QuestionnaireResponse {
     authored: Date;                          //date
     author: string;                         //reference
     source: string;                         //reference
-    items: Item[];
+    item: Item[];//item nennen, damit Iresource Items erkennt
+    resourceType = 'Bundle';
+    type = 'collection';
+    id = 'ebida-order-1';
 }

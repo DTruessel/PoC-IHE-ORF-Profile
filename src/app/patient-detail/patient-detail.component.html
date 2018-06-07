@@ -1,16 +1,16 @@
 <div *ngIf="patient">
-  <h2>{{ patient.name}} Details</h2>
+  <h2>{{ patient.name}}</h2>
   <div>
     <span>id: </span>{{patient.id}}</div>
   <div>
     <label>Name:
-      <input [(ngModel)]="patient.name" placeholder="name" />
+      <input [(ngModel)]="patient.lastname" placeholder="lastname" />
     </label>
     <label>First Name:
-      <input [(ngModel)]="patient.givenNames" placeholder="givenNames" />
+      <input [(ngModel)]="patient.firstname" placeholder="firstname" />
     </label>
     <label>Birthdate:
-      <input [(ngModel)]="patient.birthDate" placeholder="birthDate" />
+      <input [(ngModel)]="patient.birthdate" placeholder="birthdate" />
     </label>
   </div>
 </div>

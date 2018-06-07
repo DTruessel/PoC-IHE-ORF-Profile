@@ -26,16 +26,19 @@ export class BundleService {
 
   extractQuestionnaireHeader(questionnaire): QuestionnaireResponse {
     let qr = new QuestionnaireResponse();
-    qr.identifier = questionnaire.identifier;
-    qr.basedOn = 'The order, proposal or plan that is fulfilled in whole or in part by this QuestionnaireResponse.';
-    qr.parent = 'A procedure or observation that this questionnaire was performed as part of the execution of.';
-    qr.questionnaire = questionnaire.title;
-    qr.status = 'in-progress | completed | amended | entered-in-error | stopped';
-    qr.subject = 'The subject of the questionnaire response. This could be a patient, organization, practitioner, device, etc.';
-    qr.context = 'The encounter or episode of care with primary association to the questionnaire response.';
-    qr.authored = new Date();
-    qr.author = 'Person who received the answers to the questions in the QuestionnaireResponse and recorded them in the system.';
-    qr.source = 'The person who answered the questions about the subject.';
+    //qr.identifier = questionnaire.identifier;
+    //qr.basedOn = 'The order, proposal or plan that is fulfilled in whole or in part by this QuestionnaireResponse.';
+    //qr.parent = 'A procedure or observation that this questionnaire was performed as part of the execution of.';
+    //qr.questionnaire = questionnaire.title;
+    //qr.status = 'in-progress | completed | amended | entered-in-error | stopped';
+    //qr.subject = 'The subject of the questionnaire response. This could be a patient, organization, practitioner, device, etc.';
+    //qr.context = 'The encounter or episode of care with primary association to the questionnaire response.';
+    //qr.authored = new Date();
+    //qr.author = 'Person who received the answers to the questions in the QuestionnaireResponse and recorded them in the system.';
+    //qr.source = 'The person who answered the questions about the subject.';
+
+    qr.questionnaire = { reference: 'Questionnaire/' + questionnaire.id };
+    qr.status = 'in-progress';
 
     return qr;
   }
@@ -46,7 +49,8 @@ export class BundleService {
       responseItem.item = [];
       originalItem.item.forEach(child => responseItem.item.push(this.extractItem(child, formData)));
     } else {
-      responseItem.answer = formData[originalItem.linkId];
+      const Eingabe: string = formData[originalItem.linkId]
+      responseItem.answer = [{ valueString: Eingabe }]
     }
     return responseItem;
   }

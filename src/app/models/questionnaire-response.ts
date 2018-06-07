@@ -5,7 +5,7 @@ export class QuestionnaireResponse {
     identifier: string;                     //token    
     basedOn: string;                       //reference    
     parent: string;                         //reference    
-    questionnaire: string;                  //reference
+    questionnaire                          //reference
     status: string;                         //in-progress | completed | amended | entered-in-error | stopped
     subject: string;                        //reference
     context: string;                        //reference
@@ -13,7 +13,7 @@ export class QuestionnaireResponse {
     author: string;                         //reference
     source: string;                         //reference
     item: Item[];//item nennen, damit Iresource Items erkennt
-    resourceType = 'Bundle';
+    resourceType = 'QuestionnaireResponse';
     type = 'collection';
     id = 'ebida-order-1';
 }

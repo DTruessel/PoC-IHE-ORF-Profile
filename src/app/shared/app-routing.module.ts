@@ -6,7 +6,6 @@ import { SettingsComponent } from '../settings/settings.component';
 import { QuestionnairesListComponent } from '../questionnaires/questionnaires-list/questionnaires-list.component';
 import { PageNotFoundComponent } from '../page-not-found.component';
 import { PatientsListComponent } from '../patients/patients-list/patients-list.component';
-import { PatientsComponent } from '../patients/patients/patients.component';
 import { DynamicFormQuestionComponent } from '../dynamic-form-question/dynamic-form-question.component';
 import { DynamicFormComponent } from '../dynamic-form/dynamic-form.component';
 import { QuestionnaireFormComponent } from '../questionnaires/questionnaire-form/questionnaire-form.component';
@@ -19,18 +18,6 @@ const routes: Routes = [
   {
     path: 'home',
     component: HomeComponent,
-  },
-  {
-    path: 'patients-list',
-    component: PatientsListComponent,
-  },
-  {
-    path: 'patients',
-    component: PatientsComponent,
-  },
-  {
-    path: 'patient-detail',
-    component: PatientDetailComponent,
   },
   { // Liste der Questionnaires und Suchfelder
     path: 'questionnaires-list',

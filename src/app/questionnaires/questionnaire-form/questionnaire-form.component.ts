@@ -10,6 +10,7 @@ import { QuestionnaireResponse } from '../../models/questionnaire-response';
 import { BundleService } from '../../services/bundle.service';
 import { FhirJsHttpService } from 'ng-fhirjs';
 import { MessageService } from '../../services/message.service';
+import { PrefillService } from '../../services/prefill.service';
 
 @Component({
   selector: 'app-questionnaire-form',
@@ -34,12 +35,14 @@ export class QuestionnaireFormComponent implements OnInit {
     private bundleService: BundleService,
     private fhirHttpService: FhirJsHttpService,
     private messageService: MessageService,
+    private prefillService: PrefillService,
   ) {
 
     const rawQ = this.sessionService.selectedQuestionnaire;
     if (rawQ) {
       this.questionnaire = this.parserService.convertToQuestionnaire(rawQ);
       this.questions = this.questionService.getQuestions(this.questionnaire);
+      this.questions.forEach(question => this.prefillService.prefillQuestion(question));
     }
     else {
       alert('No Questionnaire found in Session');

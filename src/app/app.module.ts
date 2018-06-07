@@ -5,7 +5,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { PatientsListComponent } from './patients/patients-list/patients-list.component';
-import { PatientsComponent } from './patients/patients/patients.component';
 import { SettingsComponent } from './settings/settings.component';
 import { CapabilityStatementComponent } from './capability-statement/capability-statement.component';
 import { PageNotFoundComponent } from './page-not-found.component';
@@ -27,16 +26,15 @@ import { AppRoutingModule } from './shared/app-routing.module';
 import { BundleComponent } from './bundle/bundle.component';
 import { QuestionControlService } from './services/question-control.service';
 import { BundleService } from './services/bundle.service';
-import { PatientService } from './services/patient.service';
 import { MessagesComponent } from './messages/messages.component';
 import { PatientDetailComponent } from './patient-detail/patient-detail.component';
+import { PrefillService } from './services/prefill.service';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     PatientsListComponent,
-    PatientsComponent,
     SettingsComponent,
     CapabilityStatementComponent,
     PageNotFoundComponent,
@@ -63,12 +61,12 @@ import { PatientDetailComponent } from './patient-detail/patient-detail.componen
   providers: [
     { provide: FHIR_HTTP_CONFIG, useValue: FHIR_JS_CONFIG },
     MessageService,
-    PatientService,
     SessionService,
     QuestionService,
     ParserService,
     QuestionControlService,
     BundleService,
+    PrefillService,
   ],
 
   bootstrap: [AppComponent]

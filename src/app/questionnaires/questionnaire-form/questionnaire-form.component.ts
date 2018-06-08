@@ -26,6 +26,7 @@ export class QuestionnaireFormComponent implements OnInit {
   questionnaire: Questionnaire;
   bundle: fhir.Bundle;
   resource: QuestionnaireResponse;
+  question: QuestionBase<any>
 
   constructor(
     private questionService: QuestionService,
@@ -39,10 +40,12 @@ export class QuestionnaireFormComponent implements OnInit {
   ) {
 
     const rawQ = this.sessionService.selectedQuestionnaire;
+
     if (rawQ) {
+
       this.questionnaire = this.parserService.convertToQuestionnaire(rawQ);
       this.questions = this.questionService.getQuestions(this.questionnaire);
-      this.questions.forEach(question => this.prefillService.prefillQuestion(question));
+      this.prefillService.prefillQuestion(this.questions);
     }
     else {
       alert('No Questionnaire found in Session');

@@ -20,5 +20,4 @@ export class CapabilityStatementComponent implements OnInit {
 
   ngOnInit() {
   }
-
 }

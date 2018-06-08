@@ -27,7 +27,6 @@ import { BundleComponent } from './bundle/bundle.component';
 import { QuestionControlService } from './services/question-control.service';
 import { BundleService } from './services/bundle.service';
 import { MessagesComponent } from './messages/messages.component';
-import { PatientDetailComponent } from './patient-detail/patient-detail.component';
 import { PrefillService } from './services/prefill.service';
 
 @NgModule({
@@ -44,7 +43,6 @@ import { PrefillService } from './services/prefill.service';
     QuestionnaireFormComponent,
     BundleComponent,
     MessagesComponent,
-    PatientDetailComponent,
   ],
 
   imports: [

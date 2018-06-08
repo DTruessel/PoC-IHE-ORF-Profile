@@ -10,7 +10,6 @@ import { DynamicFormQuestionComponent } from '../dynamic-form-question/dynamic-f
 import { DynamicFormComponent } from '../dynamic-form/dynamic-form.component';
 import { QuestionnaireFormComponent } from '../questionnaires/questionnaire-form/questionnaire-form.component';
 import { MessagesComponent } from '../messages/messages.component';
-import { PatientDetailComponent } from '../patient-detail/patient-detail.component';
 
 
 const routes: Routes = [

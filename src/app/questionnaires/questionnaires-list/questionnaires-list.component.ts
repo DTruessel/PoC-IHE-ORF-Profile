@@ -160,14 +160,36 @@ export class QuestionnairesListComponent implements OnInit {
     const quest = (<fhir.Questionnaire>entry.resource);
     if (quest) {
       const line =
-        quest.title           // Anzeige Questionnaire in questionnaire-list
+        /*quest.url
+        + ' | '
+        + quest.identifier
+        + ' | '
+        + quest.version
+        + ' | '
+        + quest.name           // Anzeige Questionnaire in questionnaire-list
+        + ' | '*/
+        quest.title
+        + ' | '
+        + quest.status
+        + ' | '
+        /*+ quest.experimental
         + ' | '
         + quest.date
+        + ' | '*/
+        + quest.publisher
+        + ' | '
+        /*+ quest.effectivePeriod
+        + ' | '
+        + quest.useContext
+        + ' | '
+        + quest.jurisdiction
+        + ' | '
+        + quest.contact
+        + ' | '*/
+        + quest.subjectType
         + ' | '
         + quest.id
-        + ' | '
-        + quest.publisher;
-
+        ;
       return line;
     }
     return '-';

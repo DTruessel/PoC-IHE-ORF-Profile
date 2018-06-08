@@ -10,7 +10,6 @@ import { FhirJsHttpService } from 'ng-fhirjs';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { EventEmitter } from '@angular/core';
 
-
 @Component({
   selector: 'app-dynamic-form',
   templateUrl: './dynamic-form.component.html',

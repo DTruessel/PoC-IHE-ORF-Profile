@@ -123,14 +123,20 @@ export class QuestionnairesListComponent implements OnInit {
     if (q) {
       return Object.assign({}, baseQuery, { query: Object.assign(baseQuery.query, q) });
     }
-    return baseQuery;                                     //else
+    return baseQuery;
   }
 
   private searchQuery(query) {                                                             // macht REST CALL
     console.log('** before fhirHttpService.search, query: ' + JSON.stringify(query));
     this.fhirHttpService.search(query).then(response => {
-      this.data$.next(<fhir.Bundle>response.data);                                    // data ist eine property von response.
-      console.log('** after fhirHttpService.search, hits: ' + this.length);
+      if (response.data) {
+        this.data$.next(<fhir.Bundle>response.data);                                    // data ist eine property von response.
+        alert('Questionnaire Resource(s) returned: ' + this.length + ' HTTP ' + response.status + ' (OK) ');
+      }
+      else if (!response.data) {
+        alert('OperationsOutcome: Resource not found' + ' HTTP ' + response.status + ' (Not Found)')
+      }
+      //console.log('** after fhirHttpService.search, hits: ' + this.length + ' ' + response.status);
     });
   }
 
@@ -284,7 +290,6 @@ export class QuestionnairesListComponent implements OnInit {
     } else {
       this.patchPrevBug(this.bundle);
       this.fhirHttpService.prevPage({ bundle: this.bundle }).then(response => {
-        //this.fhirHttpService.prevPage({ bundle: this.bundle }).then(response => { //korrigiert 20.05.2018
         this.oldPageIndex = event.pageIndex;
         this.data$.next(<fhir.Bundle>response.data);
         console.log('previous page called ');

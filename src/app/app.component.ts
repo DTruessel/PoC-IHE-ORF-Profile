@@ -9,7 +9,7 @@ import { FhirJsHttpService, FHIR_HTTP_CONFIG } from 'ng-fhirjs';
 })
 export class AppComponent {
 
-  title = 'Proof Of Concept IHE ORF';
+  title = 'Proof Of Concept IHE ORF Profil';
 
   constructor(private fhirHttpService: FhirJsHttpService, private router: Router) { }
 
@@ -17,14 +17,14 @@ export class AppComponent {
 
     switch (this.router.url) {
 
+      case '/home':
+        return this.title + ' - ' + 'Home';
       case '/capabilityStatement':
         return this.title + ' - ' + 'Capability Statement';
       case '/settings':
         return this.title + ' - ' + 'Settings';
       case '/questionnaires-list':
         return this.title + ' - ' + 'Questionnaires';
-      case '/questionnaire-form':
-        return this.title + ' - ' + 'Selected Questionnaire';
       case '/messages':
         return this.title + ' - ' + 'Messages';
     }

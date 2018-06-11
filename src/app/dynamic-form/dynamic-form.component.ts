@@ -24,13 +24,10 @@ export class DynamicFormComponent implements OnInit {
   payLoad: any;
 
   @Input() questions: QuestionBase<any>[] = [];
-  @Input() selectedQuestionnaire = this.sessionService.selectedQuestionnaire;
-
   @Output() formData = new EventEmitter();
 
   constructor(
     private questionControlService: QuestionControlService,
-    private sessionService: SessionService,
     private parserService: ParserService,
     private questionService: QuestionService,
     private fhirHttpService: FhirJsHttpService,

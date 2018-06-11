@@ -49,7 +49,6 @@ export class QuestionnaireFormComponent implements OnInit {
     }
     else {
       alert('No Questionnaire found in Session');
-      // Navigation zur Suche ?! ev link zum wieder suchen
       this.router.navigate(['/questionnaires-list']);
     }
   }
@@ -62,6 +61,6 @@ export class QuestionnaireFormComponent implements OnInit {
     console.log(formData);
     console.log('---------------------------');
     const questionnaireResp = this.bundleService.convertToQuestionnaireResponse(this.questionnaire, formData); //argumente
-    const bundle = this.bundleService.createBundle(questionnaireResp);
+    const bundle = this.bundleService.createBundleEntry(questionnaireResp);
   }
 }

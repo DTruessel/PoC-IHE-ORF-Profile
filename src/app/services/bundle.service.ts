@@ -4,11 +4,11 @@ import { QuestionService } from './question.service';
 import { QuestionnaireResponse } from '../models/questionnaire-response';
 import { Item } from '../models/item';
 import { Answer } from '../models/answer';
+import { BundleResource } from '../models/bundle-resource';
 
 @Injectable()
 
 export class BundleService {
-
 
   constructor(
     private fhirHttpService: FhirJsHttpService,
@@ -66,29 +66,31 @@ export class BundleService {
     return itemCopy
   }
 
-  createBundle(questionnaireResponse: QuestionnaireResponse) {
-    const bundleQR: Entry = {
-      resource: questionnaireResponse as IResource
+  createBundleEntry(questionnaireResponse: QuestionnaireResponse) {
+    const entry: Entry = {
+      resource: questionnaireResponse as IResource,
     }
-    this.fhirHttpService.create(bundleQR).then(response => {
-      alert(' HTTP ' + response.status)
+    this.fhirHttpService.create(entry).then(response => {
+      if (response.status = 200) {
+        alert('Bundle created ' + ' HTTP ' + response.status + response.headers + ' (OK)')
+      }
+      else alert(' HTTP ' + response.status)
     })
   }
-}
 
 
+  //interface Tag { term: string; schema: string; label: string }
+  //interface Entry extends Minimal { resource: IResource; category?: Tag[] }
 
-    /*this.fhirHttpService.create(bundleQR).then(response => {
+  /*createBundle(questionnaireResponse: QuestionnaireResponse) {
+    const entry: Entry = {
+      resource: questionnaireResponse as IResource
+    }
+    this.fhirHttpService.transaction(entry).then(response => {
       if (response.status = 200) {
-        alert('Bundle created ' + ' HTTP ' + response.status + ' (OK)')
+        alert('Bundle created ' + ' HTTP ' + response.status + response.headers + ' (OK)')
       }
-      if (response.status = 406) {
-        alert('Server kann im verlangen Format _format keine Antwort schicken' + ' HTTP ' + response.status + ' (Not Acceptable)')
-      }
-      if (response.status = 404) {
-        alert('OperationsOutcome: Resource nicht gefunden' + ' HTTP ' + response.status + ' (Not Found)')
-      }
-      else {
-
-      }
-    })*/
+      else alert(' HTTP ' + response.status)
+    })
+  }*/
+}

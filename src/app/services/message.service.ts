@@ -25,4 +25,24 @@ export class MessageService {
     //HTTP 406 (Not Acceptable) Server kann im verlangen Format _format keine Antwort schicken
     //HTTP 200 (OK) Questionnaire mit gesuchter resourceID gesendet
     //HTTP 404 (Not Found) OperationsOutcome: Resource nicht gefunden
+
+      if (response.status = 200) {
+        alert('Bundle created ' + ' HTTP ' + response.status + response.headers + ' (OK)')
+
+      else if (response.status = 400) {
+        alert('Server kann im verlangen Format _format keine Antwort schicken' + ' HTTP ' + response.status + ' (Bad Request)')
+      }
+      else if (response.status = 404) {
+        alert('OperationsOutcome: Resource nicht gefunden' + ' HTTP ' + response.status + ' (Not Found)')
+      }
+      else if (response.status = 406) {
+        alert('Server kann im verlangen Format _format keine Antwort schicken' + ' HTTP ' + response.status + ' (Not Acceptable)')
+      }
+      else alert(' HTTP ' + response.status)
+
+
+
+
+
+
   */

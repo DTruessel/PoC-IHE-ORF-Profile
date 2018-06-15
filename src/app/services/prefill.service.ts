@@ -51,17 +51,3 @@ export class PrefillService {
     }
   }
 }
-
-
-
-/*  prefillQuestionWithValue(question: QuestionBase<any>) {
-    if (question.key = "patient.lastname") {
-      question.value = "Rüdisühli";
-      console.log(question.key + ' ' + question.value)
-    }
-    if (question.key = "patient.firstname") {
-      question.value = "Housi";
-      console.log(question.key + ' ' + question.value)
-    }
-
-  }*/

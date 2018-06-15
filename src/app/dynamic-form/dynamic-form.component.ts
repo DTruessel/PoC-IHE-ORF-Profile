@@ -15,7 +15,6 @@ import { EventEmitter } from '@angular/core';
   templateUrl: './dynamic-form.component.html',
   styleUrls: ['./dynamic-form.component.css'],
   providers: [],
-
 })
 
 export class DynamicFormComponent implements OnInit {

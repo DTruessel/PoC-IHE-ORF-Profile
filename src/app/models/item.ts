@@ -1,6 +1,5 @@
 export class Item {
 
-    // ItemQuestionnaire
     linkId: string;             // https://www.hl7.org/fhir/questionnaire.html#def
     definition: string;
     code: any;
@@ -23,7 +22,7 @@ export class Item {
     repeats: boolean;
     readOnly: boolean;
     maxLength: string;              // sollte integer sein
-    option: any;                 // value[x] valueInteger, valueDate, valueTime, valueString, valueCoding
+    option: any;                    // value[x] valueInteger, valueDate, valueTime, valueString, valueCoding
     initial: string;                // integer|date|time|string|Coding
     initialBoolean: boolean;
     initialDecimal: string;         //sollte decimal sein
@@ -32,22 +31,20 @@ export class Item {
     initialDateTime: string;        // sollte dateTime sein
     time: string;                   // sollte time sein
     initialString: string;
-    initialUri: string;             //sollte uri sein          
-    initialAttachment: string;      //sollte Attachment sein
-    initialCoding: string;          //sollte Coding sein
+    initialUri: string;             // sollte uri sein          
+    initialAttachment: string;      // sollte Attachment sein
+    initialCoding: string;          // sollte Coding sein
     initialQuantity: string;        // sollte Quantity sein   
     system: string;
     display: string;
     subject: string;
-    initialReference: string;       //sollte Reference(Any) sein                 
+    initialReference: string;       // sollte Reference(Any) sein                 
     item: Item[];
     options?: string[];
     answer: any[]
     constructor() {
     }
 }
-
-
 
 /*	If a QuestionnaireResponse references a Questionnaire, then the QuestionnaireResponse structure
 must be consistent with the Questionnaire (i.e. questions must be organized into the same groups,

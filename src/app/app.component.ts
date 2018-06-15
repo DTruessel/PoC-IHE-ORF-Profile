@@ -16,7 +16,6 @@ export class AppComponent {
   getTitle(): string {
 
     switch (this.router.url) {
-
       case '/home':
         return this.title + ' - ' + 'Home';
       case '/capabilityStatement':

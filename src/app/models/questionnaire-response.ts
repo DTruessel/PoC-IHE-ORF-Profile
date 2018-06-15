@@ -14,5 +14,4 @@ export class QuestionnaireResponse {
     source: string;                         //reference
     item: Item[];                           //item nennen, damit Iresource Items erkennt
     resourceType = 'QuestionnaireResponse';
-
 }

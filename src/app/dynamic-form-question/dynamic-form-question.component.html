@@ -1,12 +1,9 @@
 <div [formGroup]="form">
-
   <div [ngSwitch]="question.controlType">
-
     <div *ngSwitchCase="'description'" class="descriptionQ">
       <span class="descriptionLabel">{{question.label}}</span>
       <span class="descriptionText">{{question.value}}</span>
     </div>
-
     <div *ngSwitchCase="'group'" [id]="question.key" class="questionGroup_{{question.nestingLevel}}">
       <div class="groupHeader">{{question.label}}
         <hr/>
@@ -15,31 +12,26 @@
         <app-question [question]="child" [form]="form"></app-question>
       </div>
     </div>
-
     <div *ngSwitchCase="'textbox'" class="singleQuestionDiv">
       <span class="qLabel">{{question.label}}</span>
       <input [formControlName]="question.key" [id]="question.key" [type]="question.type" class="textInputQ">
     </div>
-
     <div *ngSwitchCase="'textarea'" class="{{(question.span &lt;= 4) ? 'spanQuestionDiv_' + question.span : 'singleQuestionDiv'}}">
       <span class="qLabel">{{question.label}}</span>
       <textarea rows="{{question.rows}}" [formControlName]="question.key" [id]="question.key" class="textAreaQ"></textarea>
     </div>
-
     <div *ngSwitchCase="'dropdown'" class="singleQuestionDiv">
       <span class="qLabel">{{question.label}}</span>
       <select [formControlName]="question.key" [id]="question.key" class="selectQ">
         <option *ngFor="let opt of question.options" [value]="opt.key">{{opt.value}}</option>
       </select>
     </div>
-
     <div *ngSwitchCase="'valueCoding'" class="singleQuestionDiv">
       <span class="qLabel">{{question.label}}</span>
       <select [formControlName]="question.key" [id]="question.key" class="selectQ">
         <option *ngFor="let opt of question.options" [value]="opt.key">{{opt.value}}</option>
       </select>
     </div>
-
     <div *ngSwitchCase="'radio-button'" [id]="question.key" class="singleQuestionDiv">
       <span class="qLabel">{{question.label}}</span>
       <div class="radioGroup">
@@ -51,7 +43,6 @@
         </label>
       </div>
     </div>
-
     <div *ngSwitchCase="'checkbox'" [id]="question.key" class="singleQuestionDiv">
       <span class="qLabel">{{question.label}}</span>
       <div class="radioGroup">
@@ -63,17 +54,13 @@
         </label>
       </div>
     </div>
-
     <div *ngSwitchCase="'date'" [id]="question.key" class="singleQuestionDiv">
       <span class="qLabel">{{question.label}}</span>
       <input *ngSwitchCase="'date'" [formControlName]="question.key" [id]="question.key" [type]="question.type" class="dateInputQ">
     </div>
-
     <div *ngSwitchCase="'definition'" class="descriptionQ">
       <span class="descriptionLabel">{{definiton.label}}</span>
     </div>
-
   </div>
-
   <div class="errorMessage" *ngIf="!isValid">{{question.label}} is required</div>
 </div>

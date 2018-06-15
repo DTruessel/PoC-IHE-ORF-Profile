@@ -39,9 +39,6 @@ export class QuestionnairesListComponent implements OnInit {
   pageSizeOptions = [this.pageSize];
   searchString: any;
 
-  @ViewChild('language')
-  private elLanguage: ElementRef;
-
   @ViewChild('date')
   private elDate: ElementRef;
 
@@ -81,7 +78,7 @@ export class QuestionnairesListComponent implements OnInit {
   @ViewChild('status')
   private elStatus: ElementRef;
 
-  private data$: BehaviorSubject<fhir.Bundle>;            // data$ ist ein observable
+  private data$: BehaviorSubject<fhir.Bundle>;
 
   constructor
     (
@@ -89,11 +86,8 @@ export class QuestionnairesListComponent implements OnInit {
     private sessionService: SessionService,
     private parserService: ParserService,
     private router: Router,
-
   ) {
-
-    this.data$ = new BehaviorSubject(null);               // data$ gibt die Daten aus, die vom Backend empfangen worden sind.
-    // this.search(this.makeQuery({ title: 'ebida' }));   // {} ist immer ein objekt
+    this.data$ = new BehaviorSubject(null);
   }
 
   /**
@@ -111,9 +105,9 @@ export class QuestionnairesListComponent implements OnInit {
     }
   }
 
-  private makeQuery(q: Object) {                          // literales Objekt
+  private makeQuery(q: Object) {
     const baseQuery = {
-      type: 'Questionnaire',                              //Liste von Questionnaires ausgeben; query: { _count: 10 Seiten
+      type: 'Questionnaire',
       query: {
         _count: this.pageSize,
         _summary: "true",
@@ -126,24 +120,23 @@ export class QuestionnairesListComponent implements OnInit {
     return baseQuery;
   }
 
-  private searchQuery(query) {                                                             // macht REST CALL
+  private searchQuery(query) {
     console.log('** before fhirHttpService.search, query: ' + JSON.stringify(query));
     this.fhirHttpService.search(query).then(response => {
       if (response.data) {
-        this.data$.next(<fhir.Bundle>response.data);                                    // data ist eine property von response.
+        this.data$.next(<fhir.Bundle>response.data);
         alert('Questionnaire Resource(s) returned: ' + this.length + ' HTTP ' + response.status + ' (OK) ');
       }
       else if (!response.data) {
         alert('OperationsOutcome: Resource not found' + ' HTTP ' + response.status + ' (Not Found)')
       }
-      //console.log('** after fhirHttpService.search, hits: ' + this.length + ' ' + response.status);
     });
   }
 
   ngOnInit() {
     this.data$.subscribe((questionnairesBundle: fhir.Bundle) => {
       if (questionnairesBundle) {
-        this.dataSource.data = questionnairesBundle.entry;                            // entry enthält generische Questionnaire-Objekte
+        this.dataSource.data = questionnairesBundle.entry;
         this.length = questionnairesBundle.total;
         this.bundle = questionnairesBundle;
       }
@@ -172,7 +165,7 @@ export class QuestionnairesListComponent implements OnInit {
         + ' | '
         + quest.version
         + ' | '
-        + quest.name           // Anzeige Questionnaire in questionnaire-list
+        + quest.name
         + ' | '*/
         quest.title
         + ' | '
@@ -202,8 +195,6 @@ export class QuestionnairesListComponent implements OnInit {
   }
 
   doSearchQuery() {
-
-    const languageSearchString = this.elLanguage.nativeElement.value;
     const dateSearchString = this.elDate.nativeElement.value;
     const identifierSearchString = this.elIdentifier.nativeElement.value;
     const codeSearchString = this.elCode.nativeElement.value;
@@ -230,10 +221,6 @@ export class QuestionnairesListComponent implements OnInit {
 
     if (idSearchString) {
       searchParams = Object.assign(searchParams, { _id: idSearchString })
-    }
-
-    if (languageSearchString) {
-      searchParams = Object.assign(searchParams, { _language: languageSearchString })
     }
 
     if (codeSearchString) {

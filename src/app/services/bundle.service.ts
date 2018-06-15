@@ -3,7 +3,6 @@ import { FhirJsHttpService } from 'ng-fhirjs';
 import { QuestionService } from './question.service';
 import { QuestionnaireResponse } from '../models/questionnaire-response';
 import { Item } from '../models/item';
-import { Answer } from '../models/answer';
 import { BundleResource } from '../models/bundle-resource';
 
 @Injectable()

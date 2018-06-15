@@ -12,7 +12,6 @@ import { Questionnaire } from '../models/questionnaire';
 import { QuestionDescription } from '../questions/question-description';
 import { Item } from '../models/item';
 
-// TODO TMP
 const todoText = 'Freitext';
 
 @Injectable()
@@ -27,7 +26,6 @@ export class QuestionService {
     return res;
   }
 
-  // TODO TMP labels
   private pushQuestionnaireDescriptions(q, res) {
     let group = new QuestionGroup({ key: q.id, label: 'Questionnaire Kopfdaten' });
     group.nestingLevel = 0;
@@ -57,7 +55,6 @@ export class QuestionService {
     res.push(group);
   }
 
-  // accessible for tests
   getQuestionForItem(item: Item, nestingLevel: number): QuestionBase<any> {
     let widget: QuestionBase<any>;
     switch (item.type) {

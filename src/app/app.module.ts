@@ -22,7 +22,6 @@ import { QuestionService } from './services/question.service';
 import { ParserService } from './services/parser.service';
 import { QuestionnaireFormComponent } from './questionnaires/questionnaire-form/questionnaire-form.component';
 import { AppRoutingModule } from './shared/app-routing.module';
-import { BundleComponent } from './bundle/bundle.component';
 import { QuestionControlService } from './services/question-control.service';
 import { BundleService } from './services/bundle.service';
 import { PrefillService } from './services/prefill.service';
@@ -39,7 +38,6 @@ import { PrefillService } from './services/prefill.service';
     DynamicFormQuestionComponent,
     QuestionnairesListComponent,
     QuestionnaireFormComponent,
-    BundleComponent,
   ],
 
   imports: [

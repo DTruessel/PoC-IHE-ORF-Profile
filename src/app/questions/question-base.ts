@@ -1,4 +1,3 @@
-
 export class QuestionBase<T> {
 
   value: T;

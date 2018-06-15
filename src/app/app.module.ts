@@ -14,7 +14,6 @@ import { MaterialModule } from './material.module';
 import { NgFhirjsModule } from 'ng-fhirjs';
 import { FHIR_HTTP_CONFIG } from 'ng-fhirjs';
 import { FHIR_JS_CONFIG } from './settings/settings.component.spec';
-import { MessageService } from './services/message.service';
 import { SessionService } from './services/session.service';
 import { DynamicFormComponent } from './dynamic-form/dynamic-form.component';
 import { DynamicFormQuestionComponent } from './dynamic-form-question/dynamic-form-question.component';
@@ -26,7 +25,6 @@ import { AppRoutingModule } from './shared/app-routing.module';
 import { BundleComponent } from './bundle/bundle.component';
 import { QuestionControlService } from './services/question-control.service';
 import { BundleService } from './services/bundle.service';
-import { MessagesComponent } from './messages/messages.component';
 import { PrefillService } from './services/prefill.service';
 
 @NgModule({
@@ -42,7 +40,6 @@ import { PrefillService } from './services/prefill.service';
     QuestionnairesListComponent,
     QuestionnaireFormComponent,
     BundleComponent,
-    MessagesComponent,
   ],
 
   imports: [
@@ -58,7 +55,6 @@ import { PrefillService } from './services/prefill.service';
 
   providers: [
     { provide: FHIR_HTTP_CONFIG, useValue: FHIR_JS_CONFIG },
-    MessageService,
     SessionService,
     QuestionService,
     ParserService,

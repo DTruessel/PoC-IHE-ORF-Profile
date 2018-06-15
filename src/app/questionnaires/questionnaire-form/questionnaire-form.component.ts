@@ -9,8 +9,8 @@ import { Router } from '@angular/router';
 import { QuestionnaireResponse } from '../../models/questionnaire-response';
 import { BundleService } from '../../services/bundle.service';
 import { FhirJsHttpService } from 'ng-fhirjs';
-import { MessageService } from '../../services/message.service';
 import { PrefillService } from '../../services/prefill.service';
+import { BundleResource } from '../../models/bundle-resource';
 
 @Component({
   selector: 'app-questionnaire-form',
@@ -35,7 +35,6 @@ export class QuestionnaireFormComponent implements OnInit {
     private router: Router,
     private bundleService: BundleService,
     private fhirHttpService: FhirJsHttpService,
-    private messageService: MessageService,
     private prefillService: PrefillService,
   ) {
 
@@ -60,7 +59,7 @@ export class QuestionnaireFormComponent implements OnInit {
     console.log('--HIER SIND DIE EINGABEN --');
     console.log(formData);
     console.log('---------------------------');
-    const questionnaireResp = this.bundleService.convertToQuestionnaireResponse(this.questionnaire, formData); //argumente
-    const bundle = this.bundleService.createBundleEntry(questionnaireResp);
+    const questionnaireResp: QuestionnaireResponse = this.bundleService.convertToQuestionnaireResponse(this.questionnaire, formData); //argumente
+    const bundle = this.bundleService.sendBundle(questionnaireResp);
   }
 }

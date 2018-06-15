@@ -30,6 +30,7 @@
     "fhir.js": "0.0.20",
     "hammerjs": "^2.0.8",
     "ng-fhirjs": "^0.1.1",
+    "node-libs-browser": "^2.1.0",
     "rxjs": "^5.5.6",
     "zone.js": "^0.8.19"
   },

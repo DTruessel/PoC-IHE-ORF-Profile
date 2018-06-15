@@ -9,7 +9,6 @@ import { PatientsListComponent } from '../patients/patients-list/patients-list.c
 import { DynamicFormQuestionComponent } from '../dynamic-form-question/dynamic-form-question.component';
 import { DynamicFormComponent } from '../dynamic-form/dynamic-form.component';
 import { QuestionnaireFormComponent } from '../questionnaires/questionnaire-form/questionnaire-form.component';
-import { MessagesComponent } from '../messages/messages.component';
 
 const routes: Routes = [
 
@@ -33,10 +32,6 @@ const routes: Routes = [
   { // FHIR Testserver
     path: 'settings',
     component: SettingsComponent
-  },
-  { // FHIR Testserver
-    path: 'messages',
-    component: MessagesComponent
   },
   {
     path: '',

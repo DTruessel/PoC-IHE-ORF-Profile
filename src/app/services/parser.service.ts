@@ -72,7 +72,7 @@ export class ParserService {
     const selectOptions = [];
     if (item.options) {
       for (const o of item.options) {
-        selectOptions.push({ label: o, value: o });                     //20.05.2018 label: o.label, value: o.label ersetzt
+        selectOptions.push({ label: o, value: o });
       }
     } else {
       selectOptions.push({ label: 'NO OPTIONS FOUND', value: null });
